@@ -9,6 +9,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import main.TiqServerMain;
+import utilitats.SystemUtils;
 
 public class Connexio {
 
@@ -20,6 +21,8 @@ public class Connexio {
     String ip;
     String port = "5432";
     String cadena ;
+    
+    File f = new File("logs.txt");
 
     public Connection establirConnexio() {
         
@@ -39,16 +42,14 @@ public class Connexio {
             br = new BufferedReader(new FileReader(fileCfg));
             String configIp;
             while ((configIp = br.readLine()) != null) {
-                System.out.println(configIp);
-                 ip = configIp;
-                 System.out.println("Valor ip:"+ip);
-                 
+               
+                 ip = configIp;              
             }
-            
+           //Tancar l'arxiu
+            br.close();
+
             cadena = "jdbc:postgresql://" + ip + "/" + bd;
             System.out.println(cadena);
-            //Tancar l'arxiu
-            br.close();
 
         } catch (FileNotFoundException ex) {
             Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -105,30 +106,96 @@ public class Connexio {
         return rol;
     }
 
-    public void consultaSqlUsuaris(String consulta) throws SQLException {
+    public void consultaSqlUsuaris(String query) throws SQLException, IOException {
 
-        int idUsuari;
-        String ulogin;
-        String upassword;
-
-        int tipusUsuari;
-        String email;
-        String telefon;
-        int idClient;
+        int id;
+        String usuari;
+        String contrasenya;
+        int rol;
 
         Statement stmt = conectar.createStatement();
-        String query = consulta;
         ResultSet result = stmt.executeQuery(query);
+        
+        SystemUtils.escriuNouLog(f, "Valor:"+ query);
+        System.out.println("Valor:"+ query);
         while (result.next()) {
-            //idUsuari = result.getInt("id");
-            idClient = result.getInt("ID");
-            ulogin = result.getString("usuari");
-            upassword = result.getString("contrasenya");
-
-            System.out.println(idClient + "\t" + ulogin + "\t" + upassword);
+            
+            id          = result.getInt("ID");
+            usuari      = result.getString("usuari");
+            contrasenya = result.getString("contrasenya");
+            rol         = result.getInt("rol");
+            
+            System.out.println(id + "\t" + usuari + "\t" + contrasenya +"\t"+ rol);
             // Leer registro
         }
+    }
+    
+    public void alta(String query) throws SQLException, IOException{
+        
+        int result =0;
+         SystemUtils.escriuNouLog(f, "ALTES");
 
+         String usuari="usuari_prova";
+         String contrasenya="contrasenya_prova";
+         String nom="nom_prova";
+         String cognom="cognom_prova";
+         int departament=1;
+         int rol = 1;
+         
+         
+         
+         String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
+
+         PreparedStatement sentence_ready;
+         
+        try {
+           
+            sentence_ready = conectar.prepareStatement(sentenciaCrear);
+            sentence_ready.setString(1, usuari);
+            sentence_ready.setString(2, contrasenya);
+            sentence_ready.setString(3, nom);
+            sentence_ready.setString(4, cognom);
+            sentence_ready.setInt(5, departament);
+            sentence_ready.setInt(6, rol);
+
+            result = sentence_ready.executeUpdate();
+            sentence_ready.close();
+
+        
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+         
+         
+         
+         
+         
+      /*  Statement stmt = conectar.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+         int result = 0;
+        Connection conexio = null;
+
+        String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"Usuari\",\"Contrasenya\",\"Nom\",\"Cognom\",\"Departament\") VALUES (default,?,?,?,?,?)");
+
+        try {
+            conexio = ConnectionSQL.establirConexio();
+            sentence_ready = conexio.prepareStatement(sentenciaCrear);
+            sentence_ready.setString(1, user);
+            sentence_ready.setString(2, passwd);
+            sentence_ready.setString(3, nom);
+            sentence_ready.setString(4, cognom);
+            sentence_ready.setString(5, departament);
+
+            result = sentence_ready.executeUpdate();
+            sentence_ready.close();
+
+            conexio.close();
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return result;*/
     }
 
 }

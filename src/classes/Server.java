@@ -140,6 +140,7 @@ public class Server {
                     //Te id
                     // Iniciem el fil amb el client
                     ServerFil fil = new ServerFil(sc, in, out, missatge[1], id_conn, this);
+                    
                     fil.start();
                 }
 
