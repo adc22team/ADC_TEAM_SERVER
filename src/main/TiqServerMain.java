@@ -45,12 +45,9 @@ public class TiqServerMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         TextAreaLogs = new javax.swing.JTextArea();
         btn_start = new javax.swing.JButton();
-        btn_stop = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(800, 600));
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -96,16 +93,6 @@ public class TiqServerMain extends javax.swing.JFrame {
             }
         });
 
-        btn_stop.setBackground(new java.awt.Color(73, 181, 172));
-        btn_stop.setFont(new java.awt.Font("Segoe UI", 0, 21)); // NOI18N
-        btn_stop.setForeground(new java.awt.Color(255, 255, 255));
-        btn_stop.setText("STOP");
-        btn_stop.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_stopActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -121,15 +108,14 @@ public class TiqServerMain extends javax.swing.JFrame {
                 .addComponent(btn_logs, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(195, 195, 195))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(130, 130, 130)
-                .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_stop, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(130, 130, 130))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 770, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(177, 177, 177))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,11 +128,9 @@ public class TiqServerMain extends javax.swing.JFrame {
                 .addComponent(btn_logs, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 336, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_stop, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addComponent(btn_start, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
@@ -159,27 +143,11 @@ public class TiqServerMain extends javax.swing.JFrame {
             hb.start();
             status = true;
             btn_start.setText("RUNNING");
-            TextAreaLogs.setText("SERVER UP");
+            //TextAreaLogs.setText("SERVER UP");
         } else {
             JOptionPane.showMessageDialog(this, "SERVER STATUS - RUNNING");
         }
     }//GEN-LAST:event_btn_startActionPerformed
-
-    private void btn_stopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_stopActionPerformed
-        //Tancar el servidor
-        //System.exit(0);
-        //btn_stop.setEnabled(false);
-        if (status == true) {
-            hb.stop();
-            status = false;
-            btn_start.setText("START");
-            TextAreaLogs.setText("SERVER DOWN");
-            //btn_stop.setEnabled(true);
-        } else {
-            //JOptionPane.showMessageDialog(this, "SERVER STATUS - STOPED");
-        }
-
-    }//GEN-LAST:event_btn_stopActionPerformed
 
     private void btn_logsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logsActionPerformed
         //Esborrar tot el contingut
@@ -236,7 +204,6 @@ public class TiqServerMain extends javax.swing.JFrame {
     private javax.swing.JTextArea TextAreaLogs;
     private javax.swing.JButton btn_logs;
     private javax.swing.JButton btn_start;
-    private javax.swing.JButton btn_stop;
     private javax.swing.JLabel jLabelClose;
     private javax.swing.JLabel jLabelTittle;
     private javax.swing.JPanel jPanel1;
@@ -250,7 +217,6 @@ class filServer extends Thread {
     public void run() {
         try {
             //Instanciem el servidor
-            //Servidor server = new Servidor(5000);
             Server server = new Server(5000);
             //Obrim el servidor
             server.obrirServer();

@@ -9,7 +9,7 @@ public class Connexio {
     String user = "tiqinssues";
     String passwd = "password";
     String bd = "tiq";
-    String ip = "192.168.1.134";
+    String ip = "192.168.1.143";
     String port = "5432";
 
     String cadena = "jdbc:postgresql://" + ip + "/" + bd;
