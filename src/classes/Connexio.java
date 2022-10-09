@@ -130,7 +130,7 @@ public class Connexio {
         }
     }
     
-    public void alta(String query) throws SQLException, IOException{
+    public int alta(String query) throws SQLException, IOException{
         
         int result =0;
          SystemUtils.escriuNouLog(f, "ALTES");
@@ -141,9 +141,7 @@ public class Connexio {
          String cognom="cognom_prova";
          int departament=1;
          int rol = 1;
-         
-         
-         
+     
          String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
 
          PreparedStatement sentence_ready;
@@ -161,41 +159,11 @@ public class Connexio {
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
 
-        
-
         } catch (Exception e) {
             System.out.println(e);
         }
-         
-         
-         
-         
-         
-      /*  Statement stmt = conectar.createStatement();
-        ResultSet result = stmt.executeQuery(query);
-         int result = 0;
-        Connection conexio = null;
-
-        String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"Usuari\",\"Contrasenya\",\"Nom\",\"Cognom\",\"Departament\") VALUES (default,?,?,?,?,?)");
-
-        try {
-            conexio = ConnectionSQL.establirConexio();
-            sentence_ready = conexio.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, user);
-            sentence_ready.setString(2, passwd);
-            sentence_ready.setString(3, nom);
-            sentence_ready.setString(4, cognom);
-            sentence_ready.setString(5, departament);
-
-            result = sentence_ready.executeUpdate();
-            sentence_ready.close();
-
-            conexio.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return result;*/
+               
+        return result;
     }
 
 }
