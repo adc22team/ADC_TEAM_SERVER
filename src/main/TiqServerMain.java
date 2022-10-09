@@ -1,19 +1,17 @@
 package main;
 
 import classes.Server;
-import classes.Server;
 import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.Socket;
+
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import static utilitats.SystemUtils.agafarDataHoraSistema;
 
 public class TiqServerMain extends javax.swing.JFrame {
 
@@ -54,7 +52,7 @@ public class TiqServerMain extends javax.swing.JFrame {
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
         jLabelTittle.setFont(new java.awt.Font("Segoe UI Light", 0, 36)); // NOI18N
-        jLabelTittle.setForeground(new java.awt.Color(73, 181, 172));
+        jLabelTittle.setForeground(new java.awt.Color(255, 255, 255));
         jLabelTittle.setText("Server - TIQ Issues  ");
 
         jLabelClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/icons8-close-24.png"))); // NOI18N
@@ -143,7 +141,7 @@ public class TiqServerMain extends javax.swing.JFrame {
             hb.start();
             status = true;
             btn_start.setText("RUNNING");
-            //TextAreaLogs.setText("SERVER UP");
+            TextAreaLogs.setText(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] + " - SERVER_online_waiting_for_request");
         } else {
             JOptionPane.showMessageDialog(this, "SERVER STATUS - RUNNING");
         }
@@ -158,7 +156,7 @@ public class TiqServerMain extends javax.swing.JFrame {
         //Si no existeix el creem
         if (!f.exists()) {
             try {
-                TextAreaLogs.append("Creat arxiu d'incidències no EXISTEIX\n");
+                TextAreaLogs.append(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] +"- Creat arxiu d'incidències no EXISTEIX\n");
                 f.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -180,7 +178,7 @@ public class TiqServerMain extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        TextAreaLogs.append("Log's carregats correctament\n");
+        TextAreaLogs.append(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] +" - Log's carregats correctament\n");
     }//GEN-LAST:event_btn_logsActionPerformed
 
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked

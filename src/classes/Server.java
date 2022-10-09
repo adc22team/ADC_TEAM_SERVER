@@ -65,7 +65,7 @@ public class Server {
                     Logger.getLogger(ServerFil.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-
+            
             SystemUtils.escriuNouLog(f, "SERVER_online_waiting_for_request");
             while (true) {
 
