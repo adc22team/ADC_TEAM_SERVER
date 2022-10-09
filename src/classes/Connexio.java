@@ -1,6 +1,14 @@
 package classes;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import main.TiqServerMain;
 
 public class Connexio {
 
@@ -9,12 +17,45 @@ public class Connexio {
     String user = "tiqinssues";
     String passwd = "password";
     String bd = "tiq";
-    String ip = "192.168.1.143";
+    String ip;
     String port = "5432";
-
-    String cadena = "jdbc:postgresql://" + ip + "/" + bd;
+    String cadena ;
 
     public Connection establirConnexio() {
+        
+        File fileCfg = new File("config.txt");
+        if (!fileCfg.exists()) {
+            try {
+                System.out.println("SERVER_CREATE_NEW_CONFIG_INI_FILE");
+                fileCfg.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ServerFil.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        //Llegim la ip del servidor bd's
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileCfg));
+            String configIp;
+            while ((configIp = br.readLine()) != null) {
+                System.out.println(configIp);
+                 ip = configIp;
+                 System.out.println("Valor ip:"+ip);
+                 
+            }
+            
+            cadena = "jdbc:postgresql://" + ip + "/" + bd;
+            System.out.println(cadena);
+            //Tancar l'arxiu
+            br.close();
+
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
 
         try {
 
