@@ -19,8 +19,6 @@ public class ServerFil extends Thread {
     private int id;
     private Server server;
     
-    //Establir la connexió a la BD's  
-    Connexio conn = new Connexio();
 
     public ServerFil(Socket sc, DataInputStream in, DataOutputStream out, String nomClient, int id, Server server) {
         this.sc = sc;
@@ -48,35 +46,47 @@ public class ServerFil extends Thread {
                         String resposta = in.readUTF();
                         //Descomposar la resposta
                         String[] missatge = resposta.split(",");
+                        System.out.println("valor de missatge : " + missatge.toString() );
                         // - - - S E R V I D O R  ---
                         
-                          System.out.println("Arribo dins el fil valor missatge[0]" +missatge[0]);
                         switch (missatge[0]) {
-                            case "NEW_USER":
+                            case "USER_NEW":
+                              
+                                //Establir la connexió a la BD's  
+                                MetodesSQLgestioUsuaris conn = new MetodesSQLgestioUsuaris();
+
                                 SystemUtils.escriuNouLog(f, "ADD_NEW_USER");
                                 //Connexio conn = new Connexio();
                                 conn.establirConnexio();
-                                conn.alta(resposta);
+                                
+                                System.out.println("Arribo aqui");
+                                int result =conn.altaUser(missatge);
+                                //Enviem el ID# assignat a l'usuari, al servidor
+                                out.writeInt(result);
+
+                                conn.tancarConexio();
                                 break;
 
-                            case "DELETE_USER":
+                            case "USER_DELETE":
                                 SystemUtils.escriuNouLog(f, "DELETE_NEW_USER");
                                 break;
 
-                            case "MODIFI_USER":
+                            case "USER_MODIFI":
                                 SystemUtils.escriuNouLog(f, "MODIFI_NEW_USER");
                                 break;
 
-                            case "QUERY_ALL_USERS":
-                                
-                               SystemUtils.escriuNouLog(f, "EXECUTO CRIDA LLISTAT");
-                            
-                               //Connexio conn = new Connexio();
-                               conn.establirConnexio();
-                               conn.consultaSqlUsuaris("select * from usuaris");
-                                break;
+                            case "USERS_QUERY_ALL":
+                        
+                                SystemUtils.escriuNouLog(f, "EXECUTO CRIDA LLISTAT");
 
-    
+                                //Establir la connexió a la BD's  
+                                MetodesSQLgestioUsuaris connq = new MetodesSQLgestioUsuaris();
+                                //Connexio conn = new Connexio();
+                                connq.establirConnexio();
+                                connq.consultaSqlUsuaris("select * from usuaris");
+                                connq.tancarConexio();
+                                break;
+                                
                             case "EXIT":
                                  SystemUtils.escriuNouLog(f, "EXECUTO CRIDA EXIT");
                                 salir = _EXIT();

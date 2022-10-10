@@ -22,8 +22,10 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        //llistat();
-        alta();
+        llistat();
+        //alta();
+        
+        
     }
     
     public static void llistat(){
@@ -76,7 +78,8 @@ public class TestCrides {
            //Enviem resposta al servidor amb el usuari i la contrasenya
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
            //Executo la consulta de la crida per sortir
-           out.writeUTF("NEW_USER");
+           out.writeUTF("USER_NEW,joan,pwdjoan,joan,rimbles,1,2");
+           System.out.println("Resultat de la consulta : " + in.readInt());
            
       
         } catch (IOException ex) {

@@ -105,65 +105,6 @@ public class Connexio {
 
         return rol;
     }
-
-    public void consultaSqlUsuaris(String query) throws SQLException, IOException {
-
-        int id;
-        String usuari;
-        String contrasenya;
-        int rol;
-
-        Statement stmt = conectar.createStatement();
-        ResultSet result = stmt.executeQuery(query);
-        
-        SystemUtils.escriuNouLog(f, "Valor:"+ query);
-        System.out.println("Valor:"+ query);
-        while (result.next()) {
-            
-            id          = result.getInt("ID");
-            usuari      = result.getString("usuari");
-            contrasenya = result.getString("contrasenya");
-            rol         = result.getInt("rol");
-            
-            System.out.println(id + "\t" + usuari + "\t" + contrasenya +"\t"+ rol);
-            // Leer registro
-        }
-    }
     
-    public int alta(String query) throws SQLException, IOException{
-        
-        int result =0;
-         SystemUtils.escriuNouLog(f, "ALTES");
-
-         String usuari="usuari_prova";
-         String contrasenya="contrasenya_prova";
-         String nom="nom_prova";
-         String cognom="cognom_prova";
-         int departament=1;
-         int rol = 1;
-     
-         String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
-
-         PreparedStatement sentence_ready;
-         
-        try {
-           
-            sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, usuari);
-            sentence_ready.setString(2, contrasenya);
-            sentence_ready.setString(3, nom);
-            sentence_ready.setString(4, cognom);
-            sentence_ready.setInt(5, departament);
-            sentence_ready.setInt(6, rol);
-
-            result = sentence_ready.executeUpdate();
-            sentence_ready.close();
-
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-               
-        return result;
-    }
 
 }
