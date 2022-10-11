@@ -50,23 +50,12 @@ public class Server {
     public void obrirServer() throws IOException, SQLException {
 
         //Establir la connexió a la BD's  
-        //Connexio conn = new Connexio();
         conn.establirConnexio();
 
         //Afegim el usuari i la seva sessió al HasMap
-        try {
-
-            File f = new File("logs.txt");
-            if (!f.exists()) {
-                try {
-                    System.out.println("SERVER_CREATE_NEW_LOG_FILE_LOGS.TXT");
-                    f.createNewFile();
-                } catch (IOException ex) {
-                    Logger.getLogger(ServerFil.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+       try {
             
-            SystemUtils.escriuNouLog(f, "SERVER_online_waiting_for_request");
+            SystemUtils.escriuNouLog("SERVER_online_waiting_for_request");
             while (true) {
 
                 sc = server.accept();
@@ -75,13 +64,13 @@ public class Server {
                 DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
                 //Missatge de benvinguda al establir la comunicació
-                out.writeUTF("SERVER_SHOW_EHLO_established connection");
-                SystemUtils.escriuNouLog(f, "SERVER_SHOW_EHLO_established connection");
+                out.writeUTF(            "SERVER_SHOW_EHLO_established connection");
+                SystemUtils.escriuNouLog("SERVER_SHOW_EHLO_established connection");
 
                 //Recullir el login de l'usuari
                 //format LOGIN,usuari,contrasenya,id_conn
                 String resposta = in.readUTF();
-                SystemUtils.escriuNouLog(f, "USER_RESPONSE # " + resposta);
+                SystemUtils.escriuNouLog("USER_RESPONSE # " + resposta);
 
                 //Descompondre la resposta del client, en un array
                 String[] missatge = resposta.split(",");
@@ -97,13 +86,14 @@ public class Server {
                 int registres = conn.loginValit(missatge[1], missatge[2]);
 
                 //Si existeix el usuari retorna 1 i 0 si no valida
-                SystemUtils.escriuNouLog(f, "SQL_RESPONSE_VALIDATE_USER # " + registres);
+                SystemUtils.escriuNouLog("SQL_RESPONSE_VALIDATE_USER        # " + registres);
 
                 //Està entrant per la pantalla del login NO TE ID i és un usuari validat
-                SystemUtils.escriuNouLog(f, "SERVER_SHOW_ID_CONN_USER_RECEIVED # " + id_conn);
+                SystemUtils.escriuNouLog("SERVER_SHOW_ID_CONN_USER_RECEIVED # " + id_conn);
 
                 //Si id_conn == 0 està fent la pantalla de LOGIN
                 if (id_conn == 0) {
+                  
                     //El ususari ha fet el login correcte
                     if (registres == 1) {
 
@@ -114,44 +104,60 @@ public class Server {
                         afegir(new_id_conn, missatge[1]);
 
                         //Està entrant per la pantalla del login NO TE ID i és un usuari validat
-                        SystemUtils.escriuNouLog(f, "SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # "
+                        SystemUtils.escriuNouLog("SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # "
                                 + new_id_conn + " - " + missatge[1]);
 
-                        SystemUtils.escriuNouLog(f, "SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # "
+                        SystemUtils.escriuNouLog("SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # "
                                 + mapUsuaris);
 
                         //Enviem el ID# assignat a l'usuari, al servidor
                         out.writeInt(new_id_conn);
-                        SystemUtils.escriuNouLog(f, "SERVER_SEND_NEW_ID_CONN_USER_OK # "
-                                + new_id_conn);
+                        SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK          # "
+                                                        + new_id_conn);
                         //Enviar el rol que té l'usuari.
                         int rol = conn.rolUsuari(missatge[1], missatge[2]);
                         out.writeInt(rol);
-                        SystemUtils.escriuNouLog(f, "SERVER_SEND_ROLE_USER  # "
-                                + rol);
-
+                        SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                    # "
+                                                        + rol);
                     } else {
                         //No te ID i el usuari / contrasenya no es correcte
                         //Enviem el ID# assignat a l'usuari -ID = 0 ERROR
                         out.writeInt(0);
-                        SystemUtils.escriuNouLog(f, "SERVER_SEND_ID_CONN_USER_WRONG # " + id_conn);
+                        SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG # " + id_conn);
                     }
                 } else {
                     //Te id
+                    SystemUtils.escriuNouLog("crida a la gestió de fils "+missatge[0]);
                     // Iniciem el fil amb el client
-                    ServerFil fil = new ServerFil(sc, in, out, missatge[1], id_conn, this);
-                    
-                    fil.start();
+                    GestioFils(sc, in, out, missatge, id_conn, this);   
                 }
-
             }
-        } catch (IOException ex) {
-            Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
-        }
+       } catch (IOException ex) {
+          Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+       }
         //Tanquem el fil
         sc.close();
         //Tanquem la connexió a la Bd's
         conn.tancarConexio();
+    }
+    
+    public  void GestioFils(Socket socket, DataInputStream in, DataOutputStream out, String[] missatge, 
+                            int id_conn, Server server) throws IOException{
+               
+        //Recullo la petició codificada que fa el client
+        String comanda = in.readUTF();
+         
+        SystemUtils.escriuNouLog("READ_COMMAND_EXECUTE # "+comanda);
+        SystemUtils.escriuNouLog("SELECT_ITEMS_GRUP    # "+comanda.substring(0,5));
+        
+           switch (comanda.substring(0,5)) {
+                    case "USER_":
+                        ServerFilUsuaris fil = new ServerFilUsuaris(sc, in, out, missatge,comanda, id_conn, this);
+                        fil.start();
+                        
+                    default:
+            }
+        
     }
 
 }

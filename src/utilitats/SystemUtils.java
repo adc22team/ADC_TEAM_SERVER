@@ -5,11 +5,14 @@
  */
 package utilitats;
 
+import classes.ServerFilUsuaris;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -18,7 +21,17 @@ import java.text.SimpleDateFormat;
 public final class SystemUtils {
     
     //Genera un nou registre a l'arxiu de log's del programa.
-    public static void escriuNouLog(File f,String log) throws IOException{
+    public static void escriuNouLog(String log) throws IOException{
+        
+         File f = new File("logs.txt");
+            if (!f.exists()) {
+                try {
+                    System.out.println("SERVER_CREATE_NEW_LOG_FILE_LOGS.TXT");
+                    f.createNewFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
         
          FileWriter fw = new FileWriter(f, true);
          fw.write(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] + " - " + log + "\r\n");

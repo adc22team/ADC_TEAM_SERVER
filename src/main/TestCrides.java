@@ -30,10 +30,6 @@ public class TestCrides {
     
     public static void llistat(){
         
-         //Instaciar el fitxer de logs per accedir-hi
-         File f = new File("logs.txt");
- 
-     
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
@@ -44,7 +40,7 @@ public class TestCrides {
            // Llegir la resposta del servidor al establir la connexió
            String resposta_svr = in.readUTF();
            
-           SystemUtils.escriuNouLog(f, "Resposta_svr:"+ resposta_svr);
+           SystemUtils.escriuNouLog("Resposta_svr:"+ resposta_svr);
                             
            //Enviem resposta al servidor amb el usuari i la contrasenya
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
@@ -59,10 +55,6 @@ public class TestCrides {
     
     public  static void alta(){
         
-        
-         //Instaciar el fitxer de logs per accedir-hi
-         File f = new File("logs.txt");
-         
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
@@ -73,7 +65,7 @@ public class TestCrides {
            // Llegir la resposta del servidor al establir la connexió
            String resposta_svr = in.readUTF();
            
-           SystemUtils.escriuNouLog(f, "Resposta_svr:"+ resposta_svr);
+           SystemUtils.escriuNouLog("Resposta_svr:"+ resposta_svr);
                             
            //Enviem resposta al servidor amb el usuari i la contrasenya
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
@@ -85,9 +77,7 @@ public class TestCrides {
         } catch (IOException ex) {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
+
     }
 
 }

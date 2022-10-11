@@ -21,10 +21,7 @@ import java.util.logging.Logger;
 import main.TiqServerMain;
 import utilitats.SystemUtils;
 
-/**
- *
- * @author cfuga
- */
+
 public class MetodesSQLgestioUsuaris {
     
     
@@ -39,7 +36,7 @@ public class MetodesSQLgestioUsuaris {
     
     File f = new File("logs.txt");
 
-    public Connection establirConnexio() {
+    public Connection establirConnexio() throws IOException {
         
         File fileCfg = new File("config.txt");
         if (!fileCfg.exists()) {
@@ -47,7 +44,7 @@ public class MetodesSQLgestioUsuaris {
                 System.out.println("SERVER_CREATE_NEW_CONFIG_INI_FILE");
                 fileCfg.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(ServerFil.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
@@ -71,17 +68,15 @@ public class MetodesSQLgestioUsuaris {
         } catch (IOException ex) {
             Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-
         try {
 
             Class.forName("org.postgresql.Driver");
             conectar = DriverManager.getConnection(cadena, user, passwd);
-            System.out.println("SQL_RESPONSE_successful_connection_user " + user);
+            SystemUtils.escriuNouLog("SQL_RESPONSE_successful_connection_user " + user);
 
         } catch (Exception e) {
 
-            System.out.println("SQL_RESPONSE_wrong_connection_database" + e.toString());
+            SystemUtils.escriuNouLog("SQL_RESPONSE_wrong_connection_database" + e.toString());
 
         }
 
@@ -93,7 +88,7 @@ public class MetodesSQLgestioUsuaris {
     }
 
     
-     public void consultaSqlUsuaris(String query) throws SQLException, IOException {
+    public void consultaSqlUsuaris(String query) throws SQLException, IOException {
 
         int id;
         String usuari;
@@ -103,8 +98,6 @@ public class MetodesSQLgestioUsuaris {
         Statement stmt = conectar.createStatement();
         ResultSet result = stmt.executeQuery(query);
         
-        SystemUtils.escriuNouLog(f, "Valor:"+ query);
-        System.out.println("Valor:"+ query);
         while (result.next()) {
             
             id          = result.getInt("ID");
@@ -121,7 +114,7 @@ public class MetodesSQLgestioUsuaris {
         
         
         int result =0;
-        SystemUtils.escriuNouLog(f, "ALTES NOU USUARI");       
+        SystemUtils.escriuNouLog("ALTES NOU USUARI");       
      
          String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
 
@@ -153,7 +146,7 @@ public class MetodesSQLgestioUsuaris {
         
         
         int result =0;
-        SystemUtils.escriuNouLog(f, "BAIXA");       
+        SystemUtils.escriuNouLog("BAIXA");       
      
          String sentenciaCrear = ("");
 

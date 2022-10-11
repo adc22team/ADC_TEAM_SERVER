@@ -32,7 +32,7 @@ public class Connexio {
                 System.out.println("SERVER_CREATE_NEW_CONFIG_INI_FILE");
                 fileCfg.createNewFile();
             } catch (IOException ex) {
-                Logger.getLogger(ServerFil.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 
