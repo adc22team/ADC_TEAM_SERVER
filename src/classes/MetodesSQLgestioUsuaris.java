@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package classes;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,16 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import main.TiqServerMain;
+import java.util.ArrayList;
 import utilitats.SystemUtils;
 
 
 public class MetodesSQLgestioUsuaris {
-    
-    
-     Connection conectar = null;
+       
+    Connection conectar = null;
 
     String user = "tiqinssues";
     String passwd = "password";
@@ -33,41 +23,12 @@ public class MetodesSQLgestioUsuaris {
     String ip;
     String port = "5432";
     String cadena ;
-    
-    File f = new File("logs.txt");
 
     public Connection establirConnexio() throws IOException {
+   
+        cadena = "jdbc:postgresql://" + SystemUtils.obtenirIpConfig() + "/" + bd;
+        System.out.println(cadena);
         
-        File fileCfg = new File("config.txt");
-        if (!fileCfg.exists()) {
-            try {
-                System.out.println("SERVER_CREATE_NEW_CONFIG_INI_FILE");
-                fileCfg.createNewFile();
-            } catch (IOException ex) {
-                Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        //Llegim la ip del servidor bd's
-        BufferedReader br;
-        try {
-            br = new BufferedReader(new FileReader(fileCfg));
-            String configIp;
-            while ((configIp = br.readLine()) != null) {
-               
-                 ip = configIp;              
-            }
-           //Tancar l'arxiu
-            br.close();
-
-            cadena = "jdbc:postgresql://" + ip + "/" + bd;
-            System.out.println(cadena);
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
         try {
 
             Class.forName("org.postgresql.Driver");
@@ -77,7 +38,6 @@ public class MetodesSQLgestioUsuaris {
         } catch (Exception e) {
 
             SystemUtils.escriuNouLog("SQL_RESPONSE_wrong_connection_database" + e.toString());
-
         }
 
         return conectar;
@@ -88,12 +48,17 @@ public class MetodesSQLgestioUsuaris {
     }
 
     
-    public void consultaSqlUsuaris(String query) throws SQLException, IOException {
+    public ArrayList consultaSqlUsuaris(String query) throws SQLException, IOException {
 
         int id;
         String usuari;
         String contrasenya;
+        String nom;
+        String cognom;
         int rol;
+        int depart;
+        
+        ArrayList<String> usuarisArrayList = new ArrayList<String>();
 
         Statement stmt = conectar.createStatement();
         ResultSet result = stmt.executeQuery(query);
@@ -103,26 +68,28 @@ public class MetodesSQLgestioUsuaris {
             id          = result.getInt("ID");
             usuari      = result.getString("usuari");
             contrasenya = result.getString("contrasenya");
+            nom         = result.getString("nom");
+            cognom      = result.getString("cognom");
+            depart      = result.getInt("departament");
             rol         = result.getInt("rol");
             
-            System.out.println(id + "\t" + usuari + "\t" + contrasenya +"\t"+ rol);
-            // Leer registro
+           usuarisArrayList.add(    id + "," + usuari + "," + contrasenya + "," + nom  + "," + cognom  + "," + depart + "," + rol);
+            
         }
+        return usuarisArrayList;
     }
     
-    public int altaUser(String[]altaDades) throws SQLException, IOException{
+    public int altaUser(String[] altaDades) throws SQLException, IOException{
         
         
         int result =0;
         SystemUtils.escriuNouLog("ALTES NOU USUARI");       
      
-         String sentenciaCrear = ("INSERT INTO usuaris (\"ID\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
+         String sentenciaCrear = ("INSERT INTO usuaris (\"id\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
 
          PreparedStatement sentence_ready;
-         
-         System.out.println("Arribo al prepared");
-         
-        try {
+       
+         try {
            
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
             sentence_ready.setString(1, altaDades[1]); // usuari
@@ -142,30 +109,25 @@ public class MetodesSQLgestioUsuaris {
         return result;
     }
     
-    public int baixaUser(String[]altaDades) throws SQLException, IOException{
+    public int baixaUser(int id_key) throws SQLException, IOException{
         
         
         int result =0;
-        SystemUtils.escriuNouLog("BAIXA");       
+        
+        SystemUtils.escriuNouLog("DELETE_USER_ID # "+id_key);       
      
-         String sentenciaCrear = ("");
-
-         PreparedStatement sentence_ready;
-         
-         System.out.println("Arribo al prepared");
-         
+        String sentenciaCrear = ("DELETE FROM usuaris WHERE id=?");
+            
+        PreparedStatement sentence_ready;
+                
         try {
            
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, altaDades[1]); // usuari
-            sentence_ready.setString(2, altaDades[2]); // contrasenya
-            sentence_ready.setString(3, altaDades[3]); //nom
-            sentence_ready.setString(4, altaDades[4]); //cognom
-            sentence_ready.setInt(5,Integer.parseInt(altaDades[5])); //departament   
-            sentence_ready.setInt(6,Integer.parseInt(altaDades[6])); //rol
-
+            sentence_ready.setInt(1, id_key); // id
+             
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
+     
 
         } catch (Exception e) {
             System.out.println(e);
@@ -173,5 +135,5 @@ public class MetodesSQLgestioUsuaris {
                
         return result;
     }
-    
+  
 }

@@ -81,3 +81,91 @@ public class TestCrides {
     }
 
 }
+
+/*
+ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+         
+         //Instaciar el fitxer de logs per accedir-hi
+       
+ 
+     
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            
+           // Llegir la resposta del servidor al establir la connexió
+           String resposta_svr = in.readUTF();
+           
+           
+                            
+           //Enviem resposta al servidor amb el usuari i la contrasenya
+           out.writeUTF("LOGIN," + usuari + "," + pwd +"," + id);
+           //Executo la consulta de la crida per sortir
+           out.writeUTF("USER_QUERY_ALL");
+           
+      
+        } catch (IOException ex) {
+            Logger.getLogger(DesktopPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+        
+        
+    }                                        
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        // TODO add your handling code here:
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            
+           // Llegir la resposta del servidor al establir la connexió
+           String resposta_svr = in.readUTF();
+           
+           
+                            
+           //Enviem resposta al servidor amb el usuari i la contrasenya
+           out.writeUTF("LOGIN," + usuari + "," + pwd +"," + id);
+           //Executo la consulta de la crida per sortir
+           out.writeUTF("USER_NEW,joan,pwdjoan,joan,rimbles,1,2");
+           
+      
+        } catch (IOException ex) {
+            Logger.getLogger(DesktopPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }                                        
+
+
+private void logOut(){
+ 
+    Socket sc;
+    try {
+        sc = new Socket("127.0.0.1", 5000);
+        DataInputStream in = new DataInputStream(sc.getInputStream());
+        DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+
+        // Llegir la resposta del servidor al establir la connexió
+        String resposta_svr = in.readUTF();
+        //Enviem resposta al servidor amb el usuari i la contrasenya
+        out.writeUTF("LOGIN," + getUsuari() + "," + getPwd() + "," + getId());
+        //Executo la consulta de la crida per sortir
+        out.writeUTF("EXIT");
+        System.out.println("Valor getId: " + getId());
+
+    } catch (IOException ex) {
+        Logger.getLogger(DesktopPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+    }
+
+    //System.exit(0);
+}
+
+
+*/

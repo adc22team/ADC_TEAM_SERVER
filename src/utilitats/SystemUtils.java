@@ -6,13 +6,17 @@
 package utilitats;
 
 import classes.ServerFilUsuaris;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import main.TiqServerMain;
 
 /**
  *
@@ -56,5 +60,38 @@ public final class SystemUtils {
     public static int generaNumAleatorio(int minimo, int maximo) {
         int num = (int) Math.floor((Math.random() * (maximo - minimo + 1) + (minimo)));
         return num;
+    }
+    
+    
+    public static String obtenirIpConfig(){
+        File fileCfg = new File("config.txt");
+        String ip="";
+
+        if (!fileCfg.exists()) {
+            try {
+                escriuNouLog("SERVER_CREATE_NEW_CONFIG_INI_FILE");
+                fileCfg.createNewFile();
+            } catch (IOException ex) {
+                Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //Llegim la ip del servidor bd's
+        BufferedReader br;
+        try {
+            br = new BufferedReader(new FileReader(fileCfg));
+            String configIp;
+            while ((configIp = br.readLine()) != null) {
+
+                ip = configIp;
+            }
+            //Tancar l'arxiu
+            br.close();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return ip;
     }
 }

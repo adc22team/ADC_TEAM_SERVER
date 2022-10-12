@@ -3,7 +3,6 @@ package classes;
 import utilitats.SystemUtils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -154,7 +153,12 @@ public class Server {
                     case "USER_":
                         ServerFilUsuaris fil = new ServerFilUsuaris(sc, in, out, missatge,comanda, id_conn, this);
                         fil.start();
+                    case "DEPA_":    
+                    
+                    case "TIQU_":       
                         
+                    case "ROLE_":
+                                           
                     default:
             }
         

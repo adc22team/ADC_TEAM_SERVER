@@ -3,10 +3,10 @@ package classes;
 import utilitats.SystemUtils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,58 +37,74 @@ public class ServerFilUsuaris extends Thread {
     public void run() {
 
         try {
-            // - - - S E R V E R  T I Q  I S S U E S  G E S T I O  U S U A R I S - - -
-            try {                    
-                //Descomposar la resposta
+            // - - - S E R V E R    T I Q  I S S U E S    G E S T I O    U S U A R I S - - -
+            try {     
+                //Establir la connexió a la BD's  
+                MetodesSQLgestioUsuaris conn = new MetodesSQLgestioUsuaris();
+                conn.establirConnexio();
+                
+                //Descomposar la resposta rebuda pel client
                 String[] missatge = comanda.split(",");
-                SystemUtils.escriuNouLog("valor de missatge[0] : " + missatge[0].toString() );
-                // - - - S E R V I D O R  ---
+                                
                 switch (missatge[0]) {
                     case "USER_NEW":
 
-                        //Establir la connexió a la BD's  
-                        MetodesSQLgestioUsuaris conn = new MetodesSQLgestioUsuaris();
-
-                        SystemUtils.escriuNouLog("ADD_NEW_USER");
-                        //Connexio conn = new Connexio();
-                        conn.establirConnexio();
-
-                        System.out.println("Arribo aqui");
+                        SystemUtils.escriuNouLog("ADD_NEW_USER_IN_BD #");
+                     
                         int result =conn.altaUser(missatge);
+                        
                         //Enviem el ID# assignat a l'usuari, al servidor
                         out.writeInt(result);
-
-                        conn.tancarConexio();
-                        break;
+                         break;
 
                     case "USER_DELETE":
-                        SystemUtils.escriuNouLog("DELETE_NEW_USER");
+                        
+                        SystemUtils.escriuNouLog("DELETE_USER_IN_DB #");
+                        
+                        int resultat =conn.baixaUser(Integer.parseInt(missatge[1]));
+                        
+                        SystemUtils.escriuNouLog("RESULT_DELETE_USER_ID # " +resultat);
+                        
+                        //Enviem el  resultat de l'operació 1 = OK                      
+                        out.writeInt(resultat);
+                        
                         break;
 
                     case "USER_MODIFI":
-                        SystemUtils.escriuNouLog("MODIFI_NEW_USER");
+                        SystemUtils.escriuNouLog("MODIFI_USER");
                         break;
 
-                    case "USER_QUERY_ALL":
+                    case "USER_QUERY":
 
-                        SystemUtils.escriuNouLog("EXECUTO CRIDA LLISTAT");
+                        ArrayList<String> usuariArrayList = new ArrayList<String>();
+                        SystemUtils.escriuNouLog("EXECUTE_USER_QUERY #");
 
-                        //Establir la connexió a la BD's  
-                        MetodesSQLgestioUsuaris connq = new MetodesSQLgestioUsuaris();
-                        //Connexio conn = new Connexio();
-                        connq.establirConnexio();
-                        connq.consultaSqlUsuaris("select * from usuaris");
-                        connq.tancarConexio();
+                        usuariArrayList  = conn.consultaSqlUsuaris(missatge[1]);
+                        
+                        //Enviem el nombre total de elements de la llista
+                        out.writeInt(usuariArrayList.size());
+                        
+                        //Enviar les dades reculllides de la consulta al client
+                        for(int i = 0; i < usuariArrayList.size(); i++){
+                            out.writeUTF(usuariArrayList.get(i));
+                            SystemUtils.escriuNouLog(usuariArrayList.get(i));
+                        }
                         break;
 
-                    case "EXIT":
-                         SystemUtils.escriuNouLog("EXECUTO CRIDA EXIT");
-                        //salir = _EXIT();
-                        _EXIT();
+                    case "USER_EXIT":
+                        
+                        SystemUtils.escriuNouLog("EXECUTO CRIDA EXIT");
+                        //Trec de la llista d'usuaris actius al usuari que tanca sessió
+                        this.server.esborrar(id, nomClient);
+                        
                         break;
 
                     default:
                 }
+                
+                //Tanquem la comunicacio amb la BD's
+                conn.tancarConexio();
+                    
             } catch (IOException ex) {
             } catch (SQLException ex) {
                 Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -96,20 +112,11 @@ public class ServerFilUsuaris extends Thread {
 
             sc.close();
             //Registrar en el logs el llistat de tots els usuaris guardats al map
-            SystemUtils.escriuNouLog("SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # " + server.getMapUsuaris());
-            SystemUtils.escriuNouLog("SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # " + nomClient + " amb ID#" + id);
+            SystemUtils.escriuNouLog("SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # " + server.getMapUsuaris());
+            SystemUtils.escriuNouLog("SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # " + nomClient + " ID#" + id);
 
         } catch (IOException ex) {
             Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
-
-    //Resposta servidor a la crida del client EXIT
-    private boolean _EXIT() {
-        //Trec de la llista d'usuaris actius al usuari que tanca sessió
-        this.server.esborrar(id, nomClient);
-
-        return true;
-    }
-
 }
