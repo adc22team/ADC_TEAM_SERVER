@@ -3532,3 +3532,20 @@
 13/10/2022;10:40:28 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
 13/10/2022;10:40:29 - SQL_RESPONSE_successful_connection_user tiqinssues
 13/10/2022;10:40:29 - SERVER_online_waiting_for_request
+13/10/2022;22:08:17 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;22:08:18 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;22:08:18 - SERVER_online_waiting_for_request
+13/10/2022;22:08:32 - SERVER_SHOW_EHLO_established connection
+13/10/2022;22:08:32 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;22:08:32 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;22:08:32 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;22:08:32 - crida a la gestió de fils LOGIN
+13/10/2022;22:08:32 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel1,pwdmanel1,manel1,lopez1,5,5
+13/10/2022;22:08:32 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;22:08:32 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;22:08:33 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;22:08:33 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;22:08:33 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;22:08:33 - MODIFI_UPDATE_USER_RESULT # 1
+13/10/2022;22:08:33 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;22:08:33 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
