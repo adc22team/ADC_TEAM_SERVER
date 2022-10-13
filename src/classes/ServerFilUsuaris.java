@@ -84,10 +84,11 @@ public class ServerFilUsuaris extends Thread {
                          break;
                         
                     case "USER_QUERY":
-
-                        ArrayList<String> usuariArrayList = new ArrayList<String>();
+                        
                         SystemUtils.escriuNouLog("EXECUTE_USER_QUERY #");
 
+                        ArrayList<String> usuariArrayList = new ArrayList<String>();
+                        
                         usuariArrayList  = conn.consultaSqlUsuaris(missatge[1]);
                         
                         //Enviem el nombre total de elements de la llista

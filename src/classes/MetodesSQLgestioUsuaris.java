@@ -83,7 +83,7 @@ public class MetodesSQLgestioUsuaris {
         
         
         int result =0;
-        SystemUtils.escriuNouLog("INSERT_NEW_USER_IN_DB");       
+        SystemUtils.escriuNouLog("INSERT_NEW_USER_IN_DB #");       
      
          String sentenciaCrear = ("INSERT INTO usuaris (\"id\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
 

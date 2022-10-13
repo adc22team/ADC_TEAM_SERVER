@@ -1,14 +1,8 @@
 package classes;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
 import java.io.IOException;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import main.TiqServerMain;
 import utilitats.SystemUtils;
 
 public class Connexio {
@@ -22,51 +16,20 @@ public class Connexio {
     String port = "5432";
     String cadena ;
     
-    File f = new File("logs.txt");
+    public Connection establirConnexio() throws IOException {
 
-    public Connection establirConnexio() {
-        
-        File fileCfg = new File("config.txt");
-        if (!fileCfg.exists()) {
-            try {
-                System.out.println("SERVER_CREATE_NEW_CONFIG_INI_FILE");
-                fileCfg.createNewFile();
-            } catch (IOException ex) {
-                Logger.getLogger(ServerFilUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        //Llegim la ip del servidor bd's
-        BufferedReader br;
-        try {
-            br = new BufferedReader(new FileReader(fileCfg));
-            String configIp;
-            while ((configIp = br.readLine()) != null) {
-               
-                 ip = configIp;              
-            }
-           //Tancar l'arxiu
-            br.close();
-
-            cadena = "jdbc:postgresql://" + ip + "/" + bd;
-            System.out.println(cadena);
-
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
-            
+        cadena = "jdbc:postgresql://" + SystemUtils.obtenirIpConfig() + "/" + bd;
+        SystemUtils.escriuNouLog("INFO_SQL_CONNECTION # "+cadena);
 
         try {
 
             Class.forName("org.postgresql.Driver");
             conectar = DriverManager.getConnection(cadena, user, passwd);
-            System.out.println("SQL_RESPONSE_successful_connection_user " + user);
+            SystemUtils.escriuNouLog("SQL_RESPONSE_successful_connection_user " + user);
 
         } catch (Exception e) {
 
-            System.out.println("SQL_RESPONSE_wrong_connection_database" + e.toString());
+           SystemUtils.escriuNouLog("SQL_RESPONSE_wrong_connection_database" + e.toString());
 
         }
 
