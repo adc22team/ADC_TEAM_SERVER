@@ -2354,3 +2354,951 @@
 12/10/2022;18:57:55 - EXECUTO CRIDA EXIT
 12/10/2022;18:57:55 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
 12/10/2022;18:57:55 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#598
+12/10/2022;19:22:25 - SERVER_SHOW_EHLO_established connection
+12/10/2022;19:22:25 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;19:23:44 - SERVER_online_waiting_for_request
+12/10/2022;19:23:47 - SERVER_SHOW_EHLO_established connection
+12/10/2022;19:23:47 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;19:23:47 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;19:23:47 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;19:23:47 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 468 - carles
+12/10/2022;19:23:47 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {468=carles}
+12/10/2022;19:23:47 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 468
+12/10/2022;19:23:47 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;19:23:50 - SERVER_SHOW_EHLO_established connection
+12/10/2022;19:23:50 - USER_RESPONSE # LOGIN,carles,pwdcarles,468
+12/10/2022;19:23:50 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;19:23:50 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 468
+12/10/2022;19:23:50 - crida a la gestió de fils LOGIN
+12/10/2022;19:23:50 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;19:23:50 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;19:23:50 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;19:23:50 - EXECUTE_USER_QUERY #
+12/10/2022;19:23:50 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {468=carles}
+12/10/2022;19:23:50 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#468
+12/10/2022;19:23:51 - SERVER_SHOW_EHLO_established connection
+12/10/2022;19:23:51 - USER_RESPONSE # LOGIN,carles,pwdcarles,468
+12/10/2022;19:23:51 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;19:23:51 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 468
+12/10/2022;19:23:51 - crida a la gestió de fils LOGIN
+12/10/2022;19:23:51 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;19:23:51 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;19:23:51 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;19:23:51 - EXECUTE_USER_QUERY #
+12/10/2022;19:23:52 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;19:23:52 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;19:23:52 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;19:23:52 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;19:23:52 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;19:23:52 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {468=carles}
+12/10/2022;19:23:52 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#468
+12/10/2022;19:23:53 - SERVER_SHOW_EHLO_established connection
+12/10/2022;19:23:53 - USER_RESPONSE # LOGIN,carles,pwdcarles,468
+12/10/2022;19:23:53 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;19:23:53 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 468
+12/10/2022;19:23:53 - crida a la gestió de fils LOGIN
+12/10/2022;19:23:53 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;19:23:53 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;19:23:53 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;19:23:53 - EXECUTE_USER_QUERY #
+12/10/2022;19:23:53 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {468=carles}
+12/10/2022;19:23:53 - SERVER_SHOW_EHLO_established connection
+12/10/2022;19:23:53 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#468
+12/10/2022;19:23:53 - USER_RESPONSE # LOGIN,carles,pwdcarles,468
+12/10/2022;19:23:53 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;19:23:53 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 468
+12/10/2022;19:23:53 - crida a la gestió de fils LOGIN
+12/10/2022;20:44:02 - SERVER_online_waiting_for_request
+12/10/2022;20:44:21 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:44:21 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;20:44:21 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:44:21 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;20:44:21 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 841 - carles
+12/10/2022;20:44:21 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {841=carles}
+12/10/2022;20:44:21 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 841
+12/10/2022;20:44:21 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;20:44:27 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:44:27 - USER_RESPONSE # LOGIN,carles,pwdcarles,841
+12/10/2022;20:44:27 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:44:27 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 841
+12/10/2022;20:44:27 - crida a la gestió de fils LOGIN
+12/10/2022;20:44:27 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:44:27 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:44:27 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:44:27 - EXECUTE_USER_QUERY #
+12/10/2022;20:44:27 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {841=carles}
+12/10/2022;20:44:27 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#841
+12/10/2022;20:45:32 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:45:32 - USER_RESPONSE # LOGIN,carles,pwdcarles,841
+12/10/2022;20:45:32 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:45:32 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 841
+12/10/2022;20:45:32 - crida a la gestió de fils LOGIN
+12/10/2022;20:45:32 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:45:32 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:45:32 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:45:32 - EXECUTE_USER_QUERY #
+12/10/2022;20:45:32 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {841=carles}
+12/10/2022;20:45:32 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#841
+12/10/2022;20:45:34 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:45:34 - USER_RESPONSE # LOGIN,carles,pwdcarles,841
+12/10/2022;20:45:34 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:45:34 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 841
+12/10/2022;20:45:34 - crida a la gestió de fils LOGIN
+12/10/2022;20:45:34 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;20:45:34 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:45:34 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:45:34 - EXECUTE_USER_QUERY #
+12/10/2022;20:45:34 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;20:45:34 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;20:45:34 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;20:45:34 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;20:45:34 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;20:45:34 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {841=carles}
+12/10/2022;20:45:34 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#841
+12/10/2022;20:45:36 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:45:36 - USER_RESPONSE # LOGIN,carles,pwdcarles,841
+12/10/2022;20:45:36 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:45:36 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 841
+12/10/2022;20:45:36 - crida a la gestió de fils LOGIN
+12/10/2022;20:45:36 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:45:36 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:45:36 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:45:36 - EXECUTE_USER_QUERY #
+12/10/2022;20:45:36 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {841=carles}
+12/10/2022;20:45:36 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#841
+12/10/2022;20:45:39 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:45:39 - USER_RESPONSE # LOGIN,carles,pwdcarles,841
+12/10/2022;20:45:39 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:45:39 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 841
+12/10/2022;20:45:39 - crida a la gestió de fils LOGIN
+12/10/2022;20:45:39 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:45:39 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:45:39 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:45:39 - EXECUTE_USER_QUERY #
+12/10/2022;20:45:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {841=carles}
+12/10/2022;20:45:39 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#841
+12/10/2022;20:45:39 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:45:39 - USER_RESPONSE # LOGIN,carles,pwdcarles,841
+12/10/2022;20:45:39 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:45:39 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 841
+12/10/2022;20:45:39 - crida a la gestió de fils LOGIN
+12/10/2022;20:46:44 - SERVER_online_waiting_for_request
+12/10/2022;20:47:00 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:00 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;20:47:00 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:00 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;20:47:00 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 775 - carles
+12/10/2022;20:47:00 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {775=carles}
+12/10/2022;20:47:00 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 775
+12/10/2022;20:47:00 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;20:47:04 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:04 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:04 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:04 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:04 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:04 - READ_COMMAND_EXECUTE # USER_NEW,joan,pwdjoan,joan,rimbles,1,2
+12/10/2022;20:47:04 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:04 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:04 - ADD_NEW_USER_IN_BD #
+12/10/2022;20:47:04 - ALTES NOU USUARI
+12/10/2022;20:47:04 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:04 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:13 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:13 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:13 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:13 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:13 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:13 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:47:13 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:13 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:13 - EXECUTE_USER_QUERY #
+12/10/2022;20:47:13 - 45,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+12/10/2022;20:47:13 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:13 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:13 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:13 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:13 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:13 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:13 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:13 - READ_COMMAND_EXECUTE # USER_DELETE,45
+12/10/2022;20:47:13 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:13 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:13 - DELETE_USER_IN_DB #
+12/10/2022;20:47:13 - DELETE_USER_ID # 45
+12/10/2022;20:47:13 - RESULT_DELETE_USER_ID # 1
+12/10/2022;20:47:13 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:13 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:29 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:29 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:29 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:29 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:29 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:29 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+12/10/2022;20:47:29 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:29 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:29 - EXECUTE_USER_QUERY #
+12/10/2022;20:47:29 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;20:47:29 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;20:47:29 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;20:47:29 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;20:47:29 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;20:47:29 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:29 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:33 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:33 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:33 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:33 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:33 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:33 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;20:47:33 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:33 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:33 - EXECUTE_USER_QUERY #
+12/10/2022;20:47:33 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;20:47:33 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;20:47:33 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;20:47:33 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;20:47:33 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;20:47:33 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:33 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:34 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:34 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:34 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:34 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:34 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:34 - READ_COMMAND_EXECUTE # USER_NEW,joan,pwdjoan,joan,rimbles,1,2
+12/10/2022;20:47:34 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:34 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:34 - ADD_NEW_USER_IN_BD #
+12/10/2022;20:47:34 - ALTES NOU USUARI
+12/10/2022;20:47:34 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:34 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:37 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:37 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:37 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:37 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:37 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:37 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:47:37 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:37 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:37 - EXECUTE_USER_QUERY #
+12/10/2022;20:47:37 - 46,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+12/10/2022;20:47:37 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:37 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:50 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:50 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:50 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:50 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:50 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:50 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+12/10/2022;20:47:50 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:50 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:50 - EXECUTE_USER_QUERY #
+12/10/2022;20:47:50 - 46,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+12/10/2022;20:47:50 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:50 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:50 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:50 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:50 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:50 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:50 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:50 - READ_COMMAND_EXECUTE # USER_DELETE,46
+12/10/2022;20:47:50 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:50 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:50 - DELETE_USER_IN_DB #
+12/10/2022;20:47:50 - DELETE_USER_ID # 46
+12/10/2022;20:47:50 - RESULT_DELETE_USER_ID # 1
+12/10/2022;20:47:50 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:50 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:47:53 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:47:53 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:47:53 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:47:53 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:47:53 - crida a la gestió de fils LOGIN
+12/10/2022;20:47:53 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;20:47:53 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:47:53 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:47:53 - EXECUTE_USER_QUERY #
+12/10/2022;20:47:53 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;20:47:53 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;20:47:53 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;20:47:53 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;20:47:53 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;20:47:53 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {775=carles}
+12/10/2022;20:47:53 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:48:07 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:48:07 - USER_RESPONSE # LOGIN,carles,pwdcarles,775
+12/10/2022;20:48:07 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:48:07 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 775
+12/10/2022;20:48:07 - crida a la gestió de fils LOGIN
+12/10/2022;20:48:07 - READ_COMMAND_EXECUTE # USER_EXIT
+12/10/2022;20:48:07 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:48:08 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:48:08 - EXECUTO CRIDA EXIT
+12/10/2022;20:48:08 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+12/10/2022;20:48:08 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#775
+12/10/2022;20:48:30 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:48:30 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;20:48:30 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:48:30 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;20:48:30 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 493 - carles
+12/10/2022;20:48:30 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {493=carles}
+12/10/2022;20:48:30 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 493
+12/10/2022;20:48:30 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;20:48:41 - SERVER_SHOW_EHLO_established connection
+12/10/2022;20:48:41 - USER_RESPONSE # LOGIN,carles,pwdcarles,493
+12/10/2022;20:48:41 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;20:48:41 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 493
+12/10/2022;20:48:41 - crida a la gestió de fils LOGIN
+12/10/2022;20:48:41 - READ_COMMAND_EXECUTE # USER_EXIT
+12/10/2022;20:48:41 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;20:48:41 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;20:48:41 - EXECUTO CRIDA EXIT
+12/10/2022;20:48:41 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+12/10/2022;20:48:41 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#493
+12/10/2022;21:15:24 - SERVER_online_waiting_for_request
+12/10/2022;21:15:29 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:15:29 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:16:04 - SERVER_online_waiting_for_request
+12/10/2022;21:16:16 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:16:16 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:18:12 - SERVER_online_waiting_for_request
+12/10/2022;21:18:55 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:18:55 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:18:55 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:18:55 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:18:55 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 776 - carles
+12/10/2022;21:18:55 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {776=carles}
+12/10/2022;21:18:55 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 776
+12/10/2022;21:18:55 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:19:01 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:19:01 - USER_RESPONSE # LOGIN,carles,pwdcarles,776
+12/10/2022;21:19:01 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:19:01 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 776
+12/10/2022;21:19:01 - crida a la gestió de fils LOGIN
+12/10/2022;21:19:01 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;21:19:01 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:19:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:19:02 - EXECUTE_USER_QUERY #
+12/10/2022;21:19:02 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;21:19:02 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;21:19:02 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;21:19:02 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;21:19:02 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;21:19:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {776=carles}
+12/10/2022;21:19:02 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#776
+12/10/2022;21:19:04 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:19:04 - USER_RESPONSE # LOGIN,carles,pwdcarles,776
+12/10/2022;21:19:04 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:19:04 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 776
+12/10/2022;21:19:04 - crida a la gestió de fils LOGIN
+12/10/2022;21:19:04 - READ_COMMAND_EXECUTE # USER_UPDATE,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:19:04 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:19:04 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:19:04 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {776=carles}
+12/10/2022;21:19:04 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#776
+12/10/2022;21:19:09 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:19:09 - USER_RESPONSE # LOGIN,carles,pwdcarles,776
+12/10/2022;21:19:09 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:19:09 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 776
+12/10/2022;21:19:09 - crida a la gestió de fils LOGIN
+12/10/2022;21:19:09 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+12/10/2022;21:19:09 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:19:09 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:19:09 - EXECUTE_USER_QUERY #
+12/10/2022;21:19:09 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;21:19:09 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;21:19:09 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;21:19:09 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;21:19:09 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;21:19:09 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {776=carles}
+12/10/2022;21:19:09 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#776
+12/10/2022;21:19:33 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:19:33 - USER_RESPONSE # LOGIN,carles,pwdcarles,776
+12/10/2022;21:19:33 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:19:33 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 776
+12/10/2022;21:19:33 - crida a la gestió de fils LOGIN
+12/10/2022;21:19:33 - READ_COMMAND_EXECUTE # USER_UPDATE,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:19:33 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:19:33 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:19:33 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {776=carles}
+12/10/2022;21:19:33 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#776
+12/10/2022;21:20:59 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:20:59 - USER_RESPONSE # LOGIN,carles,pwdcarles,776
+12/10/2022;21:20:59 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:20:59 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 776
+12/10/2022;21:20:59 - crida a la gestió de fils LOGIN
+12/10/2022;21:20:59 - READ_COMMAND_EXECUTE # USER_EXIT
+12/10/2022;21:20:59 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:20:59 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:20:59 - EXECUTO CRIDA EXIT
+12/10/2022;21:20:59 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+12/10/2022;21:20:59 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#776
+12/10/2022;21:21:22 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:21:22 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:21:22 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:21:22 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:21:22 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 677 - carles
+12/10/2022;21:21:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {677=carles}
+12/10/2022;21:21:22 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 677
+12/10/2022;21:21:22 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:21:25 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:21:25 - USER_RESPONSE # LOGIN,carles,pwdcarles,677
+12/10/2022;21:21:25 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:21:25 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 677
+12/10/2022;21:21:25 - crida a la gestió de fils LOGIN
+12/10/2022;21:21:25 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:21:25 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:21:25 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:21:25 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:21:25 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:21:25 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {677=carles}
+12/10/2022;21:21:25 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#677
+12/10/2022;21:21:53 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:21:53 - USER_RESPONSE # LOGIN,carles,pwdcarles,677
+12/10/2022;21:21:53 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:21:53 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 677
+12/10/2022;21:21:53 - crida a la gestió de fils LOGIN
+12/10/2022;21:21:53 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;21:21:53 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:21:53 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:21:53 - EXECUTE_USER_QUERY #
+12/10/2022;21:21:53 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;21:21:53 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;21:21:53 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;21:21:53 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;21:21:53 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;21:21:53 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {677=carles}
+12/10/2022;21:21:53 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#677
+12/10/2022;21:22:01 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:22:01 - USER_RESPONSE # LOGIN,carles,pwdcarles,677
+12/10/2022;21:22:01 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:22:01 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 677
+12/10/2022;21:22:01 - crida a la gestió de fils LOGIN
+12/10/2022;21:22:01 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:22:01 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:22:01 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:22:01 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:22:01 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:22:01 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {677=carles}
+12/10/2022;21:22:01 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#677
+12/10/2022;21:23:38 - SERVER_online_waiting_for_request
+12/10/2022;21:23:51 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:23:51 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:23:51 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:23:51 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:23:51 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 683 - carles
+12/10/2022;21:23:51 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {683=carles}
+12/10/2022;21:23:51 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 683
+12/10/2022;21:23:51 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:23:56 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:23:56 - USER_RESPONSE # LOGIN,carles,pwdcarles,683
+12/10/2022;21:23:56 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:23:56 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 683
+12/10/2022;21:23:56 - crida a la gestió de fils LOGIN
+12/10/2022;21:23:56 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:23:56 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:23:57 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:23:57 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:23:57 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:23:57 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {683=carles}
+12/10/2022;21:23:57 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#683
+12/10/2022;21:24:19 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:24:19 - USER_RESPONSE # LOGIN,carles,pwdcarles,683
+12/10/2022;21:24:19 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:24:19 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 683
+12/10/2022;21:24:19 - crida a la gestió de fils LOGIN
+12/10/2022;21:24:19 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+12/10/2022;21:24:19 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:24:19 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:24:19 - EXECUTE_USER_QUERY #
+12/10/2022;21:24:19 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;21:24:19 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;21:24:19 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;21:24:19 - 6,manel                                             ,pwdmanel                                          ,Manel                                             ,Lopez                                             ,0,2
+12/10/2022;21:24:19 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;21:24:19 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {683=carles}
+12/10/2022;21:24:19 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#683
+12/10/2022;21:25:50 - SERVER_online_waiting_for_request
+12/10/2022;21:26:05 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:26:05 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:26:05 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:26:05 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:26:05 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 817 - carles
+12/10/2022;21:26:05 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {817=carles}
+12/10/2022;21:26:05 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 817
+12/10/2022;21:26:05 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:26:07 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:26:07 - USER_RESPONSE # LOGIN,carles,pwdcarles,817
+12/10/2022;21:26:07 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:26:07 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 817
+12/10/2022;21:26:07 - crida a la gestió de fils LOGIN
+12/10/2022;21:26:07 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:26:07 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:26:07 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:26:07 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:26:07 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:26:08 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {817=carles}
+12/10/2022;21:26:08 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#817
+12/10/2022;21:27:19 - SERVER_online_waiting_for_request
+12/10/2022;21:27:33 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:27:33 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:27:33 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:27:33 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:27:33 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 740 - carles
+12/10/2022;21:27:33 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {740=carles}
+12/10/2022;21:27:33 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 740
+12/10/2022;21:27:33 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:27:36 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:27:37 - USER_RESPONSE # LOGIN,carles,pwdcarles,740
+12/10/2022;21:27:37 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:27:37 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 740
+12/10/2022;21:27:37 - crida a la gestió de fils LOGIN
+12/10/2022;21:27:37 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:27:37 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:27:37 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:27:37 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:27:37 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:27:37 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {740=carles}
+12/10/2022;21:27:37 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#740
+12/10/2022;21:29:44 - SERVER_online_waiting_for_request
+12/10/2022;21:30:02 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:30:02 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:30:03 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:30:03 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:30:03 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 394 - carles
+12/10/2022;21:30:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {394=carles}
+12/10/2022;21:30:03 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 394
+12/10/2022;21:30:03 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:30:06 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:30:06 - USER_RESPONSE # LOGIN,carles,pwdcarles,394
+12/10/2022;21:30:06 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:30:06 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 394
+12/10/2022;21:30:06 - crida a la gestió de fils LOGIN
+12/10/2022;21:30:06 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manelm,pwdmanelm,manelm,rimblesm,5,5
+12/10/2022;21:30:06 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:30:06 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:30:06 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:30:06 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:30:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {394=carles}
+12/10/2022;21:30:06 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#394
+12/10/2022;21:32:35 - SERVER_online_waiting_for_request
+12/10/2022;21:32:55 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:32:55 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+12/10/2022;21:32:55 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:32:55 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+12/10/2022;21:32:55 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 461 - carles
+12/10/2022;21:32:55 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {461=carles}
+12/10/2022;21:32:55 - SERVER_SEND_NEW_ID_CONN_USER_OK          # 461
+12/10/2022;21:32:55 - SERVER_SEND_ROLE_USER                    # 1
+12/10/2022;21:32:58 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:32:58 - USER_RESPONSE # LOGIN,carles,pwdcarles,461
+12/10/2022;21:32:58 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:32:58 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 461
+12/10/2022;21:32:58 - crida a la gestió de fils LOGIN
+12/10/2022;21:32:58 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+12/10/2022;21:32:58 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:32:58 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:32:58 - EXECUTE_USER_QUERY #
+12/10/2022;21:32:58 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;21:32:58 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;21:32:58 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;21:32:58 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;21:32:58 - 6,manelm                                            ,pwdmanelm                                         ,manelm                                            ,rimblesm                                          ,5,5
+12/10/2022;21:32:58 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {461=carles}
+12/10/2022;21:32:58 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#461
+12/10/2022;21:33:03 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:33:03 - USER_RESPONSE # LOGIN,carles,pwdcarles,461
+12/10/2022;21:33:03 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:33:03 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 461
+12/10/2022;21:33:03 - crida a la gestió de fils LOGIN
+12/10/2022;21:33:03 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel,pwdmanel,manel,lopez,0,1
+12/10/2022;21:33:03 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:33:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:33:03 - MODIFI_NEW_USER_IN_BD #
+12/10/2022;21:33:03 - UPDATE_USER_ID # USER_MODIFI
+12/10/2022;21:33:03 - MODIFI_UPDATE_USER_RESULT # 1
+12/10/2022;21:33:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {461=carles}
+12/10/2022;21:33:03 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#461
+12/10/2022;21:33:06 - SERVER_SHOW_EHLO_established connection
+12/10/2022;21:33:06 - USER_RESPONSE # LOGIN,carles,pwdcarles,461
+12/10/2022;21:33:06 - SQL_RESPONSE_VALIDATE_USER        # 1
+12/10/2022;21:33:06 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 461
+12/10/2022;21:33:06 - crida a la gestió de fils LOGIN
+12/10/2022;21:33:06 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+12/10/2022;21:33:06 - SELECT_ITEMS_GRUP    # USER_
+12/10/2022;21:33:06 - SQL_RESPONSE_successful_connection_user tiqinssues
+12/10/2022;21:33:06 - EXECUTE_USER_QUERY #
+12/10/2022;21:33:06 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+12/10/2022;21:33:06 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+12/10/2022;21:33:06 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+12/10/2022;21:33:06 - 6,manel                                             ,pwdmanel                                          ,manel                                             ,lopez                                             ,0,1
+12/10/2022;21:33:06 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+12/10/2022;21:33:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {461=carles}
+12/10/2022;21:33:06 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#461
+13/10/2022;09:59:32 - SERVER_online_waiting_for_request
+13/10/2022;09:59:55 - SERVER_SHOW_EHLO_established connection
+13/10/2022;09:59:55 - Resposta_svr:SERVER_SHOW_EHLO_established connection
+13/10/2022;09:59:55 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;09:59:55 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;09:59:55 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;09:59:55 - crida a la gestió de fils LOGIN
+13/10/2022;10:00:37 - SERVER_online_waiting_for_request
+13/10/2022;10:00:47 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:00:47 - Resposta_svr:SERVER_SHOW_EHLO_established connection
+13/10/2022;10:00:47 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:00:47 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:00:47 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:00:47 - crida a la gestió de fils LOGIN
+13/10/2022;10:00:47 - READ_COMMAND_EXECUTE # USER_NEW,pere,pwdjpere,pere,ruiz,0,3
+13/10/2022;10:00:47 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:00:47 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:00:47 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:00:47 - ADD_NEW_USER_IN_BD #
+13/10/2022;10:00:47 - INSERT_NEW_USER_IN_DB
+13/10/2022;10:00:47 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:00:47 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:03:16 - SERVER_online_waiting_for_request
+13/10/2022;10:03:25 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:03:25 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:03:25 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:03:25 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:03:25 - crida a la gestió de fils LOGIN
+13/10/2022;10:03:25 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+13/10/2022;10:03:25 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:03:25 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:03:26 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:03:26 - EXECUTE_USER_QUERY #
+13/10/2022;10:03:26 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:03:26 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:03:26 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:03:26 - 6,manel                                             ,pwdmanel                                          ,manel                                             ,lopez                                             ,0,1
+13/10/2022;10:03:26 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:03:26 - 47,pere                                              ,pwdjpere                                          ,pere                                              ,ruiz                                              ,0,3
+13/10/2022;10:03:26 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:03:26 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:08:01 - SERVER_online_waiting_for_request
+13/10/2022;10:08:07 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:08:07 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:08:07 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:08:07 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:08:07 - crida a la gestió de fils LOGIN
+13/10/2022;10:08:07 - READ_COMMAND_EXECUTE # USER_DELETE,47
+13/10/2022;10:08:07 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:08:07 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:08:07 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:08:07 - DELETE_USER_IN_DB #
+13/10/2022;10:08:07 - DELETE_USER_ID # 47
+13/10/2022;10:08:07 - RESULT_DELETE_USER_ID # 1
+13/10/2022;10:08:07 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:08:07 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:13:21 - SERVER_online_waiting_for_request
+13/10/2022;10:13:39 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:13:39 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:13:39 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:13:39 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:13:39 - crida a la gestió de fils LOGIN
+13/10/2022;10:13:39 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel,pwdmanel,manel,lopez,0,1
+13/10/2022;10:13:39 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:13:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:13:39 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:13:39 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:13:39 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:13:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:13:39 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:15:08 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:15:08 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:15:08 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:15:08 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:15:08 - crida a la gestió de fils LOGIN
+13/10/2022;10:15:08 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel,pwdmanel,manel,lopez,0,1
+13/10/2022;10:15:08 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:15:08 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:15:08 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:15:08 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:15:08 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:15:08 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:15:08 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:16:32 - SERVER_online_waiting_for_request
+13/10/2022;10:16:36 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:16:36 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:16:36 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:16:36 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:16:36 - crida a la gestió de fils LOGIN
+13/10/2022;10:16:36 - READ_COMMAND_EXECUTE # USER_MODIFI,9,manel,pwdmanel,manel,lopez,0,1
+13/10/2022;10:16:36 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:16:36 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:16:36 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:16:36 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:16:36 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:16:36 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:16:36 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:17:55 - SERVER_online_waiting_for_request
+13/10/2022;10:18:02 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:18:02 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:18:02 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:18:02 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:18:02 - crida a la gestió de fils LOGIN
+13/10/2022;10:19:50 - SERVER_online_waiting_for_request
+13/10/2022;10:19:55 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:19:55 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:19:55 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:19:55 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:19:55 - crida a la gestió de fils LOGIN
+13/10/2022;10:19:55 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel,pwdmanel,manel,lopez,0,1
+13/10/2022;10:19:55 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:19:55 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:19:56 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:19:56 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:19:56 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:19:56 - MODIFI_UPDATE_USER_RESULT # 1
+13/10/2022;10:19:56 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:19:56 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:21:25 - SERVER_online_waiting_for_request
+13/10/2022;10:21:32 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:21:32 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:21:32 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:21:32 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:21:32 - crida a la gestió de fils LOGIN
+13/10/2022;10:21:32 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel1,pwdmanel1,manel1,lopez1,5,5
+13/10/2022;10:21:32 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:21:32 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:21:32 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:21:32 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:21:32 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:21:32 - MODIFI_UPDATE_USER_RESULT # 1
+13/10/2022;10:21:32 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+13/10/2022;10:21:32 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:22:00 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:00 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+13/10/2022;10:22:00 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:00 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+13/10/2022;10:22:00 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 224 - carles
+13/10/2022;10:22:00 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {224=carles}
+13/10/2022;10:22:00 - SERVER_SEND_NEW_ID_CONN_USER_OK        # 224
+13/10/2022;10:22:00 - SERVER_SEND_ROLE_USER                  # 1
+13/10/2022;10:22:04 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:04 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:04 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:04 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:04 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:04 - READ_COMMAND_EXECUTE # USER_NEW,joan,pwdjoan,joan,rimbles,1,2
+13/10/2022;10:22:04 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:04 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:04 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:04 - ADD_NEW_USER_IN_BD #
+13/10/2022;10:22:04 - INSERT_NEW_USER_IN_DB
+13/10/2022;10:22:04 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:04 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:24 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:24 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:24 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:24 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:24 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:24 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+13/10/2022;10:22:24 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:24 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:24 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:24 - EXECUTE_USER_QUERY #
+13/10/2022;10:22:24 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:22:24 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:22:24 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:22:24 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:22:24 - 6,manel1                                            ,pwdmanel1                                         ,manel1                                            ,lopez1                                            ,5,5
+13/10/2022;10:22:24 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:22:24 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:24 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:27 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:27 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:27 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:27 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:27 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:27 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+13/10/2022;10:22:27 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:27 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:27 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:27 - EXECUTE_USER_QUERY #
+13/10/2022;10:22:27 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:22:27 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:22:27 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:22:27 - 6,manel1                                            ,pwdmanel1                                         ,manel1                                            ,lopez1                                            ,5,5
+13/10/2022;10:22:27 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:22:27 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:22:27 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:27 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:32 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:32 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:32 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:32 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:32 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:32 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel,pwdmanel,manel,lopez,0,1
+13/10/2022;10:22:32 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:32 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:32 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:32 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:22:32 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:22:32 - MODIFI_UPDATE_USER_RESULT # 1
+13/10/2022;10:22:32 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:32 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:35 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:35 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:35 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:35 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:35 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:35 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+13/10/2022;10:22:35 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:35 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:35 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:35 - EXECUTE_USER_QUERY #
+13/10/2022;10:22:35 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:22:35 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:22:35 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:22:35 - 6,manel                                             ,pwdmanel                                          ,manel                                             ,lopez                                             ,0,1
+13/10/2022;10:22:35 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:22:35 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:22:35 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:35 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:45 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:45 - USER_RESPONSE # LOGIN,carles,pwdcarles,555
+13/10/2022;10:22:45 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:45 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 555
+13/10/2022;10:22:45 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:45 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel1,pwdmanel1,manel1,lopez1,5,5
+13/10/2022;10:22:45 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:45 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:45 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:45 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:22:45 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:22:45 - MODIFI_UPDATE_USER_RESULT # 1
+13/10/2022;10:22:45 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:45 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#555
+13/10/2022;10:22:52 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:52 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:52 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:52 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:52 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:52 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+13/10/2022;10:22:52 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:52 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:52 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:52 - EXECUTE_USER_QUERY #
+13/10/2022;10:22:52 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:22:52 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:22:52 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:22:52 - 6,manel1                                            ,pwdmanel1                                         ,manel1                                            ,lopez1                                            ,5,5
+13/10/2022;10:22:52 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:22:52 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:22:52 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:52 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:55 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:55 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:55 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:55 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:55 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:55 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by cognom
+13/10/2022;10:22:55 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:55 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:55 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:55 - EXECUTE_USER_QUERY #
+13/10/2022;10:22:55 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:22:55 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:22:55 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:22:55 - 6,manel1                                            ,pwdmanel1                                         ,manel1                                            ,lopez1                                            ,5,5
+13/10/2022;10:22:55 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:22:55 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:22:55 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:55 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:22:59 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:22:59 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:22:59 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:22:59 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:22:59 - crida a la gestió de fils LOGIN
+13/10/2022;10:22:59 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+13/10/2022;10:22:59 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:22:59 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:22:59 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:22:59 - EXECUTE_USER_QUERY #
+13/10/2022;10:22:59 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:22:59 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:22:59 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:22:59 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:22:59 - 6,manel1                                            ,pwdmanel1                                         ,manel1                                            ,lopez1                                            ,5,5
+13/10/2022;10:22:59 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:22:59 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:22:59 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:23:14 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:23:14 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:23:14 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:23:14 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:23:14 - crida a la gestió de fils LOGIN
+13/10/2022;10:23:14 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+13/10/2022;10:23:14 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:23:14 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:23:14 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:23:14 - EXECUTE_USER_QUERY #
+13/10/2022;10:23:14 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:23:14 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:23:14 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:23:14 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:23:14 - 6,manel1                                            ,pwdmanel1                                         ,manel1                                            ,lopez1                                            ,5,5
+13/10/2022;10:23:14 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:23:14 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:23:14 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:23:23 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:23:23 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:23:23 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:23:23 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:23:23 - crida a la gestió de fils LOGIN
+13/10/2022;10:23:23 - READ_COMMAND_EXECUTE # USER_MODIFI,6,manel,pwdmanel,manel,lopez,0,1
+13/10/2022;10:23:23 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:23:23 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:23:23 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:23:23 - MODIFI_NEW_USER_IN_BD #
+13/10/2022;10:23:23 - UPDATE_USER_ID # USER_MODIFI
+13/10/2022;10:23:23 - MODIFI_UPDATE_USER_RESULT # 1
+13/10/2022;10:23:23 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:23:23 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:24:04 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:24:04 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:24:04 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:24:04 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:24:04 - crida a la gestió de fils LOGIN
+13/10/2022;10:24:04 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris order by nom
+13/10/2022;10:24:04 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:24:04 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:24:04 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:24:04 - EXECUTE_USER_QUERY #
+13/10/2022;10:24:04 - 1,aitor                                             ,pwdaitor                                          ,Aitor                                             ,Garcia                                            ,0,1
+13/10/2022;10:24:04 - 3,carles                                            ,pwdcarles                                         ,Carles                                            ,Fugarolas                                         ,0,1
+13/10/2022;10:24:04 - 2,daniela                                           ,pwddaniela                                        ,Daniela                                           ,Guitierrez                                        ,0,1
+13/10/2022;10:24:04 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:24:04 - 6,manel                                             ,pwdmanel                                          ,manel                                             ,lopez                                             ,0,1
+13/10/2022;10:24:04 - 7,martina                                           ,pwdmartina                                        ,Marina                                            ,Perez                                             ,0,3
+13/10/2022;10:24:04 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:24:04 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:24:15 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:24:15 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:24:15 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:24:15 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:24:15 - crida a la gestió de fils LOGIN
+13/10/2022;10:24:15 - READ_COMMAND_EXECUTE # USER_QUERY,select * from usuaris where usuari = 'joan'
+13/10/2022;10:24:15 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:24:15 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:24:15 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:24:15 - EXECUTE_USER_QUERY #
+13/10/2022;10:24:15 - 48,joan                                              ,pwdjoan                                           ,joan                                              ,rimbles                                           ,1,2
+13/10/2022;10:24:15 - SERVER_SHOW_EHLO_established connection
+13/10/2022;10:24:15 - USER_RESPONSE # LOGIN,carles,pwdcarles,224
+13/10/2022;10:24:15 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:24:15 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224
+13/10/2022;10:24:15 - SQL_RESPONSE_VALIDATE_USER        # 1
+13/10/2022;10:24:15 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 224
+13/10/2022;10:24:15 - crida a la gestió de fils LOGIN
+13/10/2022;10:24:15 - READ_COMMAND_EXECUTE # USER_DELETE,48
+13/10/2022;10:24:15 - SELECT_ITEMS_GRUP    # USER_
+13/10/2022;10:24:15 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+13/10/2022;10:24:15 - SQL_RESPONSE_successful_connection_user tiqinssues
+13/10/2022;10:24:15 - DELETE_USER_IN_DB #
+13/10/2022;10:24:15 - DELETE_USER_ID # 48
+13/10/2022;10:24:15 - RESULT_DELETE_USER_ID # 1
+13/10/2022;10:24:15 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {224=carles}
+13/10/2022;10:24:15 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#224

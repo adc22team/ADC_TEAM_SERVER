@@ -27,7 +27,7 @@ public class MetodesSQLgestioUsuaris {
     public Connection establirConnexio() throws IOException {
    
         cadena = "jdbc:postgresql://" + SystemUtils.obtenirIpConfig() + "/" + bd;
-        System.out.println(cadena);
+        SystemUtils.escriuNouLog("INFO_SQL_CONNECTION # "+cadena);
         
         try {
 
@@ -83,7 +83,7 @@ public class MetodesSQLgestioUsuaris {
         
         
         int result =0;
-        SystemUtils.escriuNouLog("ALTES NOU USUARI");       
+        SystemUtils.escriuNouLog("INSERT_NEW_USER_IN_DB");       
      
          String sentenciaCrear = ("INSERT INTO usuaris (\"id\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
 
@@ -109,7 +109,43 @@ public class MetodesSQLgestioUsuaris {
         return result;
     }
     
-    public int baixaUser(int id_key) throws SQLException, IOException{
+    public int modificarUser(String[] altaDades) throws SQLException, IOException{
+        
+        
+        int result =0;
+        
+        SystemUtils.escriuNouLog("UPDATE_USER_ID # "+altaDades[0]);       
+     
+        
+        String sentenciaCrear = ("UPDATE usuaris SET usuari = ?, contrasenya = ?,nom = ?, cognom = ?, departament = ?, rol = ? WHERE id = ?");
+            
+        PreparedStatement sentence_ready;
+                
+        try {
+           
+            sentence_ready = conectar.prepareStatement(sentenciaCrear);
+            sentence_ready.setString(1, altaDades[2]); // usuari
+            sentence_ready.setString(2, altaDades[3]); // contrasenya
+            sentence_ready.setString(3, altaDades[4]); //nom
+            sentence_ready.setString(4, altaDades[5]); //cognom
+            sentence_ready.setInt(5,Integer.parseInt(altaDades[6])); //departament   
+            sentence_ready.setInt(6,Integer.parseInt(altaDades[7])); //rol
+            sentence_ready.setInt(7,Integer.parseInt(altaDades[1])); //id
+
+             
+            result = sentence_ready.executeUpdate();
+            sentence_ready.close();
+     
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+               
+        return result;
+    }
+  
+    
+     public int baixaUser(int id_key) throws SQLException, IOException{
         
         
         int result =0;
@@ -117,7 +153,7 @@ public class MetodesSQLgestioUsuaris {
         SystemUtils.escriuNouLog("DELETE_USER_ID # "+id_key);       
      
         String sentenciaCrear = ("DELETE FROM usuaris WHERE id=?");
-            
+              
         PreparedStatement sentence_ready;
                 
         try {
@@ -134,6 +170,5 @@ public class MetodesSQLgestioUsuaris {
         }
                
         return result;
-    }
-  
+    }  
 }

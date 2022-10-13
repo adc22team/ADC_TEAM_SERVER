@@ -71,9 +71,18 @@ public class ServerFilUsuaris extends Thread {
                         break;
 
                     case "USER_MODIFI":
-                        SystemUtils.escriuNouLog("MODIFI_USER");
-                        break;
-
+                                               
+                        SystemUtils.escriuNouLog("MODIFI_NEW_USER_IN_BD #");
+                     
+                        int update =conn.modificarUser(missatge);
+                        
+                        //Enviem el ID# assignat a l'usuari, al servidor
+                        out.writeInt(update);
+                        
+                        SystemUtils.escriuNouLog("MODIFI_UPDATE_USER_RESULT # "
+                                                +update);
+                         break;
+                        
                     case "USER_QUERY":
 
                         ArrayList<String> usuariArrayList = new ArrayList<String>();

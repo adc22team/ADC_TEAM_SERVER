@@ -7,7 +7,6 @@ package main;
 
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -22,15 +21,16 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        llistat();
+        //llistat();
         //alta();
+        //baixa("47");
+        modificacio("6");
         
         
     }
     
     public static void llistat(){
-        
-        Socket sc;
+          Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
@@ -39,18 +39,29 @@ public class TestCrides {
             
            // Llegir la resposta del servidor al establir la connexió
            String resposta_svr = in.readUTF();
-           
-           SystemUtils.escriuNouLog("Resposta_svr:"+ resposta_svr);
-                            
+                                      
            //Enviem resposta al servidor amb el usuari i la contrasenya
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
-           //Executo la consulta de la crida per sortir
-           out.writeUTF("QUERY_ALL_USERS");
            
+           //Executo la consulta de la crida per sortir
+           //Aquí pots fer la consulta que vulguis et tornara el seu result i el
+           //podràs tractar
+           //Exemples
+           out.writeUTF("USER_QUERY,select * from usuaris order by nom");
+           
+           //Llegir el numero total de registres de la consulta
+           int total =in.readInt();
+           
+           //Llegir les dades reculllides de la consulta al client
+           for(int i =0;i < total;i++)
+             System.out.println(in.readUTF()); 
       
         } catch (IOException ex) {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        
+       
     }
     
     public  static void alta(){
@@ -70,7 +81,7 @@ public class TestCrides {
            //Enviem resposta al servidor amb el usuari i la contrasenya
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
            //Executo la consulta de la crida per sortir
-           out.writeUTF("USER_NEW,joan,pwdjoan,joan,rimbles,1,2");
+           out.writeUTF("USER_NEW,pere,pwdjpere,pere,ruiz,0,3");
            System.out.println("Resultat de la consulta : " + in.readInt());
            
       
@@ -79,19 +90,10 @@ public class TestCrides {
         }
 
     }
-
-}
-
-/*
- private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-         
-         //Instaciar el fitxer de logs per accedir-hi
-       
- 
-     
+    
+   public static void baixa(String id_key){
         Socket sc;
-        try {
+       try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
@@ -99,73 +101,46 @@ public class TestCrides {
             
            // Llegir la resposta del servidor al establir la connexió
            String resposta_svr = in.readUTF();
-           
-           
-                            
+                                      
            //Enviem resposta al servidor amb el usuari i la contrasenya
-           out.writeUTF("LOGIN," + usuari + "," + pwd +"," + id);
-           //Executo la consulta de la crida per sortir
-           out.writeUTF("USER_QUERY_ALL");
+           out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
+                   
+           
+           out.writeUTF("USER_DELETE,"+Integer.parseInt(id_key));
+           
+           //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
+           System.out.println("El resultat de la baixa :"+ in.readInt());
            
       
         } catch (IOException ex) {
-            Logger.getLogger(DesktopPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-        
-        
-    }                                        
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {                                         
-        // TODO add your handling code here:
-        Socket sc;
+   }
+   
+   
+   public static void modificacio(String id_key){
+         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
-            
+                   
            // Llegir la resposta del servidor al establir la connexió
            String resposta_svr = in.readUTF();
-           
-           
-                            
+          
            //Enviem resposta al servidor amb el usuari i la contrasenya
-           out.writeUTF("LOGIN," + usuari + "," + pwd +"," + id);
+           out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
            //Executo la consulta de la crida per sortir
-           out.writeUTF("USER_NEW,joan,pwdjoan,joan,rimbles,1,2");
+           //El primer parametre es el id a modificar
+           out.writeUTF("USER_MODIFI,"+id_key+",manel1,pwdmanel1,manel1,lopez1,5,5");
+           
+           System.out.println("El resultat de la modificació :"+ in.readInt());
            
       
         } catch (IOException ex) {
-            Logger.getLogger(DesktopPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-    }                                        
+   }
 
-
-private void logOut(){
- 
-    Socket sc;
-    try {
-        sc = new Socket("127.0.0.1", 5000);
-        DataInputStream in = new DataInputStream(sc.getInputStream());
-        DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-
-        // Llegir la resposta del servidor al establir la connexió
-        String resposta_svr = in.readUTF();
-        //Enviem resposta al servidor amb el usuari i la contrasenya
-        out.writeUTF("LOGIN," + getUsuari() + "," + getPwd() + "," + getId());
-        //Executo la consulta de la crida per sortir
-        out.writeUTF("EXIT");
-        System.out.println("Valor getId: " + getId());
-
-    } catch (IOException ex) {
-        Logger.getLogger(DesktopPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-    }
-
-    //System.exit(0);
 }
 
-
-*/

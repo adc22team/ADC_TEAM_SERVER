@@ -111,18 +111,18 @@ public class Server {
 
                         //Enviem el ID# assignat a l'usuari, al servidor
                         out.writeInt(new_id_conn);
-                        SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK          # "
+                        SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK        # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
                         int rol = conn.rolUsuari(missatge[1], missatge[2]);
                         out.writeInt(rol);
-                        SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                    # "
+                        SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                  # "
                                                         + rol);
                     } else {
                         //No te ID i el usuari / contrasenya no es correcte
                         //Enviem el ID# assignat a l'usuari -ID = 0 ERROR
                         out.writeInt(0);
-                        SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG # " + id_conn);
+                        SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG         # " + id_conn);
                     }
                 } else {
                     //Te id
@@ -134,10 +134,11 @@ public class Server {
        } catch (IOException ex) {
           Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
        }
-        //Tanquem el fil
-        sc.close();
         //Tanquem la connexió a la Bd's
         conn.tancarConexio();
+        //Tanquem el fil
+        sc.close();
+        
     }
     
     public  void GestioFils(Socket socket, DataInputStream in, DataOutputStream out, String[] missatge, 
