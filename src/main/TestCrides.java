@@ -21,10 +21,10 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        llistat();
+        //llistat();
         //alta();
-        //baixa("47");
-       // modificacio("6");
+        baixa("54");
+        //modificacio("54");
         
         
     }
@@ -81,7 +81,7 @@ public class TestCrides {
            //Enviem resposta al servidor amb el usuari i la contrasenya
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
            //Executo la consulta de la crida per sortir
-           out.writeUTF("USER_NEW,pere,pwdjpere,pere,ruiz,0,3");
+           out.writeUTF("USER_NEW,pere,pwdjpere,pere,ruiz,0,3,1");
            System.out.println("Resultat de la consulta : " + in.readInt());
            
       
@@ -132,7 +132,7 @@ public class TestCrides {
            out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
            //Executo la consulta de la crida per sortir
            //El primer parametre es el id a modificar
-           out.writeUTF("USER_MODIFI,"+id_key+",manel1,pwdmanel1,manel1,lopez1,5,5");
+           out.writeUTF("USER_MODIFI,"+id_key+",manel1,pwdmanel1,manel1,lopez1,5,5,1");
            
            System.out.println("El resultat de la modificació :"+ in.readInt());
            

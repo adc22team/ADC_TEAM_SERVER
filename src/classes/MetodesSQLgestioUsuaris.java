@@ -57,6 +57,7 @@ public class MetodesSQLgestioUsuaris {
         String cognom;
         int rol;
         int depart;
+        int estat;
         
         ArrayList<String> usuarisArrayList = new ArrayList<String>();
 
@@ -72,8 +73,9 @@ public class MetodesSQLgestioUsuaris {
             cognom      = result.getString("cognom");
             depart      = result.getInt("departament");
             rol         = result.getInt("rol");
+            estat       = result.getInt("estat");
             
-           usuarisArrayList.add(    id + "," + usuari + "," + contrasenya + "," + nom  + "," + cognom  + "," + depart + "," + rol);
+           usuarisArrayList.add(    id + "," + usuari + "," + contrasenya + "," + nom  + "," + cognom  + "," + depart + "," + rol + "," + estat);
             
         }
         return usuarisArrayList;
@@ -85,7 +87,7 @@ public class MetodesSQLgestioUsuaris {
         int result =0;
         SystemUtils.escriuNouLog("INSERT_NEW_USER_IN_DB #");       
      
-         String sentenciaCrear = ("INSERT INTO usuaris (\"id\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\") VALUES (default,?,?,?,?,?,?)");
+         String sentenciaCrear = ("INSERT INTO usuaris (\"id\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\",\"estat\") VALUES (default,?,?,?,?,?,?,?)");
 
          PreparedStatement sentence_ready;
        
@@ -98,7 +100,8 @@ public class MetodesSQLgestioUsuaris {
             sentence_ready.setString(4, altaDades[4]); //cognom
             sentence_ready.setInt(5,Integer.parseInt(altaDades[5])); //departament   
             sentence_ready.setInt(6,Integer.parseInt(altaDades[6])); //rol
-
+            sentence_ready.setInt(7,Integer.parseInt(altaDades[7])); //estat
+            
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
 
@@ -117,7 +120,7 @@ public class MetodesSQLgestioUsuaris {
         SystemUtils.escriuNouLog("UPDATE_USER_ID # "+altaDades[0]);       
      
         
-        String sentenciaCrear = ("UPDATE usuaris SET usuari = ?, contrasenya = ?,nom = ?, cognom = ?, departament = ?, rol = ? WHERE id = ?");
+        String sentenciaCrear = ("UPDATE usuaris SET usuari = ?, contrasenya = ?,nom = ?, cognom = ?, departament = ?, rol = ?, estat = ? WHERE id = ?");
             
         PreparedStatement sentence_ready;
                 
@@ -130,7 +133,8 @@ public class MetodesSQLgestioUsuaris {
             sentence_ready.setString(4, altaDades[5]); //cognom
             sentence_ready.setInt(5,Integer.parseInt(altaDades[6])); //departament   
             sentence_ready.setInt(6,Integer.parseInt(altaDades[7])); //rol
-            sentence_ready.setInt(7,Integer.parseInt(altaDades[1])); //id
+            sentence_ready.setInt(7,Integer.parseInt(altaDades[8])); //estat
+            sentence_ready.setInt(8,Integer.parseInt(altaDades[1])); //id
 
              
             result = sentence_ready.executeUpdate();
