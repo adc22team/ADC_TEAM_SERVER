@@ -21,10 +21,10 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        //llistat();
+        llistat();
         //alta();
         //baixa("47");
-        modificacio("6");
+       // modificacio("6");
         
         
     }
