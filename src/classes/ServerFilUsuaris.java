@@ -53,7 +53,7 @@ public class ServerFilUsuaris extends Thread {
                      
                         int result =conn.altaUser(missatge);
                         
-                        //Enviem el ID# assignat a l'usuari, al servidor
+                        //Enviem el resultat de l'operació 0 - error i 1  - ok
                         out.writeInt(result);
                          break;
 
