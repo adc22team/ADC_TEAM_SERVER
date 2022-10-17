@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utilitats.SystemUtils;
@@ -21,9 +22,9 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        //llistat();
+        llistat();
         //alta();
-        baixa("54");
+       // baixa("54");
         //modificacio("54");
         
         
@@ -52,9 +53,19 @@ public class TestCrides {
            //Llegir el numero total de registres de la consulta
            int total =in.readInt();
            
-           //Llegir les dades reculllides de la consulta al client
+    /*      //Llegir les dades reculllides de la consulta al client
            for(int i =0;i < total;i++)
              System.out.println(in.readUTF()); 
+    */       
+          ArrayList  registres = new ArrayList();
+           
+           //Posem el registres rebut dins d'un arrayList
+           for(int i =0;i < total;i++)
+              registres.add(in.readUTF()); 
+           
+           //Mostrem els registres guardats en el arrayList
+          for(int i =0;i < registres.size();i++)
+              System.out.println(registres.get(i).toString());   
       
         } catch (IOException ex) {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
