@@ -168,7 +168,7 @@ public class Server {
 
             default:
                 //Si la crida enviada pel client no és correcte, executem la crida forçada de sortida
-                SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + comanda);
+                SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + comanda );
         }
 
     }
