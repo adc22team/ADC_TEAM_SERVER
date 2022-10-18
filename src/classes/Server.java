@@ -81,6 +81,7 @@ public class Server {
                 //Convertir el camp id_com string a numeric
                 int id_conn = Integer.parseInt(missatge[3]);
 
+                 SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG        # "+ SystemUtils.encryptedText(missatge[2])); 
                 //Mira si l'usuari existeix a la Bd's i si la contrasenya és vàlida
                 int registres = conn.loginValit(missatge[1], missatge[2]);
 
@@ -143,26 +144,33 @@ public class Server {
     
     public  void GestioFils(Socket socket, DataInputStream in, DataOutputStream out, String[] missatge, 
                             int id_conn, Server server) throws IOException{
-               
+     
         //Recullo la petició codificada que fa el client
         String comanda = in.readUTF();
-         
-        SystemUtils.escriuNouLog("READ_COMMAND_EXECUTE # "+comanda);
-        SystemUtils.escriuNouLog("SELECT_ITEMS_GRUP    # "+comanda.substring(0,5));
-        
-           switch (comanda.substring(0,5)) {
-                    case "USER_":
-                        ServerFilUsuaris fil = new ServerFilUsuaris(sc, in, out, missatge,comanda, id_conn, this);
-                        fil.start();
-                    case "DEPA_":    
-                    
-                    case "TIQU_":       
-                        
-                    case "ROLE_":
-                                           
-                    default:
-            }
-        
+
+        //Controlar, que si la crida enviada no és vàlida, forçar perquè no falli el switch
+        if (comanda.length() < 5) {
+            comanda = comanda + "?????";
+        }
+
+        SystemUtils.escriuNouLog("READ_COMMAND_EXECUTE # " + comanda);
+        SystemUtils.escriuNouLog("SELECT_ITEMS_GRUP    # " + comanda.substring(0, 5));
+
+        switch (comanda.substring(0, 5)) {
+            case "USER_":
+                ServerFilUsuaris fil = new ServerFilUsuaris(sc, in, out, missatge, comanda, id_conn, this);
+                fil.start();
+            case "DEPA_":
+
+            case "TIQU_":
+
+            case "ROLE_":
+
+            default:
+
+                SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + comanda);
+        }
+
     }
 
 }

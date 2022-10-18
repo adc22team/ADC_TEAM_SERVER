@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import utilitats.SystemUtils;
+import utilitats.SystemUtils;
 
 /**
  *
@@ -22,8 +23,8 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        llistat();
-        //alta();
+        //llistat();
+        altaE();
        // baixa("54");
         //modificacio("54");
         
@@ -152,6 +153,36 @@ public class TestCrides {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }
    }
+   
+    public  static void altaE(){
+        
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            
+           // Llegir la resposta del servidor al establir la connexió
+           String resposta_svr = in.readUTF();
+           
+           SystemUtils.escriuNouLog("Resposta_svr:"+ resposta_svr);
+           
+           String pwd = SystemUtils.encryptedText("pwddavid");
+                            
+           //Enviem resposta al servidor amb el usuari i la contrasenya
+           out.writeUTF("LOGIN," + "carles" + "," + "pwdcarles"+"," + "555");
+           //Executo la consulta de la crida per sortir
+           out.writeUTF("USER_NEW,david,"+pwd+",pere,ruiz,0,3,1");
+           System.out.println("Resultat de la consulta : " + in.readInt());
+           
+      
+        } catch (IOException ex) {
+            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+    
 
 }
 

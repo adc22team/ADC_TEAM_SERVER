@@ -57,6 +57,7 @@ public class Connexio {
     public int rolUsuari(String usuari, String contrasenya) throws SQLException {
         int rol = 0;
 
+        //SystemUtils.decryptedText(contrasenya);
         String query = "select rol from usuaris where usuari = " + "'" + usuari + "'" + " and contrasenya = '" + contrasenya + "'";
         Statement stmt = conectar.createStatement();
 
