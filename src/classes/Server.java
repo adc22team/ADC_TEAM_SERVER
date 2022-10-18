@@ -167,7 +167,7 @@ public class Server {
             case "ROLE_":
 
             default:
-
+                //Si la crida enviada pel client no és correcte, executem la crida forçada de sortida
                 SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + comanda);
         }
 
