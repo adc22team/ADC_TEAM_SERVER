@@ -105,7 +105,7 @@ public class MetodesSQLgestioUsuaris {
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
 
-        } catch (Exception e) {
+        } catch (NumberFormatException | SQLException e) {
             System.out.println(e);
         }
                
