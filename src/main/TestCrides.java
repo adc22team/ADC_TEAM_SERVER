@@ -22,7 +22,7 @@ public class TestCrides {
 
     public static void main(String[] args) throws IOException {
 
-        //alta("emi,pwdemi,emi,alarcon,1,1,1");
+        alta("emi,pwdemi,emi,alarcon,1,1,1");
         //llistat();
         //altaE();
        // baixa("54");
