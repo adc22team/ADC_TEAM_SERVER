@@ -81,7 +81,8 @@ public class Server {
                 //Convertir el camp id_com string a numeric
                 int id_conn = Integer.parseInt(missatge[3]);
 
-                 SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG        # "+ SystemUtils.encryptedText(missatge[2])); 
+                SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG        # "+ SystemUtils.convertirSHA256(missatge[2])); 
+                
                 //Mira si l'usuari existeix a la Bd's i si la contrasenya és vàlida
                 int registres = conn.loginValit(missatge[1], missatge[2]);
 

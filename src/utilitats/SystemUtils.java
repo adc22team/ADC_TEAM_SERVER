@@ -15,7 +15,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -31,6 +30,9 @@ import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import main.TiqServerMain;
 import org.apache.commons.codec.binary.Base64;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 /**
  *
@@ -178,5 +180,25 @@ public final class SystemUtils {
         return decryptedBase64;
 
     }
+    
+    public static String convertirSHA256(String password) {
+	MessageDigest md = null;
+	try {
+		md = MessageDigest.getInstance("SHA-256");
+	} 
+	catch (NoSuchAlgorithmException e) {		
+		e.printStackTrace();
+		return null;
+	}
+	    
+	byte[] hash = md.digest(password.getBytes());
+	StringBuffer sb = new StringBuffer();
+	    
+	for(byte b : hash) {        
+		sb.append(String.format("%02x", b));
+	}
+	    
+	return sb.toString();
+}
     
 }

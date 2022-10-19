@@ -95,7 +95,7 @@ public class MetodesSQLgestioUsuaris {
            
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
             sentence_ready.setString(1, altaDades[1]); // usuari
-            sentence_ready.setString(2, altaDades[2]); // contrasenya
+            sentence_ready.setString(2, SystemUtils.convertirSHA256(altaDades[2])); // contrasenya
             sentence_ready.setString(3, altaDades[3]); //nom
             sentence_ready.setString(4, altaDades[4]); //cognom
             sentence_ready.setInt(5,Integer.parseInt(altaDades[5])); //departament   
@@ -128,7 +128,7 @@ public class MetodesSQLgestioUsuaris {
            
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
             sentence_ready.setString(1, altaDades[2]); // usuari
-            sentence_ready.setString(2, altaDades[3]); // contrasenya
+            sentence_ready.setString(2, SystemUtils.convertirSHA256(altaDades[3])); // contrasenya
             sentence_ready.setString(3, altaDades[4]); //nom
             sentence_ready.setString(4, altaDades[5]); //cognom
             sentence_ready.setInt(5,Integer.parseInt(altaDades[6])); //departament   

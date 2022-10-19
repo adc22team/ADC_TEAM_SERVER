@@ -43,7 +43,7 @@ public class Connexio {
     public int loginValit(String usuari, String contrasenya) throws SQLException {
         int cont = 0;
 
-        String query = "select * from usuaris where usuari = " + "'" + usuari + "'" + " and contrasenya = '" + contrasenya + "'";
+        String query = "select * from usuaris where usuari = " + "'" + usuari + "'" + " and contrasenya = '" + SystemUtils.convertirSHA256(contrasenya) + "'";
         Statement stmt = conectar.createStatement();
 
         ResultSet result = stmt.executeQuery(query);
@@ -58,7 +58,7 @@ public class Connexio {
         int rol = 0;
 
         //SystemUtils.decryptedText(contrasenya);
-        String query = "select rol from usuaris where usuari = " + "'" + usuari + "'" + " and contrasenya = '" + contrasenya + "'";
+        String query = "select rol from usuaris where usuari = " + "'" + usuari + "'" + " and contrasenya = '" + SystemUtils.convertirSHA256(contrasenya) + "'";
         Statement stmt = conectar.createStatement();
 
         ResultSet result = stmt.executeQuery(query);
