@@ -136,6 +136,13 @@ public class TiqServerMain extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+     /**
+    * Aquest mètode fa la crida a la creació d'un fil que executi la classe server
+    * que quedarà a l'espera de les crides dels clients
+    * @param evt un event del tipus ActionEvent 
+    *
+    * @return no retorna res (void)
+    */
     private void btn_startActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_startActionPerformed
         if (status == false) {
             hb.start();
@@ -147,9 +154,15 @@ public class TiqServerMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_startActionPerformed
 
+    /**
+    * Aquest mètode carrega l'arxiu de log's del programa generat fins aquest monent
+    * sinó el troba genera un nou arxiu en blanc.
+    * @param evt un event del tipus ActionEvent 
+    *
+    * @return no retorna res (void)
+    */
     private void btn_logsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logsActionPerformed
-        //Esborrar tot el contingut
-        //Comentari afegit
+       
         TextAreaLogs.setText(null);
 
         File f = new File("logs.txt");
@@ -181,6 +194,13 @@ public class TiqServerMain extends javax.swing.JFrame {
         TextAreaLogs.append(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] +" - Log's carregats correctament\n");
     }//GEN-LAST:event_btn_logsActionPerformed
 
+     /**
+    * Aquest mètode executa la sortida del programa, si s'ha clicat en la creu 
+    * de sortida.
+    * @param evt un event del tipus ActionEvent 
+    *
+    * @return no retorna res (void)
+    */
     private void jLabelCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabelCloseMouseClicked
 
         System.exit(0);
@@ -209,6 +229,10 @@ public class TiqServerMain extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 }
 
+ /**
+    * Aquest classe s'encarrega de crear un fil d'espera en segon pla del servidor
+   
+    */
 class filServer extends Thread {
 
     @Override

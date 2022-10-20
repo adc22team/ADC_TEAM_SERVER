@@ -51,7 +51,6 @@ public class Server {
         //Establir la connexió a la BD's  
         conn.establirConnexio();
 
-        //Afegim el usuari i la seva sessió al HasMap
        try {
             
             SystemUtils.escriuNouLog("SERVER_online_waiting_for_request");
