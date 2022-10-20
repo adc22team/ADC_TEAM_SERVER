@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose SystemUtils | Templates
+ * and open the template in the editor.
+ */
 package classes;
 
 import utilitats.SystemUtils;
@@ -9,7 +14,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
+/**
+ *
+ * @author Carles Fugarolas
+ */
 public class ServerFilUsuaris extends Thread {
 
     private Socket sc;
@@ -21,7 +29,17 @@ public class ServerFilUsuaris extends Thread {
     private String comanda;
     private String[] missatge;
     
-
+    
+    /**
+     * Mètode constructor del la classe ServerFilUsuaris extesa Thread
+     * @param sc estableix la connexió
+     * @param in DataInputStream
+     * @param out DataOutputStream
+     * @param missatge crida que el client cap el servidor
+     * @param comanda crida que vol executar en client en la gestió d'usuaris
+     * @param id  el id de connexió obtingut al fer el login 
+     * @param server servidor que ha creat el nou fil
+     */
     public ServerFilUsuaris(Socket sc, DataInputStream in, DataOutputStream out, String[] missatge, String comanda, int id, Server server) {
         this.sc = sc;
         this.in = in;
@@ -33,6 +51,9 @@ public class ServerFilUsuaris extends Thread {
         this.comanda = comanda;
     }
 
+    /**
+     * Mètode run per atendre les peticions del l'usuari
+     */
     @Override
     public void run() {
 
@@ -48,7 +69,7 @@ public class ServerFilUsuaris extends Thread {
                                 
                 switch (missatge[0]) {
                     case "USER_NEW":
-
+                        // Registrar que s'està demanant l'alta d'un nou usuari
                         SystemUtils.escriuNouLog("ADD_NEW_USER_IN_BD #");
                      
                         int result =conn.altaUser(missatge);

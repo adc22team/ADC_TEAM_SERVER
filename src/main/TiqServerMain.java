@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose SystemUtils | Templates
+ * and open the template in the editor.
+ */
 package main;
 
 import classes.Server;
@@ -13,6 +18,12 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import static utilitats.SystemUtils.agafarDataHoraSistema;
 
+/**
+ *Aquesta classe te implementats la interficie gràfica del servidor
+  * @author Carles Fugarolas
+  
+ */
+
 public class TiqServerMain extends javax.swing.JFrame {
 
     /**
@@ -21,7 +32,9 @@ public class TiqServerMain extends javax.swing.JFrame {
     private static boolean status = false;
     filServer hb = new filServer();
     
-
+     /**
+    * En el constructor fem la crida a l'entorn gràfic del servidor
+    */
     public TiqServerMain() {
         initComponents();
         this.setLocationRelativeTo(null);

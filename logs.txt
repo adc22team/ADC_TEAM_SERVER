@@ -407,3 +407,41 @@
 17/10/2022;22:51:38 - EXECUTO CRIDA EXIT
 17/10/2022;22:51:38 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {118=martina}
 17/10/2022;22:51:38 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # martina ID#470
+20/10/2022;19:23:20 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+20/10/2022;19:23:30 - SQL_RESPONSE_wrong_connection_databaseorg.postgresql.util.PSQLException: El intento de conexión falló.
+20/10/2022;19:23:30 - SERVER_online_waiting_for_request
+20/10/2022;19:23:49 - SERVER_SHOW_EHLO_established connection
+20/10/2022;19:23:49 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+20/10/2022;19:23:49 - ENCRYTED_PASSWORD_ALG        # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
+20/10/2022;19:24:42 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+20/10/2022;19:24:52 - SQL_RESPONSE_wrong_connection_databaseorg.postgresql.util.PSQLException: El intento de conexión falló.
+20/10/2022;19:24:52 - SERVER_online_waiting_for_request
+20/10/2022;19:26:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+20/10/2022;19:26:49 - SQL_RESPONSE_wrong_connection_databaseorg.postgresql.util.PSQLException: El intento de conexión falló.
+20/10/2022;19:26:49 - SERVER_online_waiting_for_request
+20/10/2022;19:31:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+20/10/2022;19:31:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+20/10/2022;19:31:02 - SERVER_online_waiting_for_request
+20/10/2022;19:31:17 - SERVER_SHOW_EHLO_established connection
+20/10/2022;19:31:17 - USER_RESPONSE # LOGIN,carles,pwdcarles,0
+20/10/2022;19:31:17 - ENCRYTED_PASSWORD_ALG        # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
+20/10/2022;19:31:17 - SQL_RESPONSE_VALIDATE_USER        # 1
+20/10/2022;19:31:17 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+20/10/2022;19:31:17 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 525 - carles
+20/10/2022;19:31:17 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {525=carles}
+20/10/2022;19:31:17 - SERVER_SEND_NEW_ID_CONN_USER_OK        # 525
+20/10/2022;19:31:17 - SERVER_SEND_ROLE_USER                  # 1
+20/10/2022;19:31:24 - SERVER_SHOW_EHLO_established connection
+20/10/2022;19:31:24 - USER_RESPONSE # LOGIN,carles,pwdcarles,525
+20/10/2022;19:31:24 - ENCRYTED_PASSWORD_ALG        # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
+20/10/2022;19:31:24 - SQL_RESPONSE_VALIDATE_USER        # 1
+20/10/2022;19:31:24 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 525
+20/10/2022;19:31:24 - crida a la gestió de fils LOGIN
+20/10/2022;19:31:24 - READ_COMMAND_EXECUTE # USER_EXIT
+20/10/2022;19:31:24 - SELECT_ITEMS_GRUP    # USER_
+20/10/2022;19:31:24 - BAD_COMMAND_SEND_FORCE_EXIT # USER_EXIT
+20/10/2022;19:31:24 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.143/tiq
+20/10/2022;19:31:24 - SQL_RESPONSE_successful_connection_user tiqinssues
+20/10/2022;19:31:24 - EXECUTO CRIDA EXIT
+20/10/2022;19:31:24 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+20/10/2022;19:31:24 - SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # carles ID#525
