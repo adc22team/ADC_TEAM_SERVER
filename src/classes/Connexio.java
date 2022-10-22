@@ -5,7 +5,6 @@
  */
 package classes;
 
-
 import java.io.IOException;
 import java.sql.*;
 import utilitats.SystemUtils;
@@ -73,24 +72,31 @@ public class Connexio {
         while (result.next()) {
             cont++;
         }
+        //La consulta haurà de tornar o cap o un registre, tornem 0 o 1
         return cont;
     }
-
+     /**
+     * Mètode que valida les credencials introduides per l'usuari per la seva validació
+     * i obte el rol de l'usuari
+     * @param usuari String amb el nom introduit en el login
+     * @param contrasenya String amb el nom introduit en el login
+     * @return retorna 1 si troba la coincidencia i 0 sinó la troba
+     * @throws SQLException 
+     */
     public int rolUsuari(String usuari, String contrasenya) throws SQLException {
+        //Variable que guarda el resultat de la consulta  que seraà el rol que té
+        //l' usuari
         int rol = 0;
-
-        //SystemUtils.decryptedText(contrasenya);
+        //definició del la consuta encriptant la contrasenya, a la Bd's està guardada així 
         String query = "select rol from usuaris where usuari = " + "'" + usuari + "'" + " and contrasenya = '" + SystemUtils.convertirSHA256(contrasenya) + "'";
         Statement stmt = conectar.createStatement();
-
+        //Executar la consulta
         ResultSet result = stmt.executeQuery(query);
-
+        //Agafem el valor del camp de la Bd's i el guardem a rol
         if (result.next()) {
             rol = result.getInt("rol");
         }
-
+        //Retormen el seu valor
         return rol;
     }
-    
-
 }

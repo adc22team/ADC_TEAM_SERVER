@@ -202,20 +202,24 @@ public class Server {
             case "USER_":
                 ServerFilUsuaris fil = new ServerFilUsuaris(sc, in, out, missatge, comanda, id_conn, this);
                 fil.start();
+                break;
             case "DEPA_":
             //DEPA_ crista a la classe que gestiona els departaments i la seva persistència,
             //No està implementada    
+                break;
             case "TIQU_":
             //TIQU_ crista a la classe que gestiona els tiquets i la seva persistència,
             //No està implementada    
+                break;
             case "ROLE_":
             //ROLE_ crista a la classe que gestiona els departaments i la seva persistència,
             //No està implementada    
-
+                break;
             default:
                 //Si la crida enviada pel client no és correcte, executem la crida forçada de sortida
                 //Escriu la sortida en el registre
                 SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + comanda );
+                break;
         }
     }
 }

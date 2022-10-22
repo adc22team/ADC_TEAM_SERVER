@@ -213,4 +213,28 @@ public class MetodesSQLgestioUsuaris {
         //retorna el resultat de l'operació 0 - Error i 1 - Correcte       
         return result;
     }  
+     
+     
+     /**
+     * Mètode que buscar el id d'un usuari a la Bd's
+     * @param usuari String amb el nom introduit en el login
+     * @return retorna  el id del usuari té a la Bd's
+     * @throws SQLException 
+     */
+    public int cercaIdUsuari(String usuari) throws SQLException {
+        //Variable que guarda el resultat de la consulta  que seraà el rol que té
+        //l' usuari
+        int id = 0;
+        //definició del la consuta encriptant la contrasenya, a la Bd's està guardada així 
+        String query = "select id from usuaris where usuari = " + "'" + usuari  + "'";
+        Statement stmt = conectar.createStatement();
+        //Executar la consulta
+        ResultSet result = stmt.executeQuery(query);
+        //Agafem el valor del camp de la Bd's i el guardem a id
+        if (result.next()) {
+            id = result.getInt("id");
+        }
+        //Retormen el seu valor
+        return id;
+    } 
 }

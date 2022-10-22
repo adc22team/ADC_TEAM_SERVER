@@ -124,10 +124,23 @@ public class ServerFilUsuaris extends Thread {
                             SystemUtils.escriuNouLog(usuariArrayList.get(i));
                         }
                         break;
-
+                        
+                    case "USER_FIND":
+                       
+                         // Registrar que s'està fent la cerca
+                        SystemUtils.escriuNouLog("FIND_ID_IN_DB #");
+                        //Executa la baixa en la base de dades, pasant com a paràmete id_key de l'usuari
+                        int id_resultat =conn.cercaIdUsuari(missatge[1]);
+                        //Mostra el resultat de l'operació 0 malament | 1 correcte
+                        SystemUtils.escriuNouLog("RESULT_FIND_USER_ID # " + id_resultat);
+                        //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
+                        out.writeInt(id_resultat);
+                        
+                        break;
+                        
                     case "USER_EXIT":
                         // Registrar en el log que s'està fent una sortidade l'aplicatiu  
-                        SystemUtils.escriuNouLog("EXECUTE_USER_EXIT");
+                        SystemUtils.escriuNouLog("EXECUTE_USER_EXIT_ServerfilsUsuaris");
                         //Trec de la llista d'usuaris actius al usuari que tanca sessió
                         this.server.esborrar(id, nomClient);
                         
