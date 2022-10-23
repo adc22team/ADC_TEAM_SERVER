@@ -69,6 +69,7 @@ public class TiqServerMain extends javax.swing.JFrame {
         jLabelTittle.setText("Server - TIQ Issues  ");
 
         jLabelClose.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imatges/icons8-close-24.png"))); // NOI18N
+        jLabelClose.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jLabelClose.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabelCloseMouseClicked(evt);
