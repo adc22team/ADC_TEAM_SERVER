@@ -105,6 +105,7 @@ public class MetodesSQLgestioUsuaris {
         //Retornem la llista confecciona
         return usuarisArrayList;
     }
+  
     /**
      * Mètode que ens permet fer l'alta d'un usuari dins la taula usuraris
      * @param altaDades passem un String amb el valors dels camps separat per ","

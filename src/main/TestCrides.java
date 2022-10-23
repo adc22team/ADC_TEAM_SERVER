@@ -55,8 +55,13 @@ public class TestCrides {
         //NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
         //l'usuari martina // pwdmartina
         System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
-        System.out.println("#################### ###################################S ################################");
+        System.out.println("#################### #################################### ################################");
       
+        System.out.println("####################        C O N T R A S E N Y A S       ################################");
+        System.out.println("Encriptació contrasenya 'pwderronea' és: "+ SystemUtils.convertirSHA256("pwderronea"));
+        System.out.println("Encriptació contrasenya 'pwdmartina' és: "+ SystemUtils.convertirSHA256("pwdmartina"));
+        System.out.println("Encriptació contrasenya 'pwdcarles'  és: "+ SystemUtils.convertirSHA256("pwdcarles"));
+        System.out.println("####################        C O N T R A S E N Y A S       ################################");
         //Simulem el login d'un usuari FALLIT en Bd's
         testSimulacioLoginOutFallit  ("martina","pwderronea","0");
         
@@ -73,6 +78,8 @@ public class TestCrides {
         System.out.println("######### Simulació d'un login carles amb el rol de admin ########");
         testSimulacioLoginOutCorrecte("carles","pwdcarles","0");
         
+        System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
+        llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
         alta("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia,pwdsilvia,silvia,olivar,1,1,1");
@@ -154,7 +161,7 @@ public class TestCrides {
             out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
 
             resposta_svr_id = in.readInt();
-            System.out.println("Fet el login FALLIT ....... ");
+            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
 
             if (resposta_svr_id == 0) {
                 System.out.println("resposta servidor del : " + resposta_svr_id + " ERROR VALIDACIO!!");
@@ -210,12 +217,12 @@ public class TestCrides {
             out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
             //Recullim el id_sessio vàlit
             resposta_svr_id = in.readInt();
-            System.out.println("Fet el login CORRECTE ....... ");
-            System.out.println("resposta servidor id      : " + resposta_svr_id);
+            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
+            System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
                 rol = in.readInt();
-                System.out.println("resposta servidor del rol : " + rol);
+                System.out.println("resposta servidor del rol que l'usuari : " + rol);
             }
         } catch (IOException ex) {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
@@ -244,6 +251,7 @@ public class TestCrides {
             //Aquí pots fer la consulta que vulguis et tornara el seu result i el
             //podràs tractar
             //Exemples
+            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
             out.writeUTF("USER_QUERY,select * from usuaris order by nom");
 
             //Llegir el numero total de registres de la consulta
