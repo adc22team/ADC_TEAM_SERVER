@@ -51,7 +51,7 @@ public class TestCrides {
             }else{
                 System.out.println("El fitxer NO HA sigut esborrat satifactoriament");
             };    
-       
+     /*  
         //NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
         //l'usuari martina // pwdmartina
         System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
@@ -72,13 +72,13 @@ public class TestCrides {
         System.out.println("######### Simulació d'un logOut ########");
         testSimulacioLogOut("martina","pwdmartina",String.valueOf(resposta_svr_id));
                
-        System.out.println("######### Simulació d'un login correcte per fer la resta de proves ########");
+        System.out.println("######### Simulació d'un login correcte per fer la resta de proves ########");*/
         
-        //Simulem el login/logOut d'un usuari validad en Bd's
+       //Simulem el login/logOut d'un usuari validad en Bd's
         System.out.println("######### Simulació d'un login carles amb el rol de admin ########");
         testSimulacioLoginOutCorrecte("carles","pwdcarles","0");
         
-        System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
+    /*    System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
         llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
@@ -101,7 +101,7 @@ public class TestCrides {
         //Simulem la baixa d'un usuari pel seu usuari
         System.out.println("######### Simulació de la baixa de l'usuari Silvia ########### ");   
         baixa("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
-                  String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));
+                  String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));*/
         
         llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
                 
@@ -252,12 +252,17 @@ public class TestCrides {
             //podràs tractar
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF("USER_QUERY,select * from usuaris order by nom");
+         //   out.writeUTF("USER_QUERY,select * from usuaris order by nom");
+         out.writeUTF("USER_QUERY_COUNT,select * from usuaris order by nom");
+         
+       
 
             //Llegir el numero total de registres de la consulta
             int total = in.readInt();
+            
+            System.out.println("El total de registres és :" +total);
 
-            ArrayList registres = new ArrayList();
+    /*        ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
                 registres.add(in.readUTF());
@@ -265,7 +270,7 @@ public class TestCrides {
             //Mostrem els registres guardats en el arrayList
             for (int i = 0; i < registres.size(); i++) {
                 System.out.println(registres.get(i).toString());
-            }
+            }*/
         } catch (IOException ex) {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }

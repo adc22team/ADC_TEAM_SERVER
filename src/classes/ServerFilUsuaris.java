@@ -124,6 +124,17 @@ public class ServerFilUsuaris extends Thread {
                             SystemUtils.escriuNouLog(usuariArrayList.get(i));
                         }
                         break;
+                    case "USER_QUERY_COUNT":
+                        // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
+                        SystemUtils.escriuNouLog("EXECUTE_USER_QUERY #");
+                        //Creem un arrayList per gestionar el resultats de las consultas
+                        ArrayList<String> usuariArrayListCount = new ArrayList<String>();
+                        //Guardem en un ArrayList els registres trobats
+                        usuariArrayListCount  = conn.consultaSqlUsuaris(missatge[1]);
+                        //Enviem el nombre total de elements de la llista al client
+                        out.writeInt(usuariArrayListCount.size());
+
+                        break;    
                         
                     case "USER_FIND":
                        
