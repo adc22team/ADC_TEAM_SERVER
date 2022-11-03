@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
+import javax.net.ssl.SSLServerSocket;
 /**
  *
  * @author Carles Fugarolas
@@ -24,6 +25,7 @@ public class Server {
     private HashMap<Integer, String> mapUsuaris = new HashMap<>();//Creating HashMap   
     private Socket sc;
     private ServerSocket server;
+  
 
     //Establir la connexió a la BD's  
     Connexio conn = new Connexio();
@@ -78,7 +80,7 @@ public class Server {
         conn.establirConnexio();
 
        try {
-            
+          
             while (true) {
 
                 //Registro que el servidor està a l'espera en el log's
