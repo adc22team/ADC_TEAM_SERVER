@@ -103,8 +103,9 @@ public class TestCrides {
         baixa("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
                   String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));*/
         
-        llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-        llistatCount("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+      //  llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+      //  llistatCount("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+        llistatGrid("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
                 
         System.out.println("######### Simulació d'un logOut  CARLES ########");
         testSimulacioLogOut("carles","pwdcarles",String.valueOf(resposta_svr_id));
@@ -308,6 +309,52 @@ public class TestCrides {
             Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+      /**
+    * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
+    * feta pels clients en la Bd's
+    * Retorna el numero de registres que compleixen la consulta.
+    * 
+     * @param valitUser passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+    */ 
+    public static void llistatGrid(String valitUser) {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            // Llegir la resposta del servidor al establir la connexió
+            String resposta_svr = in.readUTF();
+            //Enviem resposta al servidor amb el usuari i la contrasenya id valit
+            out.writeUTF("LOGIN," + valitUser);
+            //Executo la consulta de la crida per sortir
+            //Aquí pots fer la consulta que vulguis et tornara el seu result i el
+            //podràs tractar
+            //Exemples
+            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
+            out.writeUTF("USER_QUERY_GRID,SELECT * FROM usuaris");
+         
+            //Llegir el numero total de registres de la consulta
+            int total = in.readInt();
+            
+            System.out.println("El total de registres és :" +total);
+            
+              ArrayList registres = new ArrayList();
+            //Posem el registres rebut dins d'un arrayList
+            for (int i = 0; i < total; i++) {
+                registres.add(in.readUTF());
+            }
+            //Mostrem els registres guardats en el arrayList
+            for (int i = 0; i < registres.size(); i++) {
+                System.out.println(registres.get(i).toString());
+            }
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
      /**
      * Aquest mètode fa una crida  a la crida USER_NEW per simular l'alta d'un nou
      * usuari en la Bd's

@@ -124,6 +124,23 @@ public class ServerFilUsuaris extends Thread {
                             SystemUtils.escriuNouLog(usuariArrayList.get(i));
                         }
                         break;
+                    case "USER_QUERY_GRID":
+                        // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
+                        SystemUtils.escriuNouLog("EXECUTE_USER_QUERY #");
+                        //Creem un arrayList per gestionar el resultats de las consultas
+                        ArrayList<String> usuariArrayListGrid = new ArrayList<String>();
+                        //Guardem en un ArrayList els registres trobats
+                        usuariArrayListGrid  = conn.consultaSqlGrid(missatge[1]);
+                        //Enviem el nombre total de elements de la llista al client
+                        out.writeInt(usuariArrayListGrid.size());
+                        //Enviar les dades reculllides de la consulta al client
+                        for(int i = 0; i < usuariArrayListGrid.size(); i++){
+                            //Enviem el registres separats per "," al client
+                            out.writeUTF(usuariArrayListGrid.get(i));
+                            //Registrem els enviaments al l'arxiu lg's
+                            SystemUtils.escriuNouLog(usuariArrayListGrid.get(i));
+                        }
+                        break;    
                     case "USER_QUERY_COUNT":
                         // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
                         SystemUtils.escriuNouLog("EXECUTE_USER_QUERY #");

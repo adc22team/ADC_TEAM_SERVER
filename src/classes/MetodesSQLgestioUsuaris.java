@@ -106,6 +106,46 @@ public class MetodesSQLgestioUsuaris {
         return usuarisArrayList;
     }
  
+    /**
+     * Mètode que ens permet enviar una consulta SQL a la taula d'usuaris
+     * @param query sentència formatejada SQL
+     * @return un ArrayList amb els resultat dels registre trobat el seus camps
+     * separats per ","
+     * @throws SQLException
+     * @throws IOException 
+     */
+    public ArrayList consultaSqlGrid(String query) throws SQLException, IOException {
+        //Creació de les variables locals corresponent a cada camp de la taula
+        //de la Bd's d'usuaris
+        String usuari;
+        String nom;
+        String cognom;
+        int rol;
+        int depart;
+        int estat;
+        String departament;
+        //Definició del ArrayList que guardarà el resultat de la consulta
+        ArrayList<String> usuarisArrayList = new ArrayList<String>();
+        //Prepara i executar la consulta
+        Statement stmt = conectar.createStatement();
+        ResultSet result = stmt.executeQuery(query);
+        //Llegim tots els registres que han resultat de les consultes
+        while (result.next()) {
+            //Agafem els seus valors i els volquem en les varieables local
+            //i si fos necessari fer-ne el seu tractament
+            usuari      = result.getString("usuari");
+            nom         = result.getString("nom");
+            cognom      = result.getString("cognom");
+            depart      = result.getInt("departament");
+            rol         = result.getInt("rol");
+            estat       = result.getInt("estat");
+           //Afegir cada registre dins el ArrayList 
+           usuarisArrayList.add(   usuari + "," + nom  + "," + cognom  + "," + depart + "," + rol + "," + estat);
+            
+        }
+        //Retornem la llista confecciona
+        return usuarisArrayList;
+    }
     
     /**
      * Mètode que ens permet fer l'alta d'un usuari dins la taula usuraris
