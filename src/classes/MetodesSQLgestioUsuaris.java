@@ -118,6 +118,7 @@ public class MetodesSQLgestioUsuaris {
         //Creació de les variables locals corresponent a cada camp de la taula
         //de la Bd's d'usuaris
         String usuari;
+        int id;
         String nom;
         String cognom;
         int rol;
@@ -133,6 +134,7 @@ public class MetodesSQLgestioUsuaris {
         while (result.next()) {
             //Agafem els seus valors i els volquem en les varieables local
             //i si fos necessari fer-ne el seu tractament
+            id          = result.getInt("id");
             usuari      = result.getString("usuari");
             nom         = result.getString("nom");
             cognom      = result.getString("cognom");
@@ -140,7 +142,7 @@ public class MetodesSQLgestioUsuaris {
             rol         = result.getInt("rol");
             estat       = result.getInt("estat");
            //Afegir cada registre dins el ArrayList 
-           usuarisArrayList.add(   usuari + "," + nom  + "," + cognom  + "," + depart + "," + rol + "," + estat);
+           usuarisArrayList.add(   id+","+usuari + "," + nom  + "," + cognom  + "," + depart + "," + rol + "," + estat);
             
         }
         //Retornem la llista confecciona
