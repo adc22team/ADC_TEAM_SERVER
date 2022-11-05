@@ -121,12 +121,10 @@ public class MetodesSQLgestioUsuaris {
         int id;
         String nom;
         String cognom;
-        int rol;
-        int depart;
-        int estat;
+        String rol;
         String departament;
         //Definició del ArrayList que guardarà el resultat de la consulta
-        ArrayList<String> usuarisArrayList = new ArrayList<String>();
+        ArrayList<String> usuarisArrayList = new ArrayList<>();
         //Prepara i executar la consulta
         Statement stmt = conectar.createStatement();
         ResultSet result = stmt.executeQuery(query);
@@ -138,12 +136,11 @@ public class MetodesSQLgestioUsuaris {
             usuari      = result.getString("usuari");
             nom         = result.getString("nom");
             cognom      = result.getString("cognom");
-            depart      = result.getInt("departament");
-            rol         = result.getInt("rol");
-            estat       = result.getInt("estat");
-           //Afegir cada registre dins el ArrayList 
-           usuarisArrayList.add(   id+","+usuari + "," + nom  + "," + cognom  + "," + depart + "," + rol + "," + estat);
+            departament = result.getString("departament");
+            rol         = result.getString("rol");
             
+           //Afegir cada registre dins el ArrayList 
+           usuarisArrayList.add(id +","+ usuari + "," +nom +","+ cognom + "," + departament + "," + rol);
         }
         //Retornem la llista confecciona
         return usuarisArrayList;

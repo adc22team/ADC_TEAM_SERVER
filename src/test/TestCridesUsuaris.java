@@ -56,7 +56,7 @@ public class TestCridesUsuaris {
         //l'usuari martina // pwdmartina
         System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
         System.out.println("#################### #################################### ################################");
-      
+    /*  
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
         System.out.println("Encriptació contrasenya 'pwderronea' és: "+ SystemUtils.convertirSHA256("pwderronea"));
         System.out.println("Encriptació contrasenya 'pwdmartina' és: "+ SystemUtils.convertirSHA256("pwdmartina"));
@@ -71,14 +71,14 @@ public class TestCridesUsuaris {
                         
         System.out.println("######### Simulació d'un logOut ########");
         testSimulacioLogOut("martina","pwdmartina",String.valueOf(resposta_svr_id));
-               
+     */          
         System.out.println("######### Simulació d'un login correcte per fer la resta de proves ########");
         
        //Simulem el login/logOut d'un usuari validad en Bd's
         System.out.println("######### Simulació d'un login carles amb el rol de admin ########");
         testSimulacioLoginOutCorrecte("carles","pwdcarles","0");
         
-        System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
+    /*    System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
         llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
@@ -105,6 +105,7 @@ public class TestCridesUsuaris {
         
       //  llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
       //  llistatCount("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+   */
         llistatGrid("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
                 
         System.out.println("######### Simulació d'un logOut  CARLES ########");
@@ -333,8 +334,8 @@ public class TestCridesUsuaris {
             //podràs tractar
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF("USER_QUERY_GRID,SELECT * FROM usuaris");
-         
+          //  out.writeUTF("USER_QUERY_GRID,SELECT * FROM usuaris");
+              out.writeUTF("USER_QUERY_GRID,SELECT * FROM public.usuaris_grid");
             //Llegir el numero total de registres de la consulta
             int total = in.readInt();
             
