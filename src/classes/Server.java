@@ -202,21 +202,22 @@ public class Server {
         switch (comanda.substring(0, 5)) {
             //USER_ crista a la classe que gestiona els usuaris i la seva persistència
             case "USER_":
-                ServerFilUsuaris fil = new ServerFilUsuaris(sc, in, out, missatge, comanda, id_conn, this);
-                fil.start();
+                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, comanda, id_conn, this);
+                filusuaris.start();
                 break;
             case "DEPA_":
-            //DEPA_ crista a la classe que gestiona els departaments i la seva persistència,
-            //No està implementada    
+               ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge, comanda, id_conn, this);
+                fildepart.start();  
                 break;
             case "TIQU_":
             //TIQU_ crista a la classe que gestiona els tiquets i la seva persistència,
             //No està implementada    
                 break;
             case "ROLE_":
-            //ROLE_ crista a la classe que gestiona els departaments i la seva persistència,
-            //No està implementada    
-                break;
+                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, comanda, id_conn, this);
+                filrols.start();
+                break; 
+            
             default:
                 //Si la crida enviada pel client no és correcte, executem la crida forçada de sortida
                 //Escriu la sortida en el registre

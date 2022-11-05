@@ -3,7 +3,7 @@
  * To change this template file, choose SystemUtils | Templates
  * and open the template in the editor.
  */
-package main;
+package test;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -24,7 +24,7 @@ import utilitats.SystemUtils;
  * @author Carles Fugarolas
  * 
  */
-public class TestCrides {
+public class TestCridesUsuaris {
     //Variables definines per fer el joc de proves
     private static int rol;
     private static int resposta_svr_id;
@@ -51,7 +51,7 @@ public class TestCrides {
             }else{
                 System.out.println("El fitxer NO HA sigut esborrat satifactoriament");
             };    
-     /*  
+       
         //NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
         //l'usuari martina // pwdmartina
         System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
@@ -72,13 +72,13 @@ public class TestCrides {
         System.out.println("######### Simulació d'un logOut ########");
         testSimulacioLogOut("martina","pwdmartina",String.valueOf(resposta_svr_id));
                
-        System.out.println("######### Simulació d'un login correcte per fer la resta de proves ########");*/
+        System.out.println("######### Simulació d'un login correcte per fer la resta de proves ########");
         
        //Simulem el login/logOut d'un usuari validad en Bd's
         System.out.println("######### Simulació d'un login carles amb el rol de admin ########");
         testSimulacioLoginOutCorrecte("carles","pwdcarles","0");
         
-    /*    System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
+        System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
         llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
@@ -101,7 +101,7 @@ public class TestCrides {
         //Simulem la baixa d'un usuari pel seu usuari
         System.out.println("######### Simulació de la baixa de l'usuari Silvia ########### ");   
         baixa("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
-                  String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));*/
+                  String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));
         
       //  llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
       //  llistatCount("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
@@ -111,7 +111,7 @@ public class TestCrides {
         testSimulacioLogOut("carles","pwdcarles",String.valueOf(resposta_svr_id));
        
         //mirem el registre
-        mostrarLogsConsola();
+       // mostrarLogsConsola();
     }
    /**
     * Mètode que busca el id d'un usuari
@@ -138,7 +138,7 @@ public class TestCrides {
             return id_trobat;
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
         //Sinó troba l'usuari retorna 0 
         return 0;
@@ -169,7 +169,7 @@ public class TestCrides {
                 System.out.println("resposta servidor del : " + resposta_svr_id + " ERROR VALIDACIO!!");
             }
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     /**
@@ -196,7 +196,7 @@ public class TestCrides {
             System.out.println("LogOut realitzat correctament ");
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      /**
@@ -227,7 +227,7 @@ public class TestCrides {
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
             }
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
       /**
@@ -271,7 +271,7 @@ public class TestCrides {
                 System.out.println(registres.get(i).toString());
             }
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      /**
@@ -306,7 +306,7 @@ public class TestCrides {
             System.out.println("El total de registres és :" +total);
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
       /**
@@ -351,7 +351,7 @@ public class TestCrides {
             }
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -383,7 +383,7 @@ public class TestCrides {
             System.out.println("Resultat de la consulta : " + in.readInt());
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
   
@@ -412,7 +412,7 @@ public class TestCrides {
             System.out.println("El resultat de la baixa :" + in.readInt());
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
    
@@ -443,7 +443,7 @@ public class TestCrides {
             System.out.println("El resultat de la modificació :" + in.readInt());
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
   
@@ -479,7 +479,7 @@ public class TestCrides {
             System.out.println("El resultat de la modificació :" + in.readInt());
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      
@@ -501,9 +501,9 @@ public class TestCrides {
             br.close();
 
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(TestCrides.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }   
 }
