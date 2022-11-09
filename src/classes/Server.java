@@ -15,7 +15,6 @@ import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.sql.*;
-import javax.net.ssl.SSLServerSocket;
 /**
  *
  * @author Carles Fugarolas
@@ -102,10 +101,11 @@ public class Server {
 
                 //Descompondre la resposta del client, en un array
                 String[] missatge = resposta.split(",");
-                //missatge[0] - LOGIN
-                //missatge[1] - usuari
-                //missatge[2] - password
-                //missatge[3] - id_conn
+                //missatge[0] - id_conn
+                //missatge[1] - id
+                //missatge[2] - usuari
+                //missatge[3] - password
+                
 
                 //Convertir el camp id_com string a numeric
                 int id_conn = Integer.parseInt(missatge[3]);
