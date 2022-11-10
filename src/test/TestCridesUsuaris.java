@@ -118,13 +118,13 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-           
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+          
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             //Executo la consulta de la crida per sortir
             out.writeUTF(id_conn+",USER_FIND," + usuari);
@@ -156,12 +156,12 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
           
             //Executo la consulta de la crida per fer l'alta del nou usuari
             out.writeUTF(id_conn + ",USER_NEW," + params);
@@ -192,12 +192,13 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
                         
             //El primer parametre es el id a modificar
             out.writeUTF(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1");
@@ -226,12 +227,12 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
                         
             //Enviem al servidor la crida per fer la baixa d'un usuari
             out.writeUTF(id_conn +",USER_DELETE," + id_key);
@@ -259,13 +260,14 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
+            
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            // Enviament de la clau pública del servidor
-            out.writeUTF("Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
-
+            
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
   
             //out.writeUTF(id_conn + ",USER_QUERY,0");
@@ -305,13 +307,13 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-           
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             //Enviem resposta al servidor amb el usuari i la contrasenya
             out.writeUTF(id_conn + ",USER_EXIT");
@@ -337,12 +339,13 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-           // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+          
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             //Enviem resposta al servidor amb el usuari i la contrasenya
             out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
@@ -377,13 +380,13 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            //Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+         
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegir la resposta del servidor al establir la connexió
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
            //Enviem resposta al servidor  de la crida, amb el usuari i la contrasenya
             out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya );
@@ -415,12 +418,13 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
                         
+            
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            // Enviament de la clau pública del servidor
-            out.writeUTF("Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
             
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
@@ -452,12 +456,13 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
            
+           
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            // Enviament de la clau pública del servidor
-            out.writeUTF("Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
             
             //Aquí pots fer la consulta que vulguis et tornara el seu result i el podràs tractar
             //Exemples

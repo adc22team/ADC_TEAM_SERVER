@@ -111,12 +111,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
            
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+           
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             //Executo la consulta de la crida per sortir
             out.writeUTF(id_conn + ",ROLE_FIND," + rol);
@@ -148,12 +149,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+           
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
           
             //Executo la consulta de la crida per fer l'alta del nou usuari
             out.writeUTF(id_conn + ",ROLE_NEW," + params);
@@ -184,12 +186,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+           
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
                         
             //El primer parametre es el id a modificar
             out.writeUTF(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat");
@@ -218,12 +221,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
                         
             //Enviem al servidor la crida per fer la baixa d'un usuari
             out.writeUTF(id_conn +",ROLE_DELETE," + id_key);
@@ -251,13 +255,14 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
+            
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            // Enviament de la clau pública del servidor
-            out.writeUTF("Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
-
+            
             System.out.println("Executem la crida a fer un llistat de tots els rols de la Bd's de rols ");
   
             //out.writeUTF(id_conn + ",ROLE_QUERY,0");
@@ -298,12 +303,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
            
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             //Enviem resposta al servidor amb el usuari i la contrasenya
             out.writeUTF(id_conn + ",USER_EXIT");
@@ -329,12 +335,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-           // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+           
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             //Enviem resposta al servidor amb el usuari i la contrasenya
             out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
@@ -370,12 +377,13 @@ public class TestCridesRols {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
                         
+           
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            // Enviament de la clau pública del servidor
-            out.writeUTF("Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
             
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );

@@ -92,11 +92,12 @@ public class Server {
                 DataInputStream in = new DataInputStream(sc.getInputStream());
                 DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
-                //Enviament de la clau pública del client
-                out.writeUTF(            "clau_publica_ per implementar");
                 SystemUtils.escriuNouLog("clau_publica_ per implementar");
                 //Llegir la clau pública del client
                 SystemUtils.escriuNouLog(in.readUTF());
+                //Enviament de la clau pública del client
+                out.writeUTF(            "clau_publica_ per implementar");
+                
                 
                 //Llegir la crida del client
                 //format id_conn,CRIDA,....,...
