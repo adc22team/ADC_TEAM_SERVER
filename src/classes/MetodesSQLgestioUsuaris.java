@@ -166,13 +166,13 @@ public class MetodesSQLgestioUsuaris {
         //preparem i executem la SQL per fer l'alta 
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, altaDades[1]); // usuari
-            sentence_ready.setString(2, SystemUtils.convertirSHA256(altaDades[2])); // contrasenya
-            sentence_ready.setString(3, altaDades[3]); //nom
-            sentence_ready.setString(4, altaDades[4]); //cognom
-            sentence_ready.setInt(5, Integer.parseInt(altaDades[5])); //departament   
-            sentence_ready.setInt(6, Integer.parseInt(altaDades[6])); //rol
-            sentence_ready.setInt(7, Integer.parseInt(altaDades[7])); //estat
+            sentence_ready.setString(1, altaDades[2]); // usuari
+            sentence_ready.setString(2, SystemUtils.convertirSHA256(altaDades[3])); // contrasenya
+            sentence_ready.setString(3, altaDades[4]); //nom
+            sentence_ready.setString(4, altaDades[5]); //cognom
+            sentence_ready.setInt(5, Integer.parseInt(altaDades[6])); //departament   
+            sentence_ready.setInt(6, Integer.parseInt(altaDades[7])); //rol
+            sentence_ready.setInt(7, Integer.parseInt(altaDades[8])); //estat
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
@@ -182,6 +182,7 @@ public class MetodesSQLgestioUsuaris {
             SystemUtils.escriuNouLog("INSERT_NEW_USER_IN_DB_ERROR # " + e);
         }
         //Retornem el resultat de l'operació 0 - Error i 1 - Correcte
+         SystemUtils.escriuNouLog("Valor de resultat # " + result);
         return result;
     }
     /**
@@ -192,6 +193,8 @@ public class MetodesSQLgestioUsuaris {
      * @throws SQLException
      * @throws IOException 
      */
+    
+        //out.writeUTF(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1");
     public int modificarUser(String[] modificacioDades) throws SQLException, IOException{
         //Contador que recullirar el resultat de l'operació 0 - error i 1 - satisfactori              
         int result =0;
@@ -204,14 +207,14 @@ public class MetodesSQLgestioUsuaris {
         //preparem i executem la SQL per fer la modificació        
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, modificacioDades[2]); // usuari
-            sentence_ready.setString(2, SystemUtils.convertirSHA256(modificacioDades[3])); // contrasenya
-            sentence_ready.setString(3, modificacioDades[4]); //nom
-            sentence_ready.setString(4, modificacioDades[5]); //cognom
-            sentence_ready.setInt(5,Integer.parseInt(modificacioDades[6])); //departament   
-            sentence_ready.setInt(6,Integer.parseInt(modificacioDades[7])); //rol
-            sentence_ready.setInt(7,Integer.parseInt(modificacioDades[8])); //estat
-            sentence_ready.setInt(8,Integer.parseInt(modificacioDades[1])); //id
+            sentence_ready.setString(1, modificacioDades[3]); // usuari
+            sentence_ready.setString(2, SystemUtils.convertirSHA256(modificacioDades[4])); // contrasenya
+            sentence_ready.setString(3, modificacioDades[5]); //nom
+            sentence_ready.setString(4, modificacioDades[6]); //cognom
+            sentence_ready.setInt(5,Integer.parseInt(modificacioDades[7])); //departament   
+            sentence_ready.setInt(6,Integer.parseInt(modificacioDades[8])); //rol
+            sentence_ready.setInt(7,Integer.parseInt(modificacioDades[9])); //estat
+            sentence_ready.setInt(8,Integer.parseInt(modificacioDades[2])); //id
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();

@@ -20,7 +20,7 @@ import utilitats.SystemUtils;
 
 /**
  *Aquesta classe te implementats mètodde static que serveixen per la realització
- * de les proves de la TEA3
+ * de les proves de la TEA2
  * @author Carles Fugarolas
  * 
  */
@@ -51,89 +51,226 @@ public class TestCridesDepartaments {
             }else{
                 System.out.println("El fitxer NO HA sigut esborrat satifactoriament");
             };    
-    
-        System.out.println("######### Simulació d'un login correcte per fer la resta de proves TEA3 ########");
+       
+        //NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
+        //l'usuari martina // pwdmartina
+        System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
+        System.out.println("#################### #################################### ################################");
+      
+                             
+        System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
        //Simulem el login/logOut d'un usuari validad en Bd's
-        System.out.println("############# Simulació d'un login carles amb el rol de administrador ##########");
-        testSimulacioLoginOutCorrecte("carles","pwdcarles","0");
+        System.out.println("#################### Simulació d'un login carles amb el rol de admin #####################");
+        testSimulacioLoginCorrecte(0,"carles","pwdcarles");
         
-        System.out.println("######## Llistat actual de registres guardats en la Bd's de DEPARTAMENTS ########");
-        llistatDepartaments("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
         
-        //Simulem la cerca d'un id  d'un departament per el seu departament
-        System.out.println("######### Simulació de buscar el ID del departament comercial   : "
-                +buscarIdDepartament("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"Comercial")+" #######"); 
-       
-       //Simulem una alta d'un nou departaemt dins la Bd's de departaments
-        System.out.println("##################### Simulació d'una alta d'un nou DEPARTAMENT  ##################");
-        altaDepartament("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"Departament de prova");
+        System.out.println("###################### Llistat actual de registres guardats en la Bd's ###################");
+        llistatDepartaments(resposta_svr_id);
         
-        //Llistem el resultat del nou departament creat
-        System.out.println("##################### Llistat actual de departaments en la BD's  ##################");
-        llistatDepartaments("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-       
-        //Simulem una modificació d'un departament en la Bd's
-        System.out.println("############# Simulació de la modificació d'un departament en la Bd's  ############");
-        modificacioDepartament("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
-                String.valueOf(buscarIdDepartament("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"Departament de prova")));   
-                
-        //Llistem el resultat del nou departament creat
-        System.out.println("##################### Llistat actual de departaments en la BD's  ##################");
-        llistatDepartaments("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+       //Simulem una alta d'un nou rol dins la Bd's rols
+        System.out.println("###################### Simulació d'una alta d'un nou departament #########################");
+        altaDepartament(resposta_svr_id,"departament de prova"); 
         
-        //Simulem la baixa d'un departament pel seu usuari
-        System.out.println("########## Simulació de la baixa del departament  de prova de la Bd's ############ ");   
-        baixaDepartament("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
-                  String.valueOf(buscarIdDepartament("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"Departament de prova modificat")));
+        llistatDepartaments(resposta_svr_id);
+           
+        //Simulem la cerca del id pel nom del rol
+       System.out.println("######### Simulació de buscar el ID del departament  departament de prova : " + buscarIdDepartament(resposta_svr_id,"departament de prova"));
         
-        //Llistem el resultat del nou departament creat
-        System.out.println("##################### Llistat actual de departaments en la BD's  ##################");
-        llistatDepartaments("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+        //Simulem una modificació d'un usuari
+        System.out.println("######### Simulació de la modificació del departament de proves   ########");      
+        modificacioDepartament(resposta_svr_id,buscarIdDepartament(resposta_svr_id,"departament de prova"));      
         
-        //Simulem la baixa d'un  departamentrol pel nom del seu departament
-        System.out.println("########## Simulació del número total de departaemts que hi han Bd's ############# ");   
-        llistatCountDepartaments("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-              
-        System.out.println("########################## Simulació d'un logOut  CARLES ##########################");
-        testSimulacioLogOut("carles","pwdcarles",String.valueOf(resposta_svr_id));
-       
+        llistatDepartaments(resposta_svr_id);
+        
+        //Simulem la baixa d'un usuari pel seu usuari
+        System.out.println("######### Simulació de la baixa d'un departament a ########### ");   
+        baixaDepartament(resposta_svr_id,buscarIdDepartament(resposta_svr_id,"Departament de prova modificat"));
+        
+        llistatDepartaments(resposta_svr_id);
+        
+        llistatCountDepartaments(resposta_svr_id);
+      
+        System.out.println("######### Simulació d'un logOut  CARLES ########");
+        testSimulacioLogOut(resposta_svr_id);
+    
         //mirem el registre
        // mostrarLogsConsola();
     }
-      
-    /**
-    * Aquest mètode fa una crida  a la crida DEPA_QUERY per simular una consulta
-    * feta pels clients en la Bd's
-    * Retorna un llistat per consola de la consulta feta.
-    * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-    */ 
-    public static void llistatDepartaments(String valitUser) {
+   /**
+    * Mètode que busca el id d'un departament
+     * @param id_conn
+    * @param departament
+    * @return el id que té un departament en la Bd's
+    */
+    public static int buscarIdDepartament(int id_conn, String departament) {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+           
+            // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya id valit
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //Aquí pots fer la consulta que vulguis et tornara el seu result i el
-            //podràs tractar
-            //Exemples
-            System.out.println("Executem la crida a fer un llistat de tots els departaments de la Bd's de departaments" );
-            out.writeUTF("DEPA_QUERY,select * from  departaments");
-        
-            //Llegir el numero total de registres de la consulta
-            int total = in.readInt();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             
-            System.out.println("El total de registres és :" +total);
+            //Executo la consulta de la crida per sortir
+            out.writeUTF(id_conn + ",DEPA_FIND," + departament);
+            //Llegir el numero total de registres de la consulta
+            int id_trobat = in.readInt();
+            //Si troba l'usuari torna el seu id
+            return id_trobat;
 
-          ArrayList registres = new ArrayList();
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Sinó troba l'usuari retorna 0 
+        return 0;
+    }
+     /**
+     * Aquest mètode fa una crida  a la crida DEPA_NEW per simular l'alta d'un nou
+     * departament en la Bd's
+     * Genera un nou usuari i recull el resultat de l'operació
+     * 
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+     * @param params passem els registres del camps dels departament separat per "," en format text
+    */
+    public static void altaDepartament(int id_conn, String params) {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+          
+            //Executo la consulta de la crida per fer l'alta del nou usuari
+            out.writeUTF(id_conn + ",DEPA_NEW," + params);
+            SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",DEPA_NEW," + params);
+            
+            //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
+            System.out.println("Resultat de la consulta : " + in.readInt());
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+   
+    /**
+     * Aquest mètode fa una crida  a la crida DEPA_MODIFI per simular la modificacio d'un
+     * usuari en la Bd's
+     * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
+     * l'operació
+     * 
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+     * @param id_key id que té el usuari en la Bd's
+    */ 
+   public static void modificacioDepartament(int id_conn,int id_key){
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+                        
+            //El terce parametre es el id a modificar
+            out.writeUTF(id_conn+",DEPA_MODIFI," + id_key + ",Departament de prova modificat");
+
+            //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
+            System.out.println("El resultat de la modificació :" + in.readInt());
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Aquest mètode fa una crida  a la crida DEPA_DELETE per simular la baixa d'un
+     * usuari en la Bd's
+     * Elinima un usuari  i mostre per consola el resultat de  l'operació
+     * 
+     * @param id_conn passem el id_connexió obtingut al fer login.
+     * @param id_key id que té el usuari en la Bd's
+    */ 
+    public static void baixaDepartament(int id_conn, int id_key) {
+        Socket sc;
+        try {
+            
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+                        
+            //Enviem al servidor la crida per fer la baixa d'un usuari
+            out.writeUTF(id_conn +",DEPA_DELETE," + id_key);
+            
+            //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
+             SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+    * Aquest mètode fa una crida  a la crida DEPA_QUERY per simular una consulta
+    * feta pels clients en la Bd's
+    * Retorna un llistat per consola de la consulta feta.
+    * @param id_conn passem  id d'un usuari logat al program
+    * amb el rol admin
+    */ 
+    public static void llistatDepartaments(int id_conn) {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF("Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
+
+            System.out.println("Executem la crida a fer un llistat de tots els departaments de la Bd's de departaments ");
+  
+            //out.writeUTF(id_conn + ",DEPA_QUERY,0");
+           // out.writeUTF(id_conn+",DEPA_QUERY,2,0"); 
+            out.writeUTF(id_conn+",DEPA_QUERY,0");
+           // out.writeUTF(id_conn+",DEPA_QUERY,3,4#=#1,3");
+
+            //El sservidor en torna el número de registres trobat en la consulta
+            int total = in.readInt();
+
+            System.out.println("El total de registres és :" + total);
+
+            ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
                 registres.add(in.readUTF());
@@ -146,137 +283,12 @@ public class TestCridesDepartaments {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-  
-   /**
-    * Mètode que busca el id d'un departament
-     * @param valitUser
-    * @param departament
-    * @return el id que té l'usuari a la Bd's
-    */
-    public static int buscarIdDepartament(String valitUser, String departament) {
-
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            out.writeUTF("DEPA_FIND," + departament);
-            //Llegir el numero total de registres de la consulta
-            int id_trobat = in.readInt();
-            //Si troba l'usuari torna el seu id
-            return id_trobat;
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        //Sinó troba l'usuari retorna 0 
-        return 0;
-    }
-    
-       /**
-     * Aquest mètode fa una crida  a la crida DEPA_NEW per simular l'alta d'un nou
-     * usuari en la Bd's
-     * Genera un nou usuari i recull el resultat de l'operació
-     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-     * @param params passem els registres del camps dels usuari separat per "," en format text
-    */
-    public static void altaDepartament(String valitUser, String params) {
-
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr : " + resposta_svr);
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            System.out.println("Valor de valituser : " + valitUser);
-            //Fem el login amb un usuari
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            out.writeUTF("DEPA_NEW," + params);
-            System.out.println("Resultat de la consulta : " + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-  
-    /**
-     * Aquest mètode fa una crida  a la crida DEPA_DELETE per simular la baixa d'un
-     * departament en la Bd's
-     * Elinima un departament i mostre per consola el resultat de  l'operació
-     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-    * @param id_key id que té el departament en la Bd's
-    */ 
-    public static void baixaDepartament(String valitUser, String id_key) {
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
-            //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF("DEPA_DELETE," + Integer.parseInt(id_key));
-            //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
-            System.out.println("El resultat de la baixa : " + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    
-     /**
-     * Aquest mètode fa una crida  a la crida DEPA_MODIFI per simular la modificacio d'un
-     * departament en la Bd's
-     * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
-     * l'operació
-     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-     * @param id_key id que té el usuari en la Bd's
-    */ 
-   public static void modificacioDepartament(String valitUser,String id_key){
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //El primer parametre es el id a modificar
-            out.writeUTF("DEPA_MODIFI," + id_key + ",Departament de prova modificat");
-
-            System.out.println("El resultat de la modificació : " + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-   
+      
     /**
      * Mètode que simula elLogOut d'un usuari
-     * @param usuari
-     * @param contrasenya
-     * @param id 
+     * @param id_conn 
      */
-     public static void testSimulacioLogOut(String usuari, String contrasenya, String id) {
+     public static void testSimulacioLogOut(int id_conn) {
 
         Socket sc;
         System.out.println("Ara femt el logOut ....... ");
@@ -285,41 +297,53 @@ public class TestCridesDepartaments {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+           
+            // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
-            //Executem la crida per sortir i donar de baixa l'usuari del HaspMap
-            out.writeUTF("USER_EXIT");
+            out.writeUTF(id_conn + ",USER_EXIT");
+            
             System.out.println("LogOut realitzat correctament ");
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
      /**
       * Mètode que simula un login fet desde en client
       * @param usuari 
       * @param contrasenya
-      * @param id
+      * @param id_conn
       * @throws InterruptedException 
       */
-    public static void testSimulacioLoginOutCorrecte(String usuari, String contrasenya, String id) throws InterruptedException {
+    public static void testSimulacioLoginCorrecte( int id_conn,String usuari, String contrasenya) throws InterruptedException {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+            
+           // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
+            out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
+            
             //Recullim el id_sessio vàlit
             resposta_svr_id = in.readInt();
             System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
             System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
+            
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
                 rol = in.readInt();
@@ -329,41 +353,44 @@ public class TestCridesDepartaments {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+ 
     /**
-    * Aquest mètode fa una crida  a la crida DEPA_QUERY_COUNT per simular una consulta
+    * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
     * feta pels clients en la Bd's
     * Retorna el numero de registres que compleixen la consulta.
     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
      * amb el rol admin
     */ 
-    public static void llistatCountDepartaments(String valitUser) {
+    public static void llistatCountDepartaments(int id_conn) {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+                        
+            // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya id valit
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //Aquí pots fer la consulta que vulguis et tornara el seu result i el
-            //podràs tractar
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF("Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
+            
             //Exemples
-            System.out.println("Executem la crida a fer un llistat de tots els departaments de la Bd's de departaments " );
-            out.writeUTF("DEPA_QUERY_COUNT,select * from departaments order by departament");
+            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
+            out.writeUTF(id_conn + ",DEPA_QUERY_COUNT,0");
          
             //Llegir el numero total de registres de la consulta
             int total = in.readInt();
             
-            System.out.println("El total de registres és : " + total);
+            System.out.println("El total de registres és :" +total);
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+   
     /**
      * Mètode que llista per consolta tot l'arxiu de log's
      */
@@ -386,5 +413,6 @@ public class TestCridesDepartaments {
         } catch (IOException ex) {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
+    }    
 }
+

@@ -72,6 +72,8 @@ public class Server {
      * Aquest és el mètode principal de la classe que permet la creació d'un fil
      * d'un nou servidor, establint una connexió amb la Bd's i quedan a l'escolta
      * dels clients
+     * @throws java.io.IOException
+     * @throws java.sql.SQLException
      */
     public void obrirServer() throws IOException, SQLException {
 
@@ -90,40 +92,40 @@ public class Server {
                 DataInputStream in = new DataInputStream(sc.getInputStream());
                 DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
-                //Missatge de benvinguda que dona el servidor  al establir la comunicació
-                out.writeUTF(            "SERVER_SHOW_EHLO_established connection");
-                SystemUtils.escriuNouLog("SERVER_SHOW_EHLO_established connection");
-
-                //Recullir el login de l'usuari
-                //format LOGIN,usuari,contrasenya,id_conn
+                //Enviament de la clau pública del client
+                out.writeUTF(            "clau_publica_ per implementar");
+                SystemUtils.escriuNouLog("clau_publica_ per implementar");
+                //Llegir la clau pública del client
+                SystemUtils.escriuNouLog(in.readUTF());
+                
+                //Llegir la crida del client
+                //format id_conn,CRIDA,....,...
                 String resposta = in.readUTF();
                 SystemUtils.escriuNouLog("USER_RESPONSE # " + resposta);
 
                 //Descompondre la resposta del client, en un array
                 String[] missatge = resposta.split(",");
                 //missatge[0] - id_conn
-                //missatge[1] - id
+                //missatge[1] - crida
                 //missatge[2] - usuari
                 //missatge[3] - password
                 
-
                 //Convertir el camp id_com string a numeric
-                int id_conn = Integer.parseInt(missatge[3]);
+                int id_conn = Integer.parseInt(missatge[0]);
+                SystemUtils.escriuNouLog("Valor id_conn :        # "+ id_conn);
+                //Vol dir que estic fent la crida de LOGIN
+                if(id_conn == 0){
 
-                SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG        # "+ SystemUtils.convertirSHA256(missatge[2])); 
-                
-                //Mira si l'usuari existeix a la Bd's i si la contrasenya és vàlida
-                int registres = conn.loginValit(missatge[1], missatge[2]);
+                    SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG        # "+ SystemUtils.convertirSHA256(missatge[3]));       
+                    //Mira si l'usuari existeix a la Bd's i si la contrasenya és vàlida
+                    int registres = conn.loginValit(missatge[2], missatge[3]);
 
-                //Si existeix el usuari retorna 1 i 0 si no valida
-                SystemUtils.escriuNouLog("SQL_RESPONSE_VALIDATE_USER        # " + registres);
+                    //Si existeix el usuari retorna 1 i 0 si no valida
+                    SystemUtils.escriuNouLog("SQL_RESPONSE_VALIDATE_USER        # " + registres);
 
-                //Està entrant per la pantalla del login NO TE ID i és un usuari validat
-                SystemUtils.escriuNouLog("SERVER_SHOW_ID_CONN_USER_RECEIVED # " + id_conn);
-
-                //Si id_conn == 0 està fent la pantalla de LOGIN
-                if (id_conn == 0) {
-                  
+                    //Està entrant per la pantalla del login NO TE ID i és un usuari validat
+                    SystemUtils.escriuNouLog("SERVER_SHOW_ID_CONN_USER_RECEIVED # " + id_conn);
+  
                     //El ususari ha fet el login correcte
                     if (registres == 1) {
 
@@ -131,11 +133,11 @@ public class Server {
                         int new_id_conn = SystemUtils.generaNumAleatorio(100, 900);
 
                         //Afegim el usuari i la seva sessió al HasMap
-                        afegir(new_id_conn, missatge[1]);
+                        afegir(new_id_conn, missatge[2]);
 
                         //Està entrant per la pantalla del login NO TE ID i és un usuari validat
                         SystemUtils.escriuNouLog("SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # "
-                                + new_id_conn + " - " + missatge[1]);
+                                + new_id_conn + " - " + missatge[2]);
                         //Registre els usuaris que hi han actius
                         SystemUtils.escriuNouLog("SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # "
                                 + mapUsuaris);
@@ -145,7 +147,7 @@ public class Server {
                         SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK        # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
-                        int rol = conn.rolUsuari(missatge[1], missatge[2]);
+                        int rol = conn.rolUsuari(missatge[2], missatge[3]);
                         out.writeInt(rol);
                         SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                  # "
                                                         + rol);
@@ -157,7 +159,7 @@ public class Server {
                     }
                 } else {
                     //Te id
-                    SystemUtils.escriuNouLog("crida a la gestió de fils "+missatge[0]);
+                    SystemUtils.escriuNouLog("crida a la gestió de fils "+missatge[1]);
                     // Iniciem el fil amb el client
                     GestioFils(sc, in, out, missatge, id_conn, this);   
                 }
@@ -185,28 +187,16 @@ public class Server {
     public  void GestioFils(Socket socket, DataInputStream in, DataOutputStream out, String[] missatge, 
                             int id_conn, Server server) throws IOException{
      
-        //Recullo la petició codificada que fa el client
-        String comanda = in.readUTF();
-
-        //Controlar, que si la crida enviada no és vàlida, forçar perquè no falli el switch
-        if (comanda.length() < 5) {
-            comanda = comanda + "?????";
-        }
-        //Registrar en el log la comanda que vol executar i a quin grup pertany
-        SystemUtils.escriuNouLog("READ_COMMAND_EXECUTE # " + comanda);
-        SystemUtils.escriuNouLog("SELECT_ITEMS_GRUP    # " + comanda.substring(0, 5));
-        //Codificació de les crides, els 5 primer caracter serveix que definir quin
-        //mòdul del programa vol accedir l'usuari i així poder segmentar el codi en
-        //diferentes classes
         //USER_ crista a la classe que gestiona els usuaris i la seva persistència
-        switch (comanda.substring(0, 5)) {
+        switch (missatge[1].substring(0, 5)) {
             //USER_ crista a la classe que gestiona els usuaris i la seva persistència
             case "USER_":
-                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, comanda, id_conn, this);
+                SystemUtils.escriuNouLog("Entre a USER_ amb la comanda : " + missatge[1]);
+                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, missatge[1], id_conn, this);
                 filusuaris.start();
                 break;
             case "DEPA_":
-               ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge, comanda, id_conn, this);
+               ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge,missatge[1], id_conn, this);
                 fildepart.start();  
                 break;
             case "TIQU_":
@@ -214,14 +204,14 @@ public class Server {
             //No està implementada    
                 break;
             case "ROLE_":
-                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, comanda, id_conn, this);
+                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, missatge[1], id_conn, this);
                 filrols.start();
                 break; 
             
             default:
                 //Si la crida enviada pel client no és correcte, executem la crida forçada de sortida
                 //Escriu la sortida en el registre
-                SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + comanda );
+                SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_EXIT # " + missatge[1] );
                 break;
         }
     }

@@ -56,83 +56,78 @@ public class TestCridesUsuaris {
         //l'usuari martina // pwdmartina
         System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
         System.out.println("#################### #################################### ################################");
-    /*  
+      
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
         System.out.println("Encriptació contrasenya 'pwderronea' és: "+ SystemUtils.convertirSHA256("pwderronea"));
         System.out.println("Encriptació contrasenya 'pwdmartina' és: "+ SystemUtils.convertirSHA256("pwdmartina"));
         System.out.println("Encriptació contrasenya 'pwdcarles'  és: "+ SystemUtils.convertirSHA256("pwdcarles"));
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
-        //Simulem el login d'un usuari FALLIT en Bd's
-        testSimulacioLoginOutFallit  ("martina","pwderronea","0");
         
-        //Simulem el login d'un usuari validad en Bd's
-        System.out.println("######### Simulació d'un login ########");
-        testSimulacioLoginOutCorrecte("martina","pwdmartina","0");
-                        
-        System.out.println("######### Simulació d'un logOut ########");
-        testSimulacioLogOut("martina","pwdmartina",String.valueOf(resposta_svr_id));
-     */          
-        System.out.println("######### Simulació d'un login correcte per fer la resta de proves ########");
+        System.out.println("#####################    Simulació d'un login fallit   ###################################");
+        //Simulem el login d'un usuari FALLIT en Bd's
+        testSimulacioLoginOutFallit  (0,"martina","pwderronea");
+                             
+        System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
        //Simulem el login/logOut d'un usuari validad en Bd's
-        System.out.println("######### Simulació d'un login carles amb el rol de admin ########");
-        testSimulacioLoginOutCorrecte("carles","pwdcarles","0");
+        System.out.println("#################### Simulació d'un login carles amb el rol de admin ####################");
+        testSimulacioLoginCorrecte(0,"carles","pwdcarles");
         
-    /*    System.out.println("######### Llistat actual de registres guardats en la Bd's ########");
-        llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-       //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
+        
+        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
-        alta("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia,pwdsilvia,silvia,olivar,1,1,1");
-        llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
+        alta(resposta_svr_id,"silvia,pwdsilvia,silvia,olivar,1,1,1"); 
         
+        llistat(resposta_svr_id);
+           
         //Simulem la cerca d'un usuari pel seu usuari
-        System.out.println("######### Simulació de buscar el ID de l'usuari Silvia   : "
-                +buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia"));
+        System.out.println("######### Simulació de buscar el ID de l'usuari Silvia   : " + buscarIdUsuari(resposta_svr_id,"silvia"));
         
-        //Simulem una modificació d'un usuari
+         //Simulem una modificació d'un usuari
         System.out.println("######### Simulació de la modificació de l'usuari Silvia  ########");
-        //"carles,pwdcarles,555","String.valueOf(buscarIdUsuari(""silvia")")
-       
-        modificacio("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
-                String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));
-
-        llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-              
+             
+        modificacio(resposta_svr_id,buscarIdUsuari(resposta_svr_id,"silvia"));
+               
+        
+        llistat(resposta_svr_id);
+        
         //Simulem la baixa d'un usuari pel seu usuari
         System.out.println("######### Simulació de la baixa de l'usuari Silvia ########### ");   
-        baixa("carles,pwdcarles,"+String.valueOf(resposta_svr_id),
-                  String.valueOf(buscarIdUsuari("carles,pwdcarles,"+String.valueOf(resposta_svr_id),"silvia")));
+        baixa(resposta_svr_id,buscarIdUsuari(resposta_svr_id,"silvia"));
+               
+        llistatCount(resposta_svr_id);
         
-      //  llistat("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-      //  llistatCount("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-   */
-        llistatGrid("carles,pwdcarles,"+String.valueOf(resposta_svr_id));
-                
+        llistatGrid(resposta_svr_id);
+         
         System.out.println("######### Simulació d'un logOut  CARLES ########");
-        testSimulacioLogOut("carles","pwdcarles",String.valueOf(resposta_svr_id));
-       
+        testSimulacioLogOut(resposta_svr_id);
+    
         //mirem el registre
        // mostrarLogsConsola();
     }
    /**
     * Mètode que busca el id d'un usuari
-     * @param valitUser
+     * @param id_conn
     * @param usuari
     * @return el id que té l'usuari a la Bd's
     */
-    public static int buscarIdUsuari(String valitUser, String usuari) {
+    public static int buscarIdUsuari(int id_conn, String usuari) {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+           
+            // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            
             //Executo la consulta de la crida per sortir
-            out.writeUTF("USER_FIND," + usuari);
+            out.writeUTF(id_conn+",USER_FIND," + usuari);
             //Llegir el numero total de registres de la consulta
             int id_trobat = in.readInt();
             //Si troba l'usuari torna el seu id
@@ -144,125 +139,146 @@ public class TestCridesUsuaris {
         //Sinó troba l'usuari retorna 0 
         return 0;
     }
-    /**
-     * Mètode que simula un login errori
-     * @param usuari
-     * @param contrasenya
-     * @param id el id obtingut al fer la validació de l'usuari
-     * @throws InterruptedException 
-     */
-    public static void testSimulacioLoginOutFallit(String usuari, String contrasenya, String id) throws InterruptedException {
-
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
-
-            resposta_svr_id = in.readInt();
-            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
-
-            if (resposta_svr_id == 0) {
-                System.out.println("resposta servidor del : " + resposta_svr_id + " ERROR VALIDACIO!!");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    /**
-     * Mètode que simula elLogOut d'un usuari
-     * @param usuari
-     * @param contrasenya
-     * @param id 
-     */
-     public static void testSimulacioLogOut(String usuari, String contrasenya, String id) {
-
-        Socket sc;
-        System.out.println("Ara femt el logOut ....... ");
-
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
-            //Executem la crida per sortir i donar de baixa l'usuari del HaspMap
-            out.writeUTF("USER_EXIT");
-            System.out.println("LogOut realitzat correctament ");
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
      /**
-      * Mètode que simula un login fet desde en client
-      * @param usuari 
-      * @param contrasenya
-      * @param id
-      * @throws InterruptedException 
-      */
-    public static void testSimulacioLoginOutCorrecte(String usuari, String contrasenya, String id) throws InterruptedException {
+     * Aquest mètode fa una crida  a la crida USER_NEW per simular l'alta d'un nou
+     * usuari en la Bd's
+     * Genera un nou usuari i recull el resultat de l'operació
+     * 
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+     * @param params passem els registres del camps dels usuari separat per "," en format text
+    */
+    public static void alta(int id_conn, String params) {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+            
+            // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + usuari + "," + contrasenya + "," + id);
-            //Recullim el id_sessio vàlit
-            resposta_svr_id = in.readInt();
-            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
-            System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
-            //Si la validació és correcte, recullim el rol de l'usuari
-            if (resposta_svr_id != 0) {
-                rol = in.readInt();
-                System.out.println("resposta servidor del rol que l'usuari : " + rol);
-            }
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+          
+            //Executo la consulta de la crida per fer l'alta del nou usuari
+            out.writeUTF(id_conn + ",USER_NEW," + params);
+            SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",USER_NEW," + params);
+            
+            //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
+            System.out.println("Resultat de la consulta : " + in.readInt());
+
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      /**
+   
+    /**
+     * Aquest mètode fa una crida  a la crida USER_MODIFI per simular la modificacio d'un
+     * usuari en la Bd's
+     * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
+     * l'operació
+     * 
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+     * @param id_key id que té el usuari en la Bd's
+    */ 
+   public static void modificacio(int id_conn,int id_key){
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+                        
+            //El primer parametre es el id a modificar
+            out.writeUTF(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1");
+
+            //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
+            System.out.println("El resultat de la modificació :" + in.readInt());
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Aquest mètode fa una crida  a la crida USER_DELETE per simular la baixa d'un
+     * usuari en la Bd's
+     * Elinima un usuari  i mostre per consola el resultat de  l'operació
+     * 
+     * @param id_conn passem el id_connexió obtingut al fer login.
+     * @param id_key id que té el usuari en la Bd's
+    */ 
+    public static void baixa(int id_conn, int id_key) {
+        Socket sc;
+        try {
+            
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+                        
+            //Enviem al servidor la crida per fer la baixa d'un usuari
+            out.writeUTF(id_conn +",USER_DELETE," + id_key);
+            
+            //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
+             SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
     * Aquest mètode fa una crida  a la crida USER_QUERY per simular una consulta
     * feta pels clients en la Bd's
     * Retorna un llistat per consola de la consulta feta.
-    * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
+    * @param id_conn passem les credencials i el id d'un usuari logat al program
+    * amb el rol admin
     */ 
-    public static void llistat(String valitUser) {
+    public static void llistat(int id_conn) {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya id valit
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //Aquí pots fer la consulta que vulguis et tornara el seu result i el
-            //podràs tractar
-            //Exemples
-            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF("USER_QUERY,select * from usuaris order by nom");
-        
-            //Llegir el numero total de registres de la consulta
-            int total = in.readInt();
-            
-            System.out.println("El total de registres és :" +total);
 
-          ArrayList registres = new ArrayList();
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF("Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
+
+            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
+  
+            //out.writeUTF(id_conn + ",USER_QUERY,0");
+            //out.writeUTF(id_conn+",USER_QUERY,2,2");
+             out.writeUTF(id_conn+",USER_QUERY,1,4#=#2");
+           // out.writeUTF(id_conn+",USER_QUERY,3,4#=#1,3");
+
+            //El sservidor en torna el número de registres trobat en la consulta
+            int total = in.readInt();
+
+            System.out.println("El total de registres és :" + total);
+
+            ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
                 registres.add(in.readUTF());
@@ -275,31 +291,140 @@ public class TestCridesUsuaris {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+      
+    /**
+     * Mètode que simula elLogOut d'un usuari
+     * @param id_conn 
+     */
+     public static void testSimulacioLogOut(int id_conn) {
+
+        Socket sc;
+        System.out.println("Ara femt el logOut ....... ");
+
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+           
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            
+            //Enviem resposta al servidor amb el usuari i la contrasenya
+            out.writeUTF(id_conn + ",USER_EXIT");
+            
+            System.out.println("LogOut realitzat correctament ");
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
      /**
-    * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
-    * feta pels clients en la Bd's
-    * Retorna el numero de registres que compleixen la consulta.
-    * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-    */ 
-    public static void llistatCount(String valitUser) {
+      * Mètode que simula un login fet desde en client
+      * @param usuari 
+      * @param contrasenya
+      * @param id_conn
+      * @throws InterruptedException 
+      */
+    public static void testSimulacioLoginCorrecte( int id_conn,String usuari, String contrasenya) throws InterruptedException {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+            
+           // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya id valit
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //Aquí pots fer la consulta que vulguis et tornara el seu result i el
-            //podràs tractar
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            
+            //Enviem resposta al servidor amb el usuari i la contrasenya
+            out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
+            
+            //Recullim el id_sessio vàlit
+            resposta_svr_id = in.readInt();
+            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
+            System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
+            
+            //Si la validació és correcte, recullim el rol de l'usuari
+            if (resposta_svr_id != 0) {
+                rol = in.readInt();
+                System.out.println("resposta servidor del rol que l'usuari : " + rol);
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    /**
+     * Mètode que simula un login errori
+     * @param usuari
+     * @param contrasenya
+     * @param id_conn el id obtingut al fer la validació de l'usuari
+     * @throws InterruptedException 
+     */
+    public static void testSimulacioLoginOutFallit(int id_conn,String usuari, String contrasenya) throws InterruptedException {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            //Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegir la resposta del servidor al establir la connexió
+            
+           //Enviem resposta al servidor  de la crida, amb el usuari i la contrasenya
+            out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya );
+
+            resposta_svr_id = in.readInt();
+            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
+
+            if (resposta_svr_id == 0) {
+                System.out.println("resposta servidor del : " + resposta_svr_id + " ERROR VALIDACIO!!");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+ 
+    /**
+    * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
+    * feta pels clients en la Bd's
+    * Retorna el numero de registres que compleixen la consulta.
+    * 
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+    */ 
+    public static void llistatCount(int id_conn) {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+                        
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF("Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
+            
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF("USER_QUERY_COUNT,select * from usuaris order by nom");
+            out.writeUTF(id_conn + ",USER_QUERY_COUNT,0");
          
             //Llegir el numero total de registres de la consulta
             int total = in.readInt();
@@ -310,33 +435,37 @@ public class TestCridesUsuaris {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      /**
+    /**
     * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
     * feta pels clients en la Bd's
     * Retorna el numero de registres que compleixen la consulta.
     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
+     * @param id_conn el id del usuari logat al program
      * amb el rol admin
     */ 
-    public static void llistatGrid(String valitUser) {
+    public static void llistatGrid(int id_conn) {
 
         Socket sc;
         try {
+            
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
+           
+            // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya id valit
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //Aquí pots fer la consulta que vulguis et tornara el seu result i el
-            //podràs tractar
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+            // Enviament de la clau pública del servidor
+            out.writeUTF("Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client");
+            
+            //Aquí pots fer la consulta que vulguis et tornara el seu result i el podràs tractar
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-          //  out.writeUTF("USER_QUERY_GRID,SELECT * FROM usuaris");
-              out.writeUTF("USER_QUERY_GRID,SELECT * FROM public.usuaris_grid");
-            //Llegir el numero total de registres de la consulta
+           //out.writeUTF("USER_QUERY_GRID,SELECT * FROM usuaris");
+            out.writeUTF(id_conn + ",USER_QUERY_GRID,2,1");
+              
+            //El sservidor en torna el número de registres trobat en la consulta
             int total = in.readInt();
             
             System.out.println("El total de registres és :" +total);
@@ -355,99 +484,7 @@ public class TestCridesUsuaris {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-     /**
-     * Aquest mètode fa una crida  a la crida USER_NEW per simular l'alta d'un nou
-     * usuari en la Bd's
-     * Genera un nou usuari i recull el resultat de l'operació
-     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-     * @param params passem els registres del camps dels usuari separat per "," en format text
-    */
-    public static void alta(String valitUser, String params) {
-
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            System.out.println("Valor de valituser :" + valitUser);
-            //Fem el login amb un usuari
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            out.writeUTF("USER_NEW," + params);
-            System.out.println("Resultat de la consulta : " + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-  
-    /**
-     * Aquest mètode fa una crida  a la crida USER_DELETE per simular la baixa d'un
-     * usuari en la Bd's
-     * Elinima un usuari  i mostre per consola el resultat de  l'operació
-     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-    * @param id_key id que té el usuari en la Bd's
-    */ 
-    public static void baixa(String valitUser, String id_key) {
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
-            //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF("USER_DELETE," + Integer.parseInt(id_key));
-            //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
-            System.out.println("El resultat de la baixa :" + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
    
-    /**
-     * Aquest mètode fa una crida  a la crida USER_MODIFI per simular la modificacio d'un
-     * usuari en la Bd's
-     * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
-     * l'operació
-     * 
-     * @param valitUser passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-     * @param id_key id que té el usuari en la Bd's
-    */ 
-   public static void modificacio(String valitUser,String id_key){
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //El primer parametre es el id a modificar
-            out.writeUTF("USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1");
-
-            System.out.println("El resultat de la modificació :" + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-  
     /**
      * Aquest mètode encripte la contrasenya d'un usuari en la Bd's Fa la
      * modificació dels camps d'un registre i mostre per consola el resultat de
@@ -458,7 +495,7 @@ public class TestCridesUsuaris {
      * @param sql els camps del registre del usuari menys el seu id separat per
      * ","
      */
-    public static void encriptarContrasenya(String valitUser, String sql) {
+    /*public static void encriptarContrasenya(String valitUser, String sql) {
 
         String[] parametres = sql.split(",");
         Socket sc;
@@ -483,7 +520,7 @@ public class TestCridesUsuaris {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-     
+     */
     /**
      * Mètode que llista per consolta tot l'arxiu de log's
      */
@@ -506,6 +543,9 @@ public class TestCridesUsuaris {
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }   
+    }
+    
+    
+     
 }
 

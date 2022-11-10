@@ -93,8 +93,6 @@ public class MetodesSQLgestioRols {
         //Retornem la llista confecciona
         return rolsArrayList;
     }
- 
-   
     /**
      * Mètode que ens permet fer l'alta d'un usuari dins la taula usuraris
      * @param altaDades passem un String amb el valors dels camps separat per ","
@@ -115,7 +113,7 @@ public class MetodesSQLgestioRols {
         //preparem i executem la SQL per fer l'alta 
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, altaDades[1]); // rol
+            sentence_ready.setString(1, altaDades[2]); // rol
           
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
@@ -150,8 +148,8 @@ public class MetodesSQLgestioRols {
         //preparem i executem la SQL per fer la modificació        
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, modificacioDades[2]); // rol
-            sentence_ready.setInt(2,Integer.parseInt(modificacioDades[1])); //id
+            sentence_ready.setString(1, modificacioDades[3]); // rol
+            sentence_ready.setInt(2,Integer.parseInt(modificacioDades[2])); //id
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
@@ -198,7 +196,7 @@ public class MetodesSQLgestioRols {
      
      /**
      * Mètode que buscar el id d'un usuari a la Bd's
-     * @param usuari String amb el nom introduit en el login
+     * @param rol String amb el nom introduit en el login
      * @return retorna  el id del usuari té a la Bd's
      * @throws SQLException 
      */

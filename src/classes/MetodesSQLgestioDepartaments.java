@@ -93,8 +93,6 @@ public class MetodesSQLgestioDepartaments {
         //Retornem la llista confecciona
         return departamentsArrayList;
     }
- 
-   
     /**
      * Mètode que ens permet fer l'alta d'un usuari dins la taula usuraris
      * @param altaDades passem un String amb el valors dels camps separat per ","
@@ -115,7 +113,7 @@ public class MetodesSQLgestioDepartaments {
         //preparem i executem la SQL per fer l'alta 
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, altaDades[1]); // rol
+            sentence_ready.setString(1, altaDades[2]); // rol
           
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
@@ -137,12 +135,11 @@ public class MetodesSQLgestioDepartaments {
      * @throws IOException 
      */
     public int modificarDepartament(String[] modificacioDades) throws SQLException, IOException{
+        
         //Contador que recullirar el resultat de l'operació 0 - error i 1 - satisfactori              
         int result =0;
-        //Afegim en el log l'operació de modificació demanada pel client
-        SystemUtils.escriuNouLog("UPDATE_DEPARTAMENT_ID_0 # "+modificacioDades[0]);  
-        SystemUtils.escriuNouLog("UPDATE_DEPARTAMENT_ID_1 # "+modificacioDades[1]); 
-        SystemUtils.escriuNouLog("UPDATE_DEPARTAMENT_ID_2 # "+modificacioDades[2]); 
+         //Afegim en el log l'operació d'alta demanada pel client
+        SystemUtils.escriuNouLog("UPDATE_DEPARTAMENT_IN_DB #");
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
         String sentenciaCrear = ("UPDATE departaments SET departament = ? WHERE id = ?");
         //Definim el PreparedStatement   
@@ -150,14 +147,14 @@ public class MetodesSQLgestioDepartaments {
         //preparem i executem la SQL per fer la modificació        
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, modificacioDades[2]); // rol
-            sentence_ready.setInt(2,Integer.parseInt(modificacioDades[1])); //id
+            sentence_ready.setString(1, modificacioDades[3]); // departament
+            sentence_ready.setInt(2,Integer.parseInt(modificacioDades[2])); //id
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
         } catch (Exception e) {
              //Afegim en el log l'operació modificació ha donar error
-             SystemUtils.escriuNouLog("UPDATE_DEPARTAMENT_IN_DB_ERROR # " + e);
+             SystemUtils.escriuNouLog("UPDATE_DEPA_IN_DB_ERROR # " + e);
         }
          //Retornem el resultat de l'operació 0 - Error i 1 - Correcte       
         return result;
@@ -194,9 +191,7 @@ public class MetodesSQLgestioDepartaments {
         //retorna el resultat de l'operació 0 - Error i 1 - Correcte       
         return result;
     }  
-     
-     
-     /**
+    /**
      * Mètode que buscar el id d'un departament a la Bd's
      * @param departament String amb el nom introduit en el login
      * @return retorna  el id del usuari té a la Bd's
