@@ -63,9 +63,9 @@ public class TestCridesUsuaris {
         System.out.println("Encriptació contrasenya 'pwdcarles'  és: "+ SystemUtils.convertirSHA256("pwdcarles"));
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
         
-        System.out.println("#####################    Simulació d'un login fallit   ###################################");
+   /*     System.out.println("#####################    Simulació d'un login fallit   ###################################");
         //Simulem el login d'un usuari FALLIT en Bd's
-        testSimulacioLoginOutFallit  (0,"martina","pwderronea");
+        testSimulacioLoginOutFallit  (0,"martina","pwderronea");*/
                              
         System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
@@ -74,13 +74,13 @@ public class TestCridesUsuaris {
         testSimulacioLoginCorrecte(0,"carles","pwdcarles");
         
         
-        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
+    /*    //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
         alta(resposta_svr_id,"silvia,pwdsilvia,silvia,olivar,1,1,1"); 
-        
-        llistat(resposta_svr_id);
+    */    
+       llistat(resposta_svr_id);
            
-        //Simulem la cerca d'un usuari pel seu usuari
+    /*   //Simulem la cerca d'un usuari pel seu usuari
         System.out.println("######### Simulació de buscar el ID de l'usuari Silvia   : " + buscarIdUsuari(resposta_svr_id,"silvia"));
         
          //Simulem una modificació d'un usuari
@@ -94,11 +94,12 @@ public class TestCridesUsuaris {
         //Simulem la baixa d'un usuari pel seu usuari
         System.out.println("######### Simulació de la baixa de l'usuari Silvia ########### ");   
         baixa(resposta_svr_id,buscarIdUsuari(resposta_svr_id,"silvia"));
-               
+   */             
         llistatCount(resposta_svr_id);
         
         llistatGrid(resposta_svr_id);
          
+    
         System.out.println("######### Simulació d'un logOut  CARLES ########");
         testSimulacioLogOut(resposta_svr_id);
     
@@ -260,7 +261,6 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
-            
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
@@ -269,12 +269,16 @@ public class TestCridesUsuaris {
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
             
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
-  
-            //out.writeUTF(id_conn + ",USER_QUERY,0");
-            //out.writeUTF(id_conn+",USER_QUERY,2,2");
-             out.writeUTF(id_conn+",USER_QUERY,1,4#=#2");
-           // out.writeUTF(id_conn+",USER_QUERY,3,4#=#1,3");
-
+            
+            //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
+            out.writeUTF(id_conn + ",USER_QUERY,0");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,cognom");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
+            //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
+           
             //El sservidor en torna el número de registres trobat en la consulta
             int total = in.readInt();
 
@@ -428,8 +432,15 @@ public class TestCridesUsuaris {
             
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
+            //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
             out.writeUTF(id_conn + ",USER_QUERY_COUNT,0");
-         
+            //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,cognom");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
+            //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
+            
             //Llegir el numero total de registres de la consulta
             int total = in.readInt();
             
@@ -467,8 +478,14 @@ public class TestCridesUsuaris {
             //Aquí pots fer la consulta que vulguis et tornara el seu result i el podràs tractar
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-           //out.writeUTF("USER_QUERY_GRID,SELECT * FROM usuaris");
-            out.writeUTF(id_conn + ",USER_QUERY_GRID,2,1");
+            //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
+            out.writeUTF(id_conn + ",USER_QUERY_GRID,0");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,cognom");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
+            //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
               
             //El sservidor en torna el número de registres trobat en la consulta
             int total = in.readInt();

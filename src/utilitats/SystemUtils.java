@@ -138,4 +138,39 @@ public final class SystemUtils {
 	return sb.toString();
 }
     
+/**
+     * 
+     * @param selectBasic sql bàsica de la consulta afegir els paràmetres
+     * @param missatge paràmetres introduits del client en la crida
+     * @return la setencia sql formatejada correctament amb els paràmetres rebuts
+     * @throws IOException 
+     */
+    public static String formatLlistat(String selectBasic, String[] missatge) throws IOException {
+
+        SystemUtils.escriuNouLog("Util format QUERY's");
+        //Select amb la base de la consulta
+        String sql = selectBasic;
+    
+        //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
+        switch (missatge[2]) {
+            case "0":
+                sql = sql + "order by id";         
+                break;
+            case "1":              
+                sql = sql + "where " + missatge[3]; 
+                break;
+            case "2":
+                sql = sql + "order by " + missatge[3];
+                break;
+            case "3":
+                sql = sql + " where " + missatge[3] + " order by " + missatge[4];          
+                break;
+            default:
+        }
+        SystemUtils.escriuNouLog("Resultat de la setencia final SQL : " + sql);
+
+        return sql;
+    }    
+    
+    
 }

@@ -23,35 +23,27 @@ public class ServerFilRols extends Thread {
     private Socket sc;
     private DataInputStream in;
     private DataOutputStream out;
-    private String nomClient;
-    private int id;
+    private int id_conn;
     private Server server;
-    private String comanda;
     private String[] missatge;
-    
-    static final String  ID_0           ="id";
-    static final String  ROL_1         ="rol";
-    
-    
+ 
     /**
      * Mètode constructor del la classe ServerFilUsuaris extesa Thread
      * @param sc estableix la connexió
      * @param in DataInputStream
      * @param out DataOutputStream
      * @param missatge crida que el client cap el servidor
-     * @param comanda crida que vol executar en client en la gestió d'usuaris
-     * @param id  el id de connexió obtingut al fer el login 
+     * @param id_conn  el id de connexió obtingut al fer el login 
      * @param server servidor que ha creat el nou fil
      */
-    public ServerFilRols(Socket sc, DataInputStream in, DataOutputStream out, String[] missatge, String comanda, int id, Server server) {
+    public ServerFilRols(Socket sc, DataInputStream in, DataOutputStream out, 
+                         String[] missatge,int id_conn, Server server) {
         this.sc = sc;
         this.in = in;
         this.out = out;
-        this.nomClient = missatge[1];
-        this.id = id;
+        this.id_conn = id_conn;
         this.server = server;
-        this.missatge = missatge;
-        this.comanda = comanda;
+        this.missatge = missatge;  
     }
 
     /**
@@ -116,9 +108,9 @@ public class ServerFilRols extends Thread {
                         // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
                         SystemUtils.escriuNouLog("EXECUTE_ROLE_QUERY #");
                         //Creem un arrayList per gestionar el resultats de las consultas
-                        ArrayList<String> rolsArrayList = new ArrayList<String>();
+                        ArrayList<String> rolsArrayList = new ArrayList<>();
                         
-                        sql =formatLlistat("select * from rols ",missatge);
+                        sql =SystemUtils.formatLlistat("select * from rols ",missatge);
                         SystemUtils.escriuNouLog("VALOR SQL ROLE_QUERY # "+ sql);
                         
                         //Guardem en un ArrayList els registres trobats
@@ -141,9 +133,9 @@ public class ServerFilRols extends Thread {
                         // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
                         SystemUtils.escriuNouLog("EXECUTE_ROLE_QUERY_COUNT_REG #");
                         //Creem un arrayList per gestionar el resultats de las consultas
-                        ArrayList<String> rolsArrayListCount = new ArrayList<String>();
+                        ArrayList<String> rolsArrayListCount = new ArrayList<>();
                         
-                        sql =formatLlistat("select * from rols ",missatge);
+                        sql =SystemUtils.formatLlistat("select * from rols ",missatge);
                         SystemUtils.escriuNouLog("VALOR SQL ROLE_QUERY # "+ sql);
                         
                         //Guardem en un ArrayList els registres trobats
@@ -167,10 +159,11 @@ public class ServerFilRols extends Thread {
                         break;
                         
                     case "ROLE_EXIT":
+                        
                         // Registrar en el log que s'està fent una sortidade l'aplicatiu  
                         SystemUtils.escriuNouLog("EXECUTE_ROLE_EXIT_ServerfilsRols");
                         //Trec de la llista d'usuaris actius al usuari que tanca sessió
-                        this.server.esborrar(id, nomClient);
+                        this.server.esborrar(id_conn);
                         
                         break;
 
@@ -178,7 +171,7 @@ public class ServerFilRols extends Thread {
                         
                         SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_ROL_EXIT # " + missatge[0]);
                         //Trec de la llista d'usuaris actius al usuari que tanca sessió
-                        this.server.esborrar(id, nomClient);
+                        this.server.esborrar(id_conn);
                 }
                 
                 //Tanquem la comunicacio amb la BD's
@@ -193,74 +186,9 @@ public class ServerFilRols extends Thread {
             sc.close();
             //Registrar en el logs el llistat de tots els usuaris guardats al map
             SystemUtils.escriuNouLog("SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # " + server.getMapUsuaris());
-            SystemUtils.escriuNouLog("SERVER_thread_SHOW_USER_LOG_OUT_ServerFilUsuaris # " + nomClient + " ID#" + id);
 
         } catch (IOException ex) {
             Logger.getLogger(ServerFilRols.class.getName()).log(Level.SEVERE, null, ex);
       }
     }
-    
-    
-     private static String formatLlistat(String selectBasic, String[] missatge) throws IOException {
-
-        SystemUtils.escriuNouLog("E N T R O   E N  F O R M A T   L L I S T A T ");
-        //Select amb la base de la consulta
-        String sql = selectBasic;
-        String[] filtrat;
-
-        switch (missatge[2]) {
-            case "0":
-                sql = sql + "order by id";
-                break;
-            case "1":
-                SystemUtils.escriuNouLog("Arribo aqui valor missatge[2] :" + missatge[2]);
-                filtrat = missatge[3].split("#");
-                SystemUtils.escriuNouLog("valor filtrat[0] :" + filtrat[0]);
-                SystemUtils.escriuNouLog("valor filtrat[1] :" + filtrat[1]);
-                SystemUtils.escriuNouLog("valor filtrat[2] :" + filtrat[2]);
-                sql = sql + "where " + buscarCamp(filtrat[0]) + filtrat[1] + filtrat[2];
-                break;
-            case "2":
-
-                sql = sql + "order by " + buscarCamp(missatge[3]);
-                break;
-
-            case "3":
-                SystemUtils.escriuNouLog("Arribo aqui valor missatge[2] :" + missatge[2]);
-                filtrat = missatge[3].split("#");
-                SystemUtils.escriuNouLog("valor filtrat[0] :" + filtrat[0]);
-                SystemUtils.escriuNouLog("valor filtrat[1] :" + filtrat[1]);
-                SystemUtils.escriuNouLog("valor filtrat[2] :" + filtrat[2]);
-                sql = sql + " where " + buscarCamp(filtrat[0]) + filtrat[1] + filtrat[2];
-                sql = sql + " order by " + buscarCamp(missatge[4]);
-                break;
-
-            default:
-        }
-
-        SystemUtils.escriuNouLog("Resultat de la setencia final SQL : " + sql);
-
-        return sql;
-    }
-    
-    private static String buscarCamp(String camp) {
-
-        String resultat;
-        switch (camp) {
-            case "0":
-                resultat = ID_0;
-                break;
-            case "1":
-                resultat = ROL_1;
-                break;
-            
-            default:
-                resultat = "";
-        }
-        return resultat;
-    }
-
-    
-    
-    
 }

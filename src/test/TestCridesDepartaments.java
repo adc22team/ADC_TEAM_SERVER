@@ -111,7 +111,7 @@ public class TestCridesDepartaments {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
            
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -150,7 +150,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
            
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -187,7 +187,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
           
-            // Enviament de la clau pública del servidor
+         // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -222,7 +222,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
           
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -256,7 +256,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
            
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -264,11 +264,13 @@ public class TestCridesDepartaments {
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
 
             System.out.println("Executem la crida a fer un llistat de tots els departaments de la Bd's de departaments ");
-  
-            //out.writeUTF(id_conn + ",DEPA_QUERY,0");
-           // out.writeUTF(id_conn+",DEPA_QUERY,2,0"); 
-            out.writeUTF(id_conn+",DEPA_QUERY,0");
-           // out.writeUTF(id_conn+",DEPA_QUERY,3,4#=#1,3");
+     
+            out.writeUTF(id_conn + ",ROLE_QUERY,0");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,1,departament = 'Compres'");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,1,id = 1");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,2,departament");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,3,departament = 'Compres',id");
+           
 
             //El sservidor en torna el número de registres trobat en la consulta
             int total = in.readInt();
@@ -304,7 +306,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
            
             
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -336,7 +338,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
             
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
@@ -378,7 +380,7 @@ public class TestCridesDepartaments {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
                         
             
-            // Enviament de la clau pública del servidor
+            // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor

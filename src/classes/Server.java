@@ -40,19 +40,14 @@ public class Server {
         return mapUsuaris;
     }
 
-    public void setMapUsuaris(HashMap<Integer, String> mapUsuaris) {
-        mapUsuaris = mapUsuaris;
-    }
-
      /**
      * Aquest mètode en permet eliminar id i el nom de l'usuari que ha realitzat un logout
      * de la llista d'usuaris actius
      * @param id el numero generat pel sistema al fer el login
-     * @param nomClient  el nom de l'usuari logat
      */
-    public void esborrar(int id, String nomClient) {
+    public void esborrar(int id) {
         //Esborrar el usuari i la seva sessió al HasMap
-        mapUsuaris.remove(id, nomClient);
+        mapUsuaris.remove(id);
 
     }
 
@@ -113,7 +108,8 @@ public class Server {
                 
                 //Convertir el camp id_com string a numeric
                 int id_conn = Integer.parseInt(missatge[0]);
-                SystemUtils.escriuNouLog("Valor id_conn :        # "+ id_conn);
+                
+                SystemUtils.escriuNouLog("VALUE_id_conn # "+ id_conn);
                 //Vol dir que estic fent la crida de LOGIN
                 if(id_conn == 0){
 
@@ -192,20 +188,27 @@ public class Server {
         switch (missatge[1].substring(0, 5)) {
             //USER_ crista a la classe que gestiona els usuaris i la seva persistència
             case "USER_":
-                SystemUtils.escriuNouLog("Entre a USER_ amb la comanda : " + missatge[1]);
-                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, missatge[1], id_conn, this);
+                                
+                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, id_conn, this);
                 filusuaris.start();
+              
                 break;
+                  
             case "DEPA_":
-               ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge,missatge[1], id_conn, this);
+               
+                ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge, id_conn, this);
                 fildepart.start();  
                 break;
+                
             case "TIQU_":
-            //TIQU_ crista a la classe que gestiona els tiquets i la seva persistència,
-            //No està implementada    
+                
+                //TIQU_ crista a la classe que gestiona els tiquets i la seva persistència,
+                //No està implementada    
                 break;
+                
             case "ROLE_":
-                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, missatge[1], id_conn, this);
+                
+                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, id_conn, this);
                 filrols.start();
                 break; 
             
