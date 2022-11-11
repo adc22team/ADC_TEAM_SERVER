@@ -28,6 +28,7 @@ public final class SystemUtils {
 
      /**
      * Aquest mètode genera un nou registre a l'arxiu de log's del programa.
+     * @param log
      */
     public static void escriuNouLog(String log) throws IOException{
         

@@ -265,11 +265,11 @@ public class TestCridesRols {
             System.out.println("Executem la crida a fer un llistat de tots els rols de la Bd's de rols ");
   
            
-            //out.writeUTF(id_conn + ",ROLE_QUERY,0");
-            out.writeUTF(id_conn + ",DEPA_QUERY,1,rol = 'Administrador'");
-            //out.writeUTF(id_conn + ",DEPA_QUERY,1,id = 1");
-            //out.writeUTF(id_conn + ",DEPA_QUERY,2,departament");
-            //out.writeUTF(id_conn + ",DEPA_QUERY,3,departament = 'Compres',id");
+            out.writeUTF(id_conn + ",ROLE_QUERY,0");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,1,rol = 'Administrador'");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,1,id = 1");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,2,rol");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,3,rol = 'Administrador',id");
            
       
             //El sservidor en torna el número de registres trobat en la consulta
