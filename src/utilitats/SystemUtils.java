@@ -12,6 +12,10 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.nio.charset.StandardCharsets;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.logging.Level;
@@ -19,12 +23,28 @@ import java.util.logging.Logger;
 import main.TiqServerMain;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.Random;
+import javax.crypto.BadPaddingException;
+import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  *
  * @author Carles Fugarolas
  */
 public final class SystemUtils {
+    
+     
+    public static final String AES = "AES/GCM/NoPadding";
+    private static final int GCM_IV_LENGTH = 12;
+    private static final int GCM_TAG_LENGTH = 16;
+    private static final boolean ACTIVAR_ENCRIPTACIO = true;
 
      /**
      * Aquest mètode genera un nou registre a l'arxiu de log's del programa.
@@ -171,7 +191,154 @@ public final class SystemUtils {
         SystemUtils.escriuNouLog("Resultat de la setencia final SQL : " + sql);
 
         return sql;
-    }    
+    }   
+ 
+     /**
+      * 
+      * @param pText
+      * @param key
+      * @return 
+      */     
+      public static String encryptedText(String pText, byte[] key) {
+          
+        if (ACTIVAR_ENCRIPTACIO){  
+       
+            try {
+                byte[] iv = new byte[GCM_IV_LENGTH];
+                (new SecureRandom()).nextBytes(iv);
+
+                Cipher cipher = Cipher.getInstance(AES);
+                GCMParameterSpec ivSpec = new GCMParameterSpec(GCM_TAG_LENGTH * Byte.SIZE, iv);
+                cipher.init(Cipher.ENCRYPT_MODE, new SecretKeySpec(key, "AES"), ivSpec);
+
+                byte[] cipherText = cipher.doFinal(pText.getBytes(StandardCharsets.UTF_8));
+                byte[] encrypted = new byte[iv.length + cipherText.length];
+                System.arraycopy(iv, 0, encrypted, 0, iv.length);
+                System.arraycopy(cipherText, 0, encrypted, iv.length, cipherText.length);
+
+                return Base64.getEncoder().encodeToString(encrypted);
+            } catch (InvalidAlgorithmParameterException | NoSuchPaddingException | IllegalBlockSizeException |
+                    NoSuchAlgorithmException | BadPaddingException | InvalidKeyException e) {
+                throw new RuntimeException(e);
+            }
+        } else{
+            return pText;
+        }    
+    }
     
+    /**
+     * 
+     * @param pTextEncrypted
+     * @param key
+     * @return 
+     */
+    public static String decryptedText(String pTextEncrypted, byte[] key) {
+      
+        if (ACTIVAR_ENCRIPTACIO) {
+            try {
+
+                byte[] decoded = Base64.getDecoder().decode(pTextEncrypted);
+
+                byte[] iv = Arrays.copyOfRange(decoded, 0, GCM_IV_LENGTH);
+
+                Cipher cipher = Cipher.getInstance(AES);
+                GCMParameterSpec ivSpec = new GCMParameterSpec(GCM_TAG_LENGTH * Byte.SIZE, iv);
+                cipher.init(Cipher.DECRYPT_MODE, new SecretKeySpec(key, "AES"), ivSpec);
+
+                byte[] cipherText = cipher.doFinal(decoded, GCM_IV_LENGTH, decoded.length - GCM_IV_LENGTH);
+
+                return new String(cipherText, StandardCharsets.UTF_8);
+            } catch (InvalidAlgorithmParameterException | NoSuchPaddingException | IllegalBlockSizeException
+                    | NoSuchAlgorithmException | BadPaddingException | InvalidKeyException e) {
+                throw new RuntimeException(e);
+            }
+        } else {
+            return pTextEncrypted;
+        }
+    }
+ /**
+  * 
+  * @param clientPublicKeyUTF
+  * @return
+  * @throws IOException 
+  */
+  public static String clausServer(String clientPublicKeyUTF) throws IOException{
+        
+        BigInteger base       = new BigInteger("2");
+        BigInteger prime      = new BigInteger("195180477495478597250447434252857037807");
+        BigInteger secret     = new BigInteger(128, new Random());
+        BigInteger public_key = base.modPow(secret, prime);
+
+ //       System.out.println("Valor de clientPublicKeyUTF : " + clientPublicKeyUTF );
+        BigInteger client_public_key = new BigInteger(clientPublicKeyUTF);
+        BigInteger shared_secret = client_public_key.modPow(secret, prime);
+
+        while (secret.toByteArray().length != 16 || 
+               public_key.toByteArray().length != 16 ||
+               shared_secret.toByteArray().length != 16) {
+            
+            secret = new BigInteger(128, new Random());
+            public_key = base.modPow(secret, prime);
+            shared_secret = client_public_key.modPow(secret, prime);
+            System.out.println("Secret: " + secret.toByteArray().length);
+            System.out.println("Public: " + public_key.toByteArray().length);
+            System.out.println("Shared: " + shared_secret.toByteArray().length);
+            
+        }
+
+        //out.writeUTF(String.valueOf(public_key));
+  //      System.out.println("Client public key abans de convertir  : " + public_key);
+  //      System.out.println("Shared secret abans de convertir      : " + shared_secret);
+  
+        String claus_publica_share_server = String.valueOf(public_key)+","+String.valueOf(shared_secret);
+        
+      //  System.out.println("Servidor  public key           : " + public_key);
+      //  System.out.println("Shared secret del servidor     : " + shared_secret);
+       
+        return claus_publica_share_server;
+        
+    }
+  
+  
+    public static String clauPublicaClient() throws IOException {
+
+        //Enviaem la clau publica del client
+        BigInteger base = new BigInteger("2");
+        BigInteger prime = new BigInteger("195180477495478597250447434252857037807");
+        BigInteger secret = new BigInteger(128, new Random());
+        BigInteger public_key = base.modPow(secret, prime);
+
+        while (secret.toByteArray().length != 16 || public_key.toByteArray().length != 16) {
+
+            secret = new BigInteger(128, new Random());
+            public_key = base.modPow(secret, prime);
+                System.out.println("Secret: " + secret.toByteArray().length);
+                System.out.println("Public: " + public_key.toByteArray().length);
+
+        }
+  
+        String clau_publica_client_secret = String.valueOf(public_key) + "," + String.valueOf(secret);   
+        
+        return clau_publica_client_secret;
+    }
+ 
+ 
+      public static BigInteger calculClauCompartida(String publicKeyServer,String secretString) throws IOException {
+    
+          BigInteger prime = new BigInteger("195180477495478597250447434252857037807");
+          BigInteger secret = new BigInteger(secretString);
+
+          BigInteger server_public_key = new BigInteger(publicKeyServer);
+          System.out.println("Valor server_public_key part client rebuda del servidor: " + server_public_key);
+
+          BigInteger shared_secret = server_public_key.modPow(secret, prime);
+
+          System.out.println("Server public key : " + server_public_key);
+          System.out.println("Shared secret     : " + shared_secret);
+
+          return shared_secret;
+      }
+      
+            
     
 }

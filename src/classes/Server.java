@@ -9,6 +9,7 @@ import utilitats.SystemUtils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.HashMap;
@@ -87,16 +88,30 @@ public class Server {
                 DataInputStream in = new DataInputStream(sc.getInputStream());
                 DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
-                SystemUtils.escriuNouLog("clau_publica_ per implementar");
+         /*      SystemUtils.escriuNouLog("clau_publica_ per implementar");
                 //Llegir la clau pública del client
                 SystemUtils.escriuNouLog(in.readUTF());
                 //Enviament de la clau pública del client
                 out.writeUTF(            "clau_publica_ per implementar");
-                
-                
+         */       
+                //Llegim la clau pública del client
+                String clauPublicaClient = in.readUTF();
+                SystemUtils.escriuNouLog("Valor llegit clau pública client readUTF : " + clauPublicaClient);
+
+                String[] claus_ps = SystemUtils.clausServer(clauPublicaClient).split(",");
+
+                System.out.println("Valor de claus[0]  server  public_key    : " + claus_ps[0]);
+                System.out.println("Valor de claus[1]  server   share_key    : " + claus_ps[1]);
+
+                //Enviem la clau pública del servidor    
+                out.writeUTF(claus_ps[0]);
+
+                BigInteger share_key = new BigInteger(claus_ps[1]);
+                SystemUtils.escriuNouLog("Valor share_key en el  server      : " +share_key);
+                   
                 //Llegir la crida del client
                 //format id_conn,CRIDA,....,...
-                String resposta = in.readUTF();
+                String resposta = SystemUtils.decryptedText(in.readUTF(),share_key.toByteArray());
                 SystemUtils.escriuNouLog("USER_RESPONSE # " + resposta);
 
                 //Descompondre la resposta del client, en un array
@@ -113,7 +128,7 @@ public class Server {
                 //Vol dir que estic fent la crida de LOGIN
                 if(id_conn == 0){
 
-                    SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG        # "+ SystemUtils.convertirSHA256(missatge[3]));       
+                    SystemUtils.escriuNouLog("ENCRYTED_PASSWORD_ALG             # "+ SystemUtils.convertirSHA256(missatge[3]));       
                     //Mira si l'usuari existeix a la Bd's i si la contrasenya és vàlida
                     int registres = conn.loginValit(missatge[2], missatge[3]);
 
@@ -140,7 +155,7 @@ public class Server {
                                 + mapUsuaris);
 
                         //Enviem el ID# assignat a l'usuari, al servidor
-                        out.writeInt(new_id_conn);
+                        out.writeInt(new_id_conn); 
                         SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK         # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
@@ -158,7 +173,7 @@ public class Server {
                     //Te id
                     SystemUtils.escriuNouLog("crida a la gestió de fils "+missatge[1]);
                     // Iniciem el fil amb el client
-                    GestioFils(sc, in, out, missatge, id_conn, this);   
+                    GestioFils(sc, in, out, missatge, id_conn, this, share_key);   
                 }
             }
        } catch (IOException ex) {
@@ -182,14 +197,14 @@ public class Server {
      * @throws IOException 
      */
     public  void GestioFils(Socket socket, DataInputStream in, DataOutputStream out, String[] missatge, 
-                            int id_conn, Server server) throws IOException{
+                            int id_conn, Server server, BigInteger share_key) throws IOException{
      
         //USER_ crista a la classe que gestiona els usuaris i la seva persistència
         switch (missatge[1].substring(0, 5)) {
             //USER_ crista a la classe que gestiona els usuaris i la seva persistència
             case "USER_":
                                 
-                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, id_conn, this);
+                ServerFilUsuaris filusuaris = new ServerFilUsuaris(sc, in, out, missatge, id_conn, this,share_key);
                 filusuaris.start();
               
                 break;

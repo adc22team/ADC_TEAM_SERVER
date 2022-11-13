@@ -9,6 +9,7 @@ import utilitats.SystemUtils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class ServerFilUsuaris extends Thread {
     private int id_conn;
     private Server server;
     private String[] missatge;
-   
+    private BigInteger share_key;
     /**
      * Mètode constructor del la classe ServerFilUsuaris extesa Thread
      * @param sc estableix la connexió
@@ -38,13 +39,14 @@ public class ServerFilUsuaris extends Thread {
      */
    
     public ServerFilUsuaris(Socket sc, DataInputStream in, DataOutputStream out, 
-                            String[] missatge, int id_conn, Server server) {
+                            String[] missatge, int id_conn, Server server,  BigInteger share_key) {
         this.sc = sc;
         this.in = in;
         this.out = out;
         this.id_conn = id_conn;
         this.server = server;
         this.missatge = missatge;
+        this.share_key = share_key;
     }
 
     /**
@@ -124,7 +126,8 @@ public class ServerFilUsuaris extends Thread {
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < usuariArrayList.size(); i++){
                             //Enviem el registres separats per "," al client
-                            out.writeUTF(usuariArrayList.get(i));
+                          //out.writeUTF(usuariArrayList.get(i));
+                            out.writeUTF(SystemUtils.encryptedText(usuariArrayList.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(usuariArrayList.get(i));
                         }
@@ -146,7 +149,8 @@ public class ServerFilUsuaris extends Thread {
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < usuariArrayListGrid.size(); i++){
                             //Enviem el registres separats per "," al client
-                            out.writeUTF(usuariArrayListGrid.get(i));
+                        //  out.writeUTF(usuariArrayListGrid.get(i));
+                            out.writeUTF(SystemUtils.encryptedText(usuariArrayListGrid.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(usuariArrayListGrid.get(i));
                         }
