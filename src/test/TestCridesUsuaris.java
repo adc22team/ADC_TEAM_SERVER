@@ -16,7 +16,9 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.junit.Test;
 import utilitats.SystemUtils;
+
 
 /**
  *Aquesta classe te implementats mètodde static que serveixen per la realització
@@ -36,6 +38,7 @@ public class TestCridesUsuaris {
      * @throws java.io.IOException
      * @throws java.lang.InterruptedException
     */
+    @Test
     public static void main(String[] args) throws IOException, InterruptedException {
         /**
          NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
@@ -63,24 +66,22 @@ public class TestCridesUsuaris {
         System.out.println("Encriptació contrasenya 'pwdcarles'  és: "+ SystemUtils.convertirSHA256("pwdcarles"));
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
         
-   /*     System.out.println("#####################    Simulació d'un login fallit   ###################################");
+        System.out.println("#####################    Simulació d'un login fallit   ###################################");
         //Simulem el login d'un usuari FALLIT en Bd's
-        testSimulacioLoginOutFallit  (0,"martina","pwderronea");*/
+        testSimulacioLoginOutFallit  (0,"martina","pwderronea");
                              
         System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
        //Simulem el login/logOut d'un usuari validad en Bd's
         System.out.println("#################### Simulació d'un login carles amb el rol de admin ####################");
         testSimulacioLoginCorrecte(0,"carles","pwdcarles");
-        
-        
-    /*    //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
+        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("######### Simulació d'una alta d'un usuari");
         alta(resposta_svr_id,"silvia,pwdsilvia,silvia,olivar,1,1,1"); 
-    */    
+      
        llistat(resposta_svr_id);
            
-    /*   //Simulem la cerca d'un usuari pel seu usuari
+      //Simulem la cerca d'un usuari pel seu usuari
         System.out.println("######### Simulació de buscar el ID de l'usuari Silvia   : " + buscarIdUsuari(resposta_svr_id,"silvia"));
         
          //Simulem una modificació d'un usuari
@@ -94,7 +95,7 @@ public class TestCridesUsuaris {
         //Simulem la baixa d'un usuari pel seu usuari
         System.out.println("######### Simulació de la baixa de l'usuari Silvia ########### ");   
         baixa(resposta_svr_id,buscarIdUsuari(resposta_svr_id,"silvia"));
-   */             
+               
         llistatCount(resposta_svr_id);
         
         llistatGrid(resposta_svr_id);
@@ -106,6 +107,7 @@ public class TestCridesUsuaris {
         //mirem el registre
        // mostrarLogsConsola();
     }
+    
    /**
     * Mètode que busca el id d'un usuari
      * @param id_conn
