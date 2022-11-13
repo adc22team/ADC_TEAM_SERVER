@@ -36,7 +36,7 @@ public class TestCridesDepartaments {
      * @throws java.io.IOException
      * @throws java.lang.InterruptedException
     */
-    @Test
+   
     public static void main(String[] args) throws IOException, InterruptedException {
         /**
          NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
