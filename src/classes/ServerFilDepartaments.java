@@ -9,6 +9,7 @@ import utilitats.SystemUtils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class ServerFilDepartaments extends Thread {
     private Server server;
     private String comanda;
     private String[] missatge;
+    private BigInteger share_key;
   
     /**
      * Mètode constructor del la classe ServerFilUsuaris extesa Thread
@@ -39,13 +41,14 @@ public class ServerFilDepartaments extends Thread {
      * @param server servidor que ha creat el nou fil
      */
     public ServerFilDepartaments(Socket sc, DataInputStream in, DataOutputStream out,
-                                 String[] missatge, int id_conn, Server server) {
+                                 String[] missatge, int id_conn, Server server,BigInteger share_key) {
         this.sc = sc;
         this.in = in;
         this.out = out;
         this.id_conn = id_conn;
         this.server = server;
         this.missatge = missatge;   
+        this.share_key = share_key;
     }
 
     /**
@@ -76,7 +79,9 @@ public class ServerFilDepartaments extends Thread {
                         //Executa la alta en la base de dades, pasant tots els camps
                         result =conn.altaDepartament(missatge);
                         //Enviem el resultat de l'operació 0 - error i 1  - ok al client
-                        out.writeInt(result);
+                     // out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
+                        
                          break;
 
                     case "DEPA_DELETE":
@@ -88,7 +93,8 @@ public class ServerFilDepartaments extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_DELETE_DEPART_ID # " +result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                        out.writeInt(result);
+                      //out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
 
@@ -101,7 +107,8 @@ public class ServerFilDepartaments extends Thread {
                         //Registrar el resultat de l'operació  0 malament | 1 correcte en l'arxiu log
                          SystemUtils.escriuNouLog("MODIFI_UPDATE_DEPART_RESULT # " + result);
                         //Enviem el resultat de l'operació  0 malament | 1 correcte al client
-                        out.writeInt(result);
+                   //   out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray())); 
                                                
                          break;
                         
@@ -118,12 +125,15 @@ public class ServerFilDepartaments extends Thread {
                         //Guardem en un ArrayList els registres trobats
                         departamentsArrayList  = conn.consultaSqlDepartaments(sql);
                         //Enviem el nombre total de elements de la llista al client
-                        out.writeInt(departamentsArrayList.size());
+                       //out.writeInt(departamentsArrayList.size());
+                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(departamentsArrayList.size()),share_key.toByteArray()));
                         
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < departamentsArrayList.size(); i++){
                             //Enviem el registres separats per "," al client
-                            out.writeUTF(departamentsArrayList.get(i));
+                         // out.writeUTF(departamentsArrayList.get(i));
+                            out.writeUTF(SystemUtils.encryptedText(departamentsArrayList.get(i),share_key.toByteArray()));
+                            
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(departamentsArrayList.get(i));
                         }
@@ -143,7 +153,8 @@ public class ServerFilDepartaments extends Thread {
                         departamentsArrayListCount  = conn.consultaSqlDepartaments(sql);
                         
                         //Enviem el nombre total de elements de la llista al client
-                        out.writeInt(departamentsArrayListCount.size());
+                      //out.writeInt(departamentsArrayListCount.size());
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(departamentsArrayListCount.size()),share_key.toByteArray()));
 
                         break;    
                         
@@ -158,7 +169,8 @@ public class ServerFilDepartaments extends Thread {
                         SystemUtils.escriuNouLog("RESULT_FIND_DEPART_ID # " + result);
                         
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                        out.writeInt(result);
+                      //out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
                         

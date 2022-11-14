@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -110,19 +111,35 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-           
-           
+    /*     
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+    */
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
             
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);        
+    
             //Executo la consulta de la crida per sortir
-            out.writeUTF(id_conn + ",ROLE_FIND," + rol);
+          //out.writeUTF(id_conn + ",ROLE_FIND," + rol);
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_FIND," + rol,shared_secret.toByteArray()));
+            
             //Llegir el numero total de registres de la consulta
-            int id_trobat = in.readInt();
+         // int id_trobat = in.readInt();
+            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
             //Si troba l'usuari torna el seu id
             return id_trobat;
 
@@ -148,18 +165,33 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
-           
+     /*       
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-          
+    */      
+             //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);     
+     
             //Executo la consulta de la crida per fer l'alta del nou usuari
-            out.writeUTF(id_conn + ",ROLE_NEW," + params);
-            SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",ROLE_NEW," + params);
+     //     out.writeUTF(id_conn + ",ROLE_NEW," + params);
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_NEW," + params,shared_secret.toByteArray()));
+     
+            SystemUtils.escriuNouLog("Crida d'una alta   : " + id_conn + ",ROLE_NEW," + params);
             
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             System.out.println("Resultat de la consulta : " + in.readInt());
@@ -185,19 +217,36 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
+    /*        
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-                        
+    */
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);         
+    
             //El primer parametre es el id a modificar
-            out.writeUTF(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat");
+         // out.writeUTF(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat");
+            out.writeUTF(SystemUtils.encryptedText(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat",shared_secret.toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-            System.out.println("El resultat de la modificació :" + in.readInt());
+          //System.out.println("El resultat de la modificació :" + in.readInt());
+          System.out.println("Resultat de la modificació : "
+                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
@@ -219,20 +268,36 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
-            
+   /*         
             // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-                        
+   */                   
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);
+   
             //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF(id_conn +",ROLE_DELETE," + id_key);
+         // out.writeUTF(id_conn +",ROLE_DELETE," + id_key);
+            out.writeUTF(SystemUtils.encryptedText(id_conn +",ROLE_DELETE," + id_key,shared_secret.toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
-             SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
+        //  SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
+            System.out.println("Resultat de la baixa       : "
+                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
@@ -253,19 +318,30 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-
-            
+  /*
             // Enviament de la clau pública del client al servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+  */          
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
             
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);
             System.out.println("Executem la crida a fer un llistat de tots els rols de la Bd's de rols ");
-  
-           
-            out.writeUTF(id_conn + ",ROLE_QUERY,0");
+            //out.writeUTF(id_conn + ",ROLE_QUERY,0");
+              out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_QUERY,0",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",ROLE_QUERY,1,rol = 'Administrador'");
             //out.writeUTF(id_conn + ",ROLE_QUERY,1,id = 1");
             //out.writeUTF(id_conn + ",ROLE_QUERY,2,rol");
@@ -273,14 +349,16 @@ public class TestCridesRols {
            
       
             //El sservidor en torna el número de registres trobat en la consulta
-            int total = in.readInt();
+        //  int total = in.readInt();
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
 
             System.out.println("El total de registres és :" + total);
 
             ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
-                registres.add(in.readUTF());
+             // registres.add(in.readUTF());
+                registres.add(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()) );
             }
             //Mostrem els registres guardats en el arrayList
             for (int i = 0; i < registres.size(); i++) {
@@ -290,7 +368,59 @@ public class TestCridesRols {
             Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-      
+    
+     /**
+    * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
+    * feta pels clients en la Bd's
+    * Retorna el numero de registres que compleixen la consulta.
+    * 
+     * @param id_conn passem les credencials i el id d'un usuari logat al program
+     * amb el rol admin
+    */ 
+    public static void llistatCountRols(int id_conn) {
+
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+    /*                    
+            // Enviament de la clau pública del client al servidor
+            out.writeUTF(                          "Enviament de la clau pública del client");
+            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
+            // Llegim la clau pública del servidor
+            String resposta_svr = in.readUTF();
+            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+    */
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);
+        
+            //Exemples
+            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
+      //    out.writeUTF(id_conn + ",ROLE_QUERY_COUNT,0");
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_QUERY_COUNT,0",shared_secret.toByteArray()));
+         
+           //Llegir el numero total de registres de la consulta
+        // int total = in.readInt();
+           int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            
+            System.out.println("El total de registres és :" +total);
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     /**
      * Mètode que simula elLogOut d'un usuari
      * @param id_conn 
@@ -304,22 +434,38 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-           
-            
-            // Enviament de la clau pública del client al servidor
+
+        /*    // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+        */
+        
+         //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
             
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(id_conn + ",USER_EXIT");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);
+            
+            
+           //Enviem resposta al servidor amb el usuari i la contrasenya
+          //out.writeUTF(id_conn + ",USER_EXIT");
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",shared_secret.toByteArray()));
             
             System.out.println("LogOut realitzat correctament ");
 
         } catch (IOException ex) {
-            Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
      /**
@@ -336,71 +482,56 @@ public class TestCridesRols {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
-           
-            // Enviament de la clau pública del client al servidor
+          
+        /*  // Enviament de la clau pública del servidor
             out.writeUTF(                          "Enviament de la clau pública del client");
             SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
             // Llegim la clau pública del servidor
             String resposta_svr = in.readUTF();
             SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
+        */
+        
+          //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
             
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
+            
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            System.out.println("Valor share_secret generada : " + shared_secret);
+       
+            System.out.println("Server public key           : " + claus_ps[0]);
+            System.out.println("Shared secret               : " + shared_secret);
+                   
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
+          //out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
             
             //Recullim el id_sessio vàlit
-            resposta_svr_id = in.readInt();
+            //resposta_svr_id = in.readInt();
+           // resposta_svr_id = Integer.parseInt(in.readUTF());
+              resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+              
+              
+              
             System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
             System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
             
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
-                rol = in.readInt();
+              //rol = in.readInt();
+              //rol = Integer.parseInt(in.readUTF());
+                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+                                
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
             }
         } catch (IOException ex) {
-            Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
- 
-    /**
-    * Aquest mètode fa una crida  a la crida USER_QUERY_COUNT per simular una consulta
-    * feta pels clients en la Bd's
-    * Retorna el numero de registres que compleixen la consulta.
-    * 
-     * @param id_conn passem les credencials i el id d'un usuari logat al program
-     * amb el rol admin
-    */ 
-    public static void llistatCountRols(int id_conn) {
-
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-                        
-           
-            // Enviament de la clau pública del client al servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-            
-            //Exemples
-            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF(id_conn + ",ROLE_QUERY_COUNT,0");
-         
-            //Llegir el numero total de registres de la consulta
-            int total = in.readInt();
-            
-            System.out.println("El total de registres és :" +total);
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-   
+  
     /**
      * Mètode que llista per consolta tot l'arxiu de log's
      */
@@ -426,3 +557,4 @@ public class TestCridesRols {
     }    
 }
 
+        

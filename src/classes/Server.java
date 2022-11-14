@@ -155,18 +155,27 @@ public class Server {
                                 + mapUsuaris);
 
                         //Enviem el ID# assignat a l'usuari, al servidor
-                        out.writeInt(new_id_conn); 
+                      //out.writeInt(new_id_conn); 
+                     // out.writeUTF(String.valueOf(new_id_conn)); 
+                     // out.writeUTF(String.valueOf(new_id_conn)); 
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(new_id_conn),share_key.toByteArray()));
+                        
                         SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK         # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
                         int rol = conn.rolUsuari(missatge[2], missatge[3]);
-                        out.writeInt(rol);
+                      //out.writeInt(rol);
+                     // out.writeUTF(String.valueOf(rol));  
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(rol),share_key.toByteArray()));
+                        
                         SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                   # "
                                                         + rol);
                     } else {
                         //No te ID i el usuari / contrasenya no es correcte
                         //Enviem el ID# assignat a l'usuari si el ID# = 0 ERROR
-                        out.writeInt(0);
+                        //out.writeInt(0);
+                        //out.writeUTF("0");  
+                        out.writeUTF(SystemUtils.encryptedText("0",share_key.toByteArray()));
                         SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG          # " + id_conn);
                     }
                 } else {
@@ -211,7 +220,7 @@ public class Server {
                   
             case "DEPA_":
                
-                ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge, id_conn, this);
+                ServerFilDepartaments fildepart = new ServerFilDepartaments(sc, in, out, missatge, id_conn, this,share_key);
                 fildepart.start();  
                 break;
                 
@@ -223,7 +232,7 @@ public class Server {
                 
             case "ROLE_":
                 
-                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, id_conn, this);
+                ServerFilRols filrols = new ServerFilRols(sc, in, out, missatge, id_conn, this,share_key);
                 filrols.start();
                 break; 
             

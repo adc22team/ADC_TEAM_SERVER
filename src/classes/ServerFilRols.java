@@ -9,6 +9,7 @@ import utilitats.SystemUtils;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -26,6 +27,7 @@ public class ServerFilRols extends Thread {
     private int id_conn;
     private Server server;
     private String[] missatge;
+    private BigInteger share_key;
  
     /**
      * Mètode constructor del la classe ServerFilUsuaris extesa Thread
@@ -37,13 +39,14 @@ public class ServerFilRols extends Thread {
      * @param server servidor que ha creat el nou fil
      */
     public ServerFilRols(Socket sc, DataInputStream in, DataOutputStream out, 
-                         String[] missatge,int id_conn, Server server) {
+                         String[] missatge,int id_conn, Server server,BigInteger share_key) {
         this.sc = sc;
         this.in = in;
         this.out = out;
         this.id_conn = id_conn;
         this.server = server;
         this.missatge = missatge;  
+        this.share_key = share_key;
     }
 
     /**
@@ -74,7 +77,8 @@ public class ServerFilRols extends Thread {
                         //Executa la alta en la base de dades, pasant tots els camps
                         result =conn.altaRol(missatge);
                         //Enviem el resultat de l'operació 0 - error i 1  - ok al client
-                        out.writeInt(result);
+                      //out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                          break;
 
                     case "ROLE_DELETE":
@@ -86,7 +90,8 @@ public class ServerFilRols extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_DELETE_ROLE_ID # " +result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                        out.writeInt(result);
+                      //out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
 
@@ -99,7 +104,8 @@ public class ServerFilRols extends Thread {
                         //Registrar el resultat de l'operació  0 malament | 1 correcte en l'arxiu log
                          SystemUtils.escriuNouLog("MODIFI_UPDATE_ROLE_RESULT # " + result);
                         //Enviem el resultat de l'operació  0 malament | 1 correcte al client
-                        out.writeInt(result);
+                      //out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                                                
                          break;
                         
@@ -117,12 +123,14 @@ public class ServerFilRols extends Thread {
                         rolsArrayList  = conn.consultaSqlRols(sql);
                         
                         //Enviem el nombre total de elements de la llista al client
-                        out.writeInt(rolsArrayList.size());
+                   //   out.writeInt(rolsArrayList.size());
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(rolsArrayList.size()),share_key.toByteArray()));
                         
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < rolsArrayList.size(); i++){
                             //Enviem el registres separats per "," al client
-                            out.writeUTF(rolsArrayList.get(i));
+                         // out.writeUTF(rolsArrayList.get(i));
+                            out.writeUTF(SystemUtils.encryptedText(rolsArrayList.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(rolsArrayList.get(i));
                         }
@@ -141,7 +149,8 @@ public class ServerFilRols extends Thread {
                         //Guardem en un ArrayList els registres trobats
                         rolsArrayListCount  = conn.consultaSqlRols(sql);
                         //Enviem el nombre total de elements de la llista al client
-                        out.writeInt(rolsArrayListCount.size());
+                    //  out.writeInt(rolsArrayListCount.size());
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(rolsArrayListCount.size()),share_key.toByteArray()));
 
                         break;    
                         
@@ -154,7 +163,8 @@ public class ServerFilRols extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_FIND_ROLE_ID # " + result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                        out.writeInt(result);
+                 //     out.writeInt(result);
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
                         

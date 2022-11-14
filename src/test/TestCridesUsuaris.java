@@ -69,9 +69,9 @@ public class TestCridesUsuaris {
         
         System.out.println("#####################    Simulació d'un login fallit   ###################################");
         //Simulem el login d'un usuari FALLIT en Bd's
-        testSimulacioLoginOutFallit  (0,"martina","pwderronea");
-                             
-        System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
+  //      testSimulacioLoginOutFallit  (0,"martina","pwderronea");
+                            
+      System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
        //Simulem el login/logOut d'un usuari validad en Bd's
         System.out.println("#################### Simulació d'un login carles amb el rol de admin ####################");
@@ -80,7 +80,7 @@ public class TestCridesUsuaris {
         System.out.println("######### Simulació d'una alta d'un usuari");
         alta(resposta_svr_id,"silvia,pwdsilvia,silvia,olivar,1,1,1"); 
       
-       llistat(resposta_svr_id);
+        llistat(resposta_svr_id);
            
       //Simulem la cerca d'un usuari pel seu usuari
         System.out.println("######### Simulació de buscar el ID de l'usuari Silvia   : " + buscarIdUsuari(resposta_svr_id,"silvia"));
@@ -100,7 +100,7 @@ public class TestCridesUsuaris {
         llistatCount(resposta_svr_id);
        
         llistatGrid(resposta_svr_id);
-         
+        
         System.out.println("######### Simulació d'un logOut  CARLES ########");
         testSimulacioLogOut(resposta_svr_id);
     
@@ -147,7 +147,9 @@ public class TestCridesUsuaris {
         //  out.writeUTF(id_conn+",USER_FIND," + usuari);
             out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_FIND," + usuari,shared_secret.toByteArray()));
             //Llegir el numero total de registres de la consulta
-            int id_trobat = in.readInt();
+            //int id_trobat = in.readInt();
+            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            
             //Si troba l'usuari torna el seu id
             return id_trobat;
 
@@ -197,13 +199,14 @@ public class TestCridesUsuaris {
     
     
             //Executo la consulta de la crida per fer l'alta del nou usuari
-         // out.writeUTF(id_conn + ",USER_NEW," + params);
+          //out.writeUTF(id_conn + ",USER_NEW," + params);
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_NEW," + params,shared_secret.toByteArray()));
-           
             SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",USER_NEW," + params);
             
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-            System.out.println("Resultat de la consulta : " + in.readInt());
+          //System.out.println("Resultat de la consulta : " + in.readInt());
+            System.out.println("Resultat de la consulta : "
+                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -253,7 +256,9 @@ public class TestCridesUsuaris {
             out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1",shared_secret.toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-            System.out.println("El resultat de la modificació :" + in.readInt());
+          // System.out.println("El resultat de la modificació :" + in.readInt());
+             System.out.println("Resultat de la modificacio : " 
+                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -302,8 +307,10 @@ public class TestCridesUsuaris {
             out.writeUTF(SystemUtils.encryptedText(id_conn +",USER_DELETE," + id_key,shared_secret.toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
-             SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
-
+            //SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
+             System.out.println("Resultat de la baixa : " 
+                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+       
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -357,7 +364,8 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
            
             //El sservidor en torna el número de registres trobat en la consulta
-            int total = in.readInt();
+           //int total = in.readInt();
+             int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
 
             System.out.println("El total de registres és :" + total);
 
@@ -465,13 +473,21 @@ public class TestCridesUsuaris {
           //out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
             
             //Recullim el id_sessio vàlit
-            resposta_svr_id = in.readInt();
+            //resposta_svr_id = in.readInt();
+           // resposta_svr_id = Integer.parseInt(in.readUTF());
+              resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+              
+              
+              
             System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
             System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
             
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
-                rol = in.readInt();
+              //rol = in.readInt();
+              //rol = Integer.parseInt(in.readUTF());
+                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+                                
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
             }
         } catch (IOException ex) {
@@ -519,7 +535,13 @@ public class TestCridesUsuaris {
            //out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya );
              out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
 
-            resposta_svr_id = in.readInt();
+          //resposta_svr_id = in.readInt();
+          // resposta_svr_id = Integer.parseInt(in.readUTF());
+            String valor =  in.readUTF();   
+            System.out.println("El resultat de valor :" + valor);
+            
+            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(valor,shared_secret.toByteArray()));
+              
             System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
 
             if (resposta_svr_id == 0) {
@@ -581,7 +603,8 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
             
             //Llegir el numero total de registres de la consulta
-            int total = in.readInt();
+          //int total = in.readInt();
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
             
             System.out.println("El total de registres és :" +total);
 
@@ -640,7 +663,8 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
               
             //El sservidor en torna el número de registres trobat en la consulta
-            int total = in.readInt();
+         // int total = in.readInt();
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
             
             System.out.println("El total de registres és :" +total);
             
@@ -722,8 +746,6 @@ public class TestCridesUsuaris {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-     
+  
 }
 
