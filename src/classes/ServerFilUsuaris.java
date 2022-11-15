@@ -82,7 +82,6 @@ public class ServerFilUsuaris extends Thread {
                         //dades = missatge[2].split(",");
                         result =conn.altaUser(missatge);
                         //Enviem el resultat de l'operació 0 - error i 1  - ok al client
-                       //out.writeInt(result);
                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                          break;
 
@@ -95,7 +94,6 @@ public class ServerFilUsuaris extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_DELETE_USER_ID # " +result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                        //out.writeInt(result);
                           out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
@@ -108,7 +106,6 @@ public class ServerFilUsuaris extends Thread {
                         //Registrar el resultat de l'operació  0 malament | 1 correcte en l'arxiu log
                          SystemUtils.escriuNouLog("MODIFI_UPDATE_USER_RESULT # " + result);
                         //Enviem el resultat de l'operació  0 malament | 1 correcte al client
-                      // out.writeInt(result);
                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                                                
                          break;
@@ -126,13 +123,11 @@ public class ServerFilUsuaris extends Thread {
                         //Guardem en un ArrayList els registres trobats
                         usuariArrayList  = conn.consultaSqlUsuaris(sql);
                         //Enviem el nombre total de elements de la llista al client
-                        //out.writeInt(usuariArrayList.size());
                           out.writeUTF(SystemUtils.encryptedText(String.valueOf(usuariArrayList.size()),share_key.toByteArray()));
                         
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < usuariArrayList.size(); i++){
                             //Enviem el registres separats per "," al client
-                          //out.writeUTF(usuariArrayList.get(i));
                             out.writeUTF(SystemUtils.encryptedText(usuariArrayList.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(usuariArrayList.get(i));
@@ -151,13 +146,11 @@ public class ServerFilUsuaris extends Thread {
                         
                         usuariArrayListGrid  = conn.consultaSqlGrid(sql);
                         //Enviem el nombre total de elements de la llista al client
-                        //out.writeInt(usuariArrayListGrid.size());
                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(usuariArrayListGrid.size()),share_key.toByteArray()));
                         
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < usuariArrayListGrid.size(); i++){
                             //Enviem el registres separats per "," al client
-                        //  out.writeUTF(usuariArrayListGrid.get(i));
                             out.writeUTF(SystemUtils.encryptedText(usuariArrayListGrid.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(usuariArrayListGrid.get(i));
@@ -177,7 +170,6 @@ public class ServerFilUsuaris extends Thread {
                         
                         usuariArrayListCount  = conn.consultaSqlUsuaris(sql);
                         //Enviem el nombre total de elements de la llista al client
-                        //out.writeInt(usuariArrayListCount.size());
                           out.writeUTF(SystemUtils.encryptedText(String.valueOf(usuariArrayListCount.size()),share_key.toByteArray()));
 
                         break;    
@@ -191,7 +183,6 @@ public class ServerFilUsuaris extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_FIND_USER_ID # " + result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                        //out.writeInt(result);
                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;

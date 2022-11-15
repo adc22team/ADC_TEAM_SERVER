@@ -49,6 +49,7 @@ public final class SystemUtils {
      /**
      * Aquest mètode genera un nou registre a l'arxiu de log's del programa.
      * @param log
+     * @throws java.io.IOException
      */
     public static void escriuNouLog(String log) throws IOException{
         
@@ -198,8 +199,9 @@ public final class SystemUtils {
       * @param pText
       * @param key
       * @return 
+     * @throws java.io.IOException 
       */     
-      public static String encryptedText(String pText, byte[] key) {
+      public static String encryptedText(String pText, byte[] key) throws IOException {
           
         if (ACTIVAR_ENCRIPTACIO){  
        
@@ -216,11 +218,16 @@ public final class SystemUtils {
                 System.arraycopy(iv, 0, encrypted, 0, iv.length);
                 System.arraycopy(cipherText, 0, encrypted, iv.length, cipherText.length);
 
-                return Base64.getEncoder().encodeToString(encrypted);
+                String pTextEncrypted = Base64.getEncoder().encodeToString(encrypted);
+         //     SystemUtils.escriuNouLog("value : " + pTextEncrypted);
+                
+                return pTextEncrypted;
+                
             } catch (InvalidAlgorithmParameterException | NoSuchPaddingException | IllegalBlockSizeException |
                     NoSuchAlgorithmException | BadPaddingException | InvalidKeyException e) {
                 throw new RuntimeException(e);
             }
+       
         } else{
             return pText;
         }    
@@ -274,27 +281,25 @@ public final class SystemUtils {
         BigInteger shared_secret = client_public_key.modPow(secret, prime);
 
         while (secret.toByteArray().length != 16 || 
-               public_key.toByteArray().length != 16 ||
-               shared_secret.toByteArray().length != 16) {
+                    public_key.toByteArray().length != 16 ||
+                          shared_secret.toByteArray().length != 16) {
             
             secret = new BigInteger(128, new Random());
             public_key = base.modPow(secret, prime);
             shared_secret = client_public_key.modPow(secret, prime);
-            System.out.println("Secret: " + secret.toByteArray().length);
-            System.out.println("Public: " + public_key.toByteArray().length);
-            System.out.println("Shared: " + shared_secret.toByteArray().length);
+    //      SystemUtils.escriuNouLog("Secret: " + secret.toByteArray().length);
+    //      SystemUtils.escriuNouLog("Public: " + public_key.toByteArray().length);
+    //      SystemUtils.escriuNouLog("Shared Server: " + shared_secret.toByteArray().length);
             
         }
 
-        //out.writeUTF(String.valueOf(public_key));
-  //      System.out.println("Client public key abans de convertir  : " + public_key);
-  //      System.out.println("Shared secret abans de convertir      : " + shared_secret);
+  //    System.out.println("Client public key abans de convertir  : " + public_key);
+  //    System.out.println("Shared secret abans de convertir      : " + shared_secret);
   
         String claus_publica_share_server = String.valueOf(public_key)+","+String.valueOf(shared_secret);
         
-      //  System.out.println("Servidor  public key           : " + public_key);
-      //  System.out.println("Shared secret del servidor     : " + shared_secret);
-       
+    //  System.out.println("Servidor  public key           : " + public_key);
+    //  System.out.println("Shared secret del servidor     : " + shared_secret);      
         return claus_publica_share_server;
         
     }
@@ -312,8 +317,8 @@ public final class SystemUtils {
 
             secret = new BigInteger(128, new Random());
             public_key = base.modPow(secret, prime);
-                System.out.println("Secret: " + secret.toByteArray().length);
-                System.out.println("Public: " + public_key.toByteArray().length);
+         // SystemUtils.escriuNouLog("Secret: " + secret.toByteArray().length);
+        //  SystemUtils.escriuNouLog("Public: " + public_key.toByteArray().length);
 
         }
   
@@ -329,12 +334,12 @@ public final class SystemUtils {
           BigInteger secret = new BigInteger(secretString);
 
           BigInteger server_public_key = new BigInteger(publicKeyServer);
-          System.out.println("Valor server_public_key part client rebuda del servidor: " + server_public_key);
+    //    SystemUtils.escriuNouLog("Valor server_public_key part client rebuda del servidor: " + server_public_key);
 
           BigInteger shared_secret = server_public_key.modPow(secret, prime);
 
-          System.out.println("Server public key : " + server_public_key);
-          System.out.println("Shared secret     : " + shared_secret);
+    //    SystemUtils.escriuNouLog("Server public key : " + server_public_key);
+          SystemUtils.escriuNouLog("Shared secret client     : " + shared_secret);
 
           return shared_secret;
       }

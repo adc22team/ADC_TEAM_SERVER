@@ -48,6 +48,7 @@ public class TestCridesUsuaris {
          Eliminació de l'arxiu de logs de la carpeta del projecte
         * 
         */
+        SystemUtils.escriuNouLog("--------- I N I C I   D E   P R O V E S   U S U A R I S ----");
         File f = new File("logs.txt");
         //Comprovo que l'arxiu existeix abans de eliminar
         if(f.delete()){
@@ -58,56 +59,107 @@ public class TestCridesUsuaris {
        
         //NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
         //l'usuari martina // pwdmartina
+        System.out.println();
         System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
         System.out.println("#################### #################################### ################################");
-      
+        System.out.println();
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
-        System.out.println("Encriptació contrasenya 'pwderronea' és: "+ SystemUtils.convertirSHA256("pwderronea"));
-        System.out.println("Encriptació contrasenya 'pwdmartina' és: "+ SystemUtils.convertirSHA256("pwdmartina"));
-        System.out.println("Encriptació contrasenya 'pwdcarles'  és: "+ SystemUtils.convertirSHA256("pwdcarles"));
+        System.out.println("Encriptació contrasenya 'pwderronea' és: " + SystemUtils.convertirSHA256("pwderronea"));
+        System.out.println("Encriptació contrasenya 'pwdmartina' és: " + SystemUtils.convertirSHA256("pwdmartina"));
+        System.out.println("Encriptació contrasenya 'pwdcarles'  és: " + SystemUtils.convertirSHA256("pwdcarles"));
         System.out.println("####################        C O N T R A S E N Y A S       ################################");
-        
+        // encriptarContrasenya(resposta_svr_id, "78,rosa,pwdrosa,rosa,diaz,2,2,1");
+        System.out.println();
         System.out.println("#####################    Simulació d'un login fallit   ###################################");
         //Simulem el login d'un usuari FALLIT en Bd's
-  //      testSimulacioLoginOutFallit  (0,"martina","pwderronea");
-                            
-      System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
+        testSimulacioLoginFallit  (0,"martina","pwderronea");
+       
+        System.out.println();                    
+        System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
-       //Simulem el login/logOut d'un usuari validad en Bd's
-        System.out.println("#################### Simulació d'un login carles amb el rol de admin ####################");
+        //Simulem el login/logOut d'un usuari validad en Bd's
+        System.out.println("#################### Simulació d'un login carles amb el rol de admin #####################");
         testSimulacioLoginCorrecte(0,"carles","pwdcarles");
+        System.out.println();                    
+        
         //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
-        System.out.println("######### Simulació d'una alta d'un usuari");
+        System.out.println("####################   Simulació d'una alta d'un usuari   ###############################");
         alta(resposta_svr_id,"silvia,pwdsilvia,silvia,olivar,1,1,1"); 
       
+        System.out.println();                    
         llistat(resposta_svr_id);
-           
-      //Simulem la cerca d'un usuari pel seu usuari
+        
+        System.out.println();                       
+       //Simulem la cerca d'un usuari pel seu usuari
         System.out.println("######### Simulació de buscar el ID de l'usuari Silvia   : " + buscarIdUsuari(resposta_svr_id,"silvia"));
-        
-         //Simulem una modificació d'un usuari
-        System.out.println("######### Simulació de la modificació de l'usuari Silvia  ########");
-             
+       
+        System.out.println();                    
+        //Simulem una modificació d'un usuari
+        System.out.println("#################### Simulació de la modificació de l'usuari Silvia  #####################");
         modificacio(resposta_svr_id,buscarIdUsuari(resposta_svr_id,"silvia"));
-               
-        
+       
+        System.out.println();                    
         llistat(resposta_svr_id);
         
+        System.out.println();                    
         //Simulem la baixa d'un usuari pel seu usuari
-        System.out.println("######### Simulació de la baixa de l'usuari Silvia ########### ");   
+        System.out.println("############################ Simulació de la baixa de l'usuari Silvia ################### ");   
         baixa(resposta_svr_id,buscarIdUsuari(resposta_svr_id,"silvia"));
               
+        System.out.println();                    
         llistatCount(resposta_svr_id);
        
+        System.out.println();                    
         llistatGrid(resposta_svr_id);
         
-        System.out.println("######### Simulació d'un logOut  CARLES ########");
+        System.out.println();                    
+        System.out.println("############################### Simulació d'un logOut  CARLES ###########################");
         testSimulacioLogOut(resposta_svr_id);
-    
+   /* 
+        System.out.println();                    
         //mirem el registre
-       // mostrarLogsConsola();
+        mostrarLogsConsola();*/
     }
     
+    /**
+     * Aquest mètode encripte la contrasenya d'un usuari en la Bd's Fa la
+     * modificació dels camps d'un registre i mostre per consola el resultat de
+     * l'operació
+     *
+     * @param id_conn passem les credencials i el id d'un usuari logat al
+     * program amb el rol admin
+     * @param sql els camps del registre del usuari menys el seu id separat per
+     * ","
+     */
+    public static void encriptarContrasenya(int id_conn, String sql) {
+
+        String[] parametres = sql.split(",");
+        Socket sc;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            //Cálcul clau pública client
+            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(String.valueOf(claus_ps[0]));
+            //llegim la clau pública del servidor
+            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            
+            //El primer parametre es el id a modificar
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_MODIFI," + parametres[0] + "," + parametres[1] + ","
+                    + parametres[2] + "," + parametres[3] + ","
+                    + parametres[4] + "," + parametres[5] + ","
+                    + parametres[6] + "," + parametres[7],shared_secret.toByteArray()));
+
+            System.out.println("El resultat de la modificació :" + in.readInt());
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+     
    /**
     * Mètode que busca el id d'un usuari
      * @param id_conn
@@ -121,33 +173,18 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-     /*     
-            // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-    */
+            
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
+            out.writeUTF(String.valueOf(claus_ps[0]));  
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);         
     
             //Executo la consulta de la crida per sortir
-        //  out.writeUTF(id_conn+",USER_FIND," + usuari);
             out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_FIND," + usuari,shared_secret.toByteArray()));
+            
             //Llegir el numero total de registres de la consulta
-            //int id_trobat = in.readInt();
             int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
             
             //Si troba l'usuari torna el seu id
@@ -175,39 +212,22 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-    /*        
-            // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-    */
+   
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);         
-    
     
             //Executo la consulta de la crida per fer l'alta del nou usuari
-          //out.writeUTF(id_conn + ",USER_NEW," + params);
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_NEW," + params,shared_secret.toByteArray()));
             SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",USER_NEW," + params);
-            
-            //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-          //System.out.println("Resultat de la consulta : " + in.readInt());
+ 
+           //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé  
             System.out.println("Resultat de la consulta : "
                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
-
+            
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -229,35 +249,20 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-             
- /*           // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
- */        
+        
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);         
                        
             //El primer parametre es el id a modificar
-        //  out.writeUTF(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1");
-            out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_MODIFI," + id_key 
+                        + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1",shared_secret.toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-          // System.out.println("El resultat de la modificació :" + in.readInt());
-             System.out.println("Resultat de la modificacio : " 
+            SystemUtils.escriuNouLog("Resultat de la modificacio : " 
                      + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
 
         } catch (IOException ex) {
@@ -280,35 +285,19 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            
-    /*        // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-    */                    
+           
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-
+            
             //Enviem al servidor la crida per fer la baixa d'un usuari
-     //     out.writeUTF(id_conn +",USER_DELETE," + id_key);
             out.writeUTF(SystemUtils.encryptedText(id_conn +",USER_DELETE," + id_key,shared_secret.toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
-            //SystemUtils.escriuNouLog("El resultat de la baixa :" + in.readInt());
-             System.out.println("Resultat de la baixa : " 
+             SystemUtils.escriuNouLog("Resultat de la baixa : " 
                      + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
        
         } catch (IOException ex) {
@@ -330,44 +319,29 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-
-    /*        // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-    */
+            
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-   
+           
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-       //   out.writeUTF(id_conn + ",USER_QUERY,0");
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
+          //  out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
             //out.writeUTF(id_conn + ",USER_QUERY,2,cognom");
+             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,2,nom",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
            
             //El sservidor en torna el número de registres trobat en la consulta
-           //int total = in.readInt();
              int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
 
-            System.out.println("El total de registres és :" + total);
+            SystemUtils.escriuNouLog("El total de registres és :" + total);
 
             ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
@@ -398,34 +372,17 @@ public class TestCridesUsuaris {
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
-        /*    // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-        */
-        
-         //Cálcul clau pública client
+            //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-            
             
            //Enviem resposta al servidor amb el usuari i la contrasenya
-          //out.writeUTF(id_conn + ",USER_EXIT");
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",shared_secret.toByteArray()));
             
-            System.out.println("LogOut realitzat correctament ");
+            SystemUtils.escriuNouLog("LogOut realitzat correctament proves usuaris ");
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -445,47 +402,26 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-          
-        /*  // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-        */
-        
-          //Cálcul clau pública client
+       
+           //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-       
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-                   
+            
             //Enviem resposta al servidor amb el usuari i la contrasenya
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
-          //out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya);
             
             //Recullim el id_sessio vàlit
-            //resposta_svr_id = in.readInt();
-           // resposta_svr_id = Integer.parseInt(in.readUTF());
-              resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
               
-              
-              
-            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
-            System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
+            SystemUtils.escriuNouLog("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
+            SystemUtils.escriuNouLog("resposta servidor  es un id  valit    : " + resposta_svr_id);
             
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
-              //rol = in.readInt();
-              //rol = Integer.parseInt(in.readUTF());
+              
                 rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
                                 
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
@@ -502,50 +438,30 @@ public class TestCridesUsuaris {
      * @param id_conn el id obtingut al fer la validació de l'usuari
      * @throws InterruptedException 
      */
-    public static void testSimulacioLoginOutFallit(int id_conn,String usuari, String contrasenya) throws InterruptedException {
+    public static void testSimulacioLoginFallit(int id_conn,String usuari, String contrasenya) throws InterruptedException {
 
         Socket sc;
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-         
-     /*       // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-     */     
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-            
-            
+           
            //Enviem resposta al servidor  de la crida, amb el usuari i la contrasenya
-           //out.writeUTF(id_conn +",LOGIN," + usuari + "," + contrasenya );
              out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
 
-          //resposta_svr_id = in.readInt();
-          // resposta_svr_id = Integer.parseInt(in.readUTF());
-            String valor =  in.readUTF();   
-            System.out.println("El resultat de valor :" + valor);
-            
-            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(valor,shared_secret.toByteArray()));
+            //Recullim el id_sessio no vàlit 
+            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText( in.readUTF(),shared_secret.toByteArray()));
               
-            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
+             SystemUtils.escriuNouLog("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
 
             if (resposta_svr_id == 0) {
-                System.out.println("resposta servidor del : " + resposta_svr_id + " ERROR VALIDACIO!!");
+                 SystemUtils.escriuNouLog("resposta servidor del : " + resposta_svr_id + " ERROR VALIDACIO!!");
             }
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -567,33 +483,17 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-                        
-        /*    
-            // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-        */    
+       
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-            
-            
+          
             //Exemples
-            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
+            SystemUtils.escriuNouLog("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-         // out.writeUTF(id_conn + ",USER_QUERY_COUNT,0");
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_COUNT,0",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
@@ -603,10 +503,9 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
             
             //Llegir el numero total de registres de la consulta
-          //int total = in.readInt();
             int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
             
-            System.out.println("El total de registres és :" +total);
+             SystemUtils.escriuNouLog("El total de registres és :" +total);
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -628,32 +527,18 @@ public class TestCridesUsuaris {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-     /*      
-            // Enviament de la clau pública del servidor
-            out.writeUTF(                          "Enviament de la clau pública del client");
-            SystemUtils.escriuNouLog("Resposta_cli: Enviament de la clau pública del client"); 
-            // Llegim la clau pública del servidor
-            String resposta_svr = in.readUTF();
-            SystemUtils.escriuNouLog("Resposta_svr:" + resposta_svr);
-     */       
+         
             //Cálcul clau pública client
             String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
-            
             //Enviem la clau pública del client al servidor
             out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            System.out.println("Valor share_secret generada : " + shared_secret);
-            System.out.println("Server public key           : " + claus_ps[0]);
-            System.out.println("Shared secret               : " + shared_secret);
-         
+           
             //Aquí pots fer la consulta que vulguis et tornara el seu result i el podràs tractar
             //Exemples
-            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
+            SystemUtils.escriuNouLog("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-         // out.writeUTF(id_conn + ",USER_QUERY_GRID,0");
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_GRID,0",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
@@ -663,10 +548,9 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
               
             //El sservidor en torna el número de registres trobat en la consulta
-         // int total = in.readInt();
             int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
             
-            System.out.println("El total de registres és :" +total);
+             SystemUtils.escriuNouLog("El total de registres és :" + total);
             
             ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
@@ -686,43 +570,7 @@ public class TestCridesUsuaris {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-   
-    /**
-     * Aquest mètode encripte la contrasenya d'un usuari en la Bd's Fa la
-     * modificació dels camps d'un registre i mostre per consola el resultat de
-     * l'operació
-     *
-     * @param valitUser passem les credencials i el id d'un usuari logat al
-     * program amb el rol admin
-     * @param sql els camps del registre del usuari menys el seu id separat per
-     * ","
-     */
-    /*public static void encriptarContrasenya(String valitUser, String sql) {
-
-        String[] parametres = sql.split(",");
-        Socket sc;
-        try {
-            sc = new Socket("127.0.0.1", 5000);
-            DataInputStream in = new DataInputStream(sc.getInputStream());
-            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-            // Llegir la resposta del servidor al establir la connexió
-            String resposta_svr = in.readUTF();
-            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF("LOGIN," + valitUser);
-            //Executo la consulta de la crida per sortir
-            //El primer parametre es el id a modificar
-            out.writeUTF("USER_MODIFI," + parametres[0] + "," + parametres[1] + ","
-                    + parametres[2] + "," + parametres[3] + ","
-                    + parametres[4] + "," + parametres[5] + ","
-                    + parametres[6] + "," + parametres[7]);
-
-            System.out.println("El resultat de la modificació :" + in.readInt());
-
-        } catch (IOException ex) {
-            Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-     */
+  
     /**
      * Mètode que llista per consolta tot l'arxiu de log's
      */

@@ -87,21 +87,14 @@ public class Server {
 
                 DataInputStream in = new DataInputStream(sc.getInputStream());
                 DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-
-         /*      SystemUtils.escriuNouLog("clau_publica_ per implementar");
-                //Llegir la clau pública del client
-                SystemUtils.escriuNouLog(in.readUTF());
-                //Enviament de la clau pública del client
-                out.writeUTF(            "clau_publica_ per implementar");
-         */       
+      
                 //Llegim la clau pública del client
                 String clauPublicaClient = in.readUTF();
-                SystemUtils.escriuNouLog("Valor llegit clau pública client readUTF : " + clauPublicaClient);
-
+             // SystemUtils.escriuNouLog("Valor llegit clau pública client readUTF : " + clauPublicaClient);
                 String[] claus_ps = SystemUtils.clausServer(clauPublicaClient).split(",");
 
-                System.out.println("Valor de claus[0]  server  public_key    : " + claus_ps[0]);
-                System.out.println("Valor de claus[1]  server   share_key    : " + claus_ps[1]);
+            //  SystemUtils.escriuNouLog("Valor de claus[0]  server  public_key    : " + claus_ps[0]);
+            //  SystemUtils.escriuNouLog("Valor de claus[1]  server   share_key    : " + claus_ps[1]);
 
                 //Enviem la clau pública del servidor    
                 out.writeUTF(claus_ps[0]);
@@ -155,17 +148,12 @@ public class Server {
                                 + mapUsuaris);
 
                         //Enviem el ID# assignat a l'usuari, al servidor
-                      //out.writeInt(new_id_conn); 
-                     // out.writeUTF(String.valueOf(new_id_conn)); 
-                     // out.writeUTF(String.valueOf(new_id_conn)); 
                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(new_id_conn),share_key.toByteArray()));
                         
                         SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK         # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
                         int rol = conn.rolUsuari(missatge[2], missatge[3]);
-                      //out.writeInt(rol);
-                     // out.writeUTF(String.valueOf(rol));  
                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(rol),share_key.toByteArray()));
                         
                         SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                   # "
@@ -173,8 +161,6 @@ public class Server {
                     } else {
                         //No te ID i el usuari / contrasenya no es correcte
                         //Enviem el ID# assignat a l'usuari si el ID# = 0 ERROR
-                        //out.writeInt(0);
-                        //out.writeUTF("0");  
                         out.writeUTF(SystemUtils.encryptedText("0",share_key.toByteArray()));
                         SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG          # " + id_conn);
                     }
