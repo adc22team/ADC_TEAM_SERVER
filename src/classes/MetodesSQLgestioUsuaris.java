@@ -160,7 +160,7 @@ public class MetodesSQLgestioUsuaris {
         //Afegim en el log l'operació d'alta demanada pel client
         SystemUtils.escriuNouLog("INSERT_NEW_USER_IN_DB #");
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("INSERT INTO usuaris (\"id\",\"usuari\",\"contrasenya\",\"nom\",\"cognom\",\"departament\",\"rol\",\"estat\") VALUES (default,?,?,?,?,?,?,?)");
+        String sentenciaCrear = ("INSERT INTO usuaris (id, usuari,contrasenya,nom,cognom,departament,rol,estat) VALUES (default,?,?,?,?,?,?,?)");
         //preparem la consulta
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer l'alta 

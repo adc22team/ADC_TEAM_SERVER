@@ -73,7 +73,7 @@ public class MetodesSQLgestioDepartaments {
         //Creació de les variables locals corresponent a cada camp de la taula
         //de la Bd's d'usuaris
         int id;
-        String departament;
+        String departament,descripcio,telefon;
         //Definició del ArrayList que guardarà el resultat de la consulta
         ArrayList<String> departamentsArrayList = new ArrayList<String>();
         //Prepara i executar la consulta
@@ -85,10 +85,11 @@ public class MetodesSQLgestioDepartaments {
             //i si fos necessari fer-ne el seu tractament
             id          = result.getInt("id");
             departament = result.getString("departament");
-            
+            descripcio  = result.getString("descripcio");
+            telefon    = result.getString("telefon");
+   
            //Afegir cada registre dins el ArrayList 
-           departamentsArrayList.add(    id + "," + departament );
-            
+           departamentsArrayList.add(    id + "," + departament + "," + descripcio + "," + telefon );    
         }
         //Retornem la llista confecciona
         return departamentsArrayList;
@@ -107,13 +108,16 @@ public class MetodesSQLgestioDepartaments {
         //Afegim en el log l'operació d'alta demanada pel client
         SystemUtils.escriuNouLog("INSERT_NEW_DEPARTAMENT_IN_DB #");
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("INSERT INTO departaments (\"id\",\"departament\") VALUES (default,?)");
+   //     String sentenciaCrear = ("INSERT INTO departaments (\"id\",\"departament\,\"departament\") VALUES (default,?)");
+        String sentenciaCrear = ("INSERT INTO departaments (id,departament,descripcio,telefon) VALUES (default,?,?,?)");
         //preparem la consulta
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer l'alta 
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
-            sentence_ready.setString(1, altaDades[2]); // rol
+            sentence_ready.setString(1, altaDades[2]); // departament
+            sentence_ready.setString(2, altaDades[3]); // descripcio
+            sentence_ready.setString(3, altaDades[4]); // telefon
           
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
@@ -141,14 +145,16 @@ public class MetodesSQLgestioDepartaments {
          //Afegim en el log l'operació d'alta demanada pel client
         SystemUtils.escriuNouLog("UPDATE_DEPARTAMENT_IN_DB #");
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("UPDATE departaments SET departament = ? WHERE id = ?");
+        String sentenciaCrear = ("UPDATE departaments SET departament = ?, descripcio = ?, telefon = ? WHERE id = ?");
         //Definim el PreparedStatement   
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer la modificació        
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
             sentence_ready.setString(1, modificacioDades[3]); // departament
-            sentence_ready.setInt(2,Integer.parseInt(modificacioDades[2])); //id
+            sentence_ready.setString(2, modificacioDades[4]); // descripcio
+            sentence_ready.setString(3, modificacioDades[5]); // telefon
+            sentence_ready.setInt(4,Integer.parseInt(modificacioDades[2])); //id
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();

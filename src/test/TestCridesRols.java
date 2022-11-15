@@ -74,7 +74,7 @@ public class TestCridesRols {
         System.out.println();
        //Simulem una alta d'un nou rol dins la Bd's rols
         System.out.println("############################ Simulació d'una alta d'un usuari  ##########################");
-        altaRol(resposta_svr_id,"rol de prova"); 
+        altaRol(resposta_svr_id,"rol de prova,descripcio prova"); 
         
         System.out.println();
         llistatRols(resposta_svr_id);
@@ -205,7 +205,7 @@ public class TestCridesRols {
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
             
             //El primer parametre es el id a modificar
-            out.writeUTF(SystemUtils.encryptedText(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat,Descripcio modificat",shared_secret.toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             System.out.println("Resultat de la modificació : "

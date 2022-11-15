@@ -329,7 +329,7 @@ public class TestCridesUsuaris {
            
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-          //  out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
+            //out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");

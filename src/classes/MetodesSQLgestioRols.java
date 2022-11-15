@@ -73,7 +73,7 @@ public class MetodesSQLgestioRols {
         //Creació de les variables locals corresponent a cada camp de la taula
         //de la Bd's d'usuaris
         int id;
-        String rol;
+        String rol, descripcio;
         //Definició del ArrayList que guardarà el resultat de la consulta
         ArrayList<String> rolsArrayList = new ArrayList<String>();
         //Prepara i executar la consulta
@@ -85,10 +85,10 @@ public class MetodesSQLgestioRols {
             //i si fos necessari fer-ne el seu tractament
             id          = result.getInt("id");
             rol         = result.getString("rol");
+            descripcio  = result.getString("descripcio"); 
             
            //Afegir cada registre dins el ArrayList 
-           rolsArrayList.add(    id + "," + rol );
-            
+           rolsArrayList.add(    id + "," + rol + "," + descripcio);
         }
         //Retornem la llista confecciona
         return rolsArrayList;
@@ -107,13 +107,14 @@ public class MetodesSQLgestioRols {
         //Afegim en el log l'operació d'alta demanada pel client
         SystemUtils.escriuNouLog("INSERT_NEW_ROLE_IN_DB #");
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("INSERT INTO rols (\"id\",\"rol\") VALUES (default,?)");
+        String sentenciaCrear = ("INSERT INTO rols ( id, rol, descripcio ) VALUES (default,?,?)");
         //preparem la consulta
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer l'alta 
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
             sentence_ready.setString(1, altaDades[2]); // rol
+            sentence_ready.setString(2, altaDades[3]); // descripcio
           
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
@@ -142,14 +143,15 @@ public class MetodesSQLgestioRols {
         SystemUtils.escriuNouLog("UPDATE_USER_ID_1 # "+modificacioDades[1]); 
         SystemUtils.escriuNouLog("UPDATE_USER_ID_2 # "+modificacioDades[2]); 
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("UPDATE rols SET rol = ? WHERE id = ?");
+        String sentenciaCrear = ("UPDATE rols SET rol = ?, descripcio = ? WHERE id = ?");
         //Definim el PreparedStatement   
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer la modificació        
         try {
             sentence_ready = conectar.prepareStatement(sentenciaCrear);
             sentence_ready.setString(1, modificacioDades[3]); // rol
-            sentence_ready.setInt(2,Integer.parseInt(modificacioDades[2])); //id
+            sentence_ready.setString(2, modificacioDades[4]); // rol
+            sentence_ready.setInt(3,Integer.parseInt(modificacioDades[2])); //id
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();

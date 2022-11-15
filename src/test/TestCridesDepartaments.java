@@ -75,7 +75,7 @@ public class TestCridesDepartaments {
        //Simulem una alta d'un nou departament dins la Bd's rols
        System.out.println(); 
        System.out.println("###################### Simulació d'una alta d'un nou departament #########################");
-       altaDepartament(resposta_svr_id,"departament de prova"); 
+       altaDepartament(resposta_svr_id,"departament de prova, descripcio prova,555 55 55"); 
        
        System.out.println();
        llistatDepartaments(resposta_svr_id);
@@ -210,7 +210,8 @@ public class TestCridesDepartaments {
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
      
             //El terce parametre es el id a modificar
-            out.writeUTF(SystemUtils.encryptedText(id_conn+",DEPA_MODIFI," + id_key + ",Departament de prova modificat",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn+",DEPA_MODIFI," + id_key 
+                    + ",Departament de prova modificat, Descripcio modificada, 666 66 66",shared_secret.toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             System.out.println("Resultat de la modificacio    : "
