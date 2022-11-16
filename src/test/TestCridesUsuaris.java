@@ -334,9 +334,10 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
             //out.writeUTF(id_conn + ",USER_QUERY,2,cognom");
-             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,2,nom",shared_secret.toByteArray()));
+           //  out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,2,nom",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
+             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
            
             //El sservidor en torna el número de registres trobat en la consulta
              int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
@@ -409,10 +410,9 @@ public class TestCridesUsuaris {
             out.writeUTF(String.valueOf(claus_ps[0]));
             //llegim la clau pública del servidor
             BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-            
+           
             //Enviem resposta al servidor amb el usuari i la contrasenya
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
-            
             //Recullim el id_sessio vàlit
             resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
               
