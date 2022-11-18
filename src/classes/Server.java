@@ -75,11 +75,12 @@ public class Server {
 
         //Establir la connexió a la BD's  
         conn.establirConnexio();
-
+        EncrypDecryp ed = new  EncrypDecryp();
+   
        try {
           
             while (true) {
-
+              
                 //Registro que el servidor està a l'espera en el log's
                 SystemUtils.escriuNouLog("SERVER_online_waiting_for_request");   
                 
@@ -89,22 +90,18 @@ public class Server {
                 DataOutputStream out = new DataOutputStream(sc.getOutputStream());
       
                 //Llegim la clau pública del client
-                String clauPublicaClient = in.readUTF();
-             // SystemUtils.escriuNouLog("Valor llegit clau pública client readUTF : " + clauPublicaClient);
-                String[] claus_ps = SystemUtils.clausServer(clauPublicaClient).split(",");
+                ed.setClauPublicaClient(in.readUTF());
+                //Calculo la pública i la clau compartida al servidor
+                ed.clausServer();
+                //Enviem la clau pública del servidor al client
+                out.writeUTF(ed.getClauPublicaServidor());
 
-            //  SystemUtils.escriuNouLog("Valor de claus[0]  server  public_key    : " + claus_ps[0]);
-            //  SystemUtils.escriuNouLog("Valor de claus[1]  server   share_key    : " + claus_ps[1]);
-
-                //Enviem la clau pública del servidor    
-                out.writeUTF(claus_ps[0]);
-
-                BigInteger share_key = new BigInteger(claus_ps[1]);
-                SystemUtils.escriuNouLog("Valor share_key en el  server      : " +share_key);
+                SystemUtils.escriuNouLog("Valor share_key en el  server      : " + ed.getShare_key_server());
                    
                 //Llegir la crida del client
                 //format id_conn,CRIDA,....,...
-                String resposta = SystemUtils.decryptedText(in.readUTF(),share_key.toByteArray());
+              //  String resposta = SystemUtils.decryptedText(in.readUTF(),share_key.toByteArray());
+                String resposta = SystemUtils.decryptedText(in.readUTF(),ed.getShare_key_server().toByteArray());
                 SystemUtils.escriuNouLog("USER_RESPONSE # " + resposta);
 
                 //Descompondre la resposta del client, en un array
@@ -148,27 +145,27 @@ public class Server {
                                 + mapUsuaris);
 
                         //Enviem el ID# assignat a l'usuari, al servidor
-                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(new_id_conn),share_key.toByteArray()));
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(new_id_conn),ed.getShare_key_server().toByteArray()));
                         
                         SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK         # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
                         int rol = conn.rolUsuari(missatge[2], missatge[3]);
-                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(rol),share_key.toByteArray()));
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(rol),ed.getShare_key_server().toByteArray()));
                         
                         SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                   # "
                                                         + rol);
                     } else {
                         //No te ID i el usuari / contrasenya no es correcte
                         //Enviem el ID# assignat a l'usuari si el ID# = 0 ERROR
-                        out.writeUTF(SystemUtils.encryptedText("0",share_key.toByteArray()));
+                        out.writeUTF(SystemUtils.encryptedText("0",ed.getShare_key_server().toByteArray()));
                         SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG          # " + id_conn);
                     }
                 } else {
                     //Te id
                     SystemUtils.escriuNouLog("crida a la gestió de fils "+missatge[1]);
                     // Iniciem el fil amb el client
-                    GestioFils(sc, in, out, missatge, id_conn, this, share_key);   
+                    GestioFils(sc, in, out, missatge, id_conn, this, ed.getShare_key_server());   
                 }
             }
        } catch (IOException ex) {

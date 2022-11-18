@@ -1,10 +1,13 @@
+package test;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose SystemUtils | Templates
  * and open the template in the editor.
  */
-package test;
 
+
+import classes.EncrypDecrypCli;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -12,11 +15,12 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.math.BigInteger;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 import utilitats.SystemUtils;
 
@@ -39,8 +43,9 @@ public class TestCridesUsuaris {
      * @throws java.io.IOException
      * @throws java.lang.InterruptedException
     */
-    @Test
-    public static void main(String[] args) throws IOException, InterruptedException {
+    
+    
+      public static void main(String[] args) throws IOException, InterruptedException {
         /**
          NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
          l'usuari martina // pwdmartina
@@ -73,7 +78,7 @@ public class TestCridesUsuaris {
         System.out.println("#####################    Simulació d'un login fallit   ###################################");
         //Simulem el login d'un usuari FALLIT en Bd's
         testSimulacioLoginFallit  (0,"martina","pwderronea");
-       
+    
         System.out.println();                    
         System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
         
@@ -81,11 +86,11 @@ public class TestCridesUsuaris {
         System.out.println("#################### Simulació d'un login carles amb el rol de admin #####################");
         testSimulacioLoginCorrecte(0,"carles","pwdcarles");
         System.out.println();                    
-        
+      
         //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("####################   Simulació d'una alta d'un usuari   ###############################");
         alta(resposta_svr_id,"silvia,pwdsilvia,silvia,olivar,1,1,1"); 
-      
+     
         System.out.println();                    
         llistat(resposta_svr_id);
         
@@ -111,7 +116,7 @@ public class TestCridesUsuaris {
        
         System.out.println();                    
         llistatGrid(resposta_svr_id);
-        
+       
         System.out.println();                    
         System.out.println("############################### Simulació d'un logOut  CARLES ###########################");
         testSimulacioLogOut(resposta_svr_id);
@@ -120,6 +125,7 @@ public class TestCridesUsuaris {
         //mirem el registre
         mostrarLogsConsola();*/
     }
+    
     
     /**
      * Aquest mètode encripte la contrasenya d'un usuari en la Bd's Fa la
@@ -135,23 +141,26 @@ public class TestCridesUsuaris {
 
         String[] parametres = sql.split(",");
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
+          
             
             //El primer parametre es el id a modificar
             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_MODIFI," + parametres[0] + "," + parametres[1] + ","
                     + parametres[2] + "," + parametres[3] + ","
                     + parametres[4] + "," + parametres[5] + ","
-                    + parametres[6] + "," + parametres[7],shared_secret.toByteArray()));
+                    + parametres[6] + "," + parametres[7],edc.getShare_key_client().toByteArray()));
 
             System.out.println("El resultat de la modificació :" + in.readInt());
 
@@ -169,23 +178,25 @@ public class TestCridesUsuaris {
     public static int buscarIdUsuari(int id_conn, String usuari) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));  
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
-    
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
+            
             //Executo la consulta de la crida per sortir
-            out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_FIND," + usuari,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_FIND," + usuari,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta
-            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             
             //Si troba l'usuari torna el seu id
             return id_trobat;
@@ -208,25 +219,27 @@ public class TestCridesUsuaris {
     public static void alta(int id_conn, String params) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
    
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
     
             //Executo la consulta de la crida per fer l'alta del nou usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_NEW," + params,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_NEW," + params,edc.getShare_key_client().toByteArray()));
             SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",USER_NEW," + params);
  
            //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé  
             System.out.println("Resultat de la consulta : "
-                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
             
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -245,25 +258,27 @@ public class TestCridesUsuaris {
     */ 
    public static void modificacio(int id_conn,int id_key){
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+       
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
         
-            //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+             //Cálcul clau pública client
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
                        
             //El primer parametre es el id a modificar
             out.writeUTF(SystemUtils.encryptedText(id_conn+",USER_MODIFI," + id_key 
-                        + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1",shared_secret.toByteArray()));
+                        + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1",edc.getShare_key_client().toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             SystemUtils.escriuNouLog("Resultat de la modificacio : " 
-                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -280,6 +295,8 @@ public class TestCridesUsuaris {
     */ 
     public static void baixa(int id_conn, int id_key) {
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             
             sc = new Socket("127.0.0.1", 5000);
@@ -287,18 +304,18 @@ public class TestCridesUsuaris {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
            
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
             
             //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn +",USER_DELETE," + id_key,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn +",USER_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
              SystemUtils.escriuNouLog("Resultat de la baixa : " 
-                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+                     + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
        
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
@@ -315,17 +332,18 @@ public class TestCridesUsuaris {
     public static void llistat(int id_conn) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
-            //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+           //Cálcul clau pública client
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
            
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
@@ -337,10 +355,10 @@ public class TestCridesUsuaris {
            //  out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,2,nom",shared_secret.toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
-             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
+             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",edc.getShare_key_client().toByteArray()));
            
             //El sservidor en torna el número de registres trobat en la consulta
-             int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+             int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
 
             SystemUtils.escriuNouLog("El total de registres és :" + total);
 
@@ -348,7 +366,7 @@ public class TestCridesUsuaris {
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
              // registres.add(in.readUTF());
-                registres.add(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()) );
+                registres.add(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()) );
             }
             //Mostrem els registres guardats en el arrayList
             for (int i = 0; i < registres.size(); i++) {
@@ -362,11 +380,13 @@ public class TestCridesUsuaris {
     /**
      * Mètode que simula elLogOut d'un usuari
      * @param id_conn 
+     * @throws java.io.IOException 
      */
-     public static void testSimulacioLogOut(int id_conn) {
+     public static void testSimulacioLogOut(int id_conn) throws IOException {
 
         Socket sc;
-        System.out.println("Ara femt el logOut ....... ");
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        SystemUtils.escriuNouLog("Ara femt el logOut ....... ");
 
         try {
             sc = new Socket("127.0.0.1", 5000);
@@ -374,14 +394,14 @@ public class TestCridesUsuaris {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
             
            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",edc.getShare_key_client().toByteArray()));
             
             SystemUtils.escriuNouLog("LogOut realitzat correctament proves usuaris ");
 
@@ -396,41 +416,46 @@ public class TestCridesUsuaris {
       * @param id_conn
       * @throws InterruptedException 
       */
-    public static void testSimulacioLoginCorrecte( int id_conn,String usuari, String contrasenya) throws InterruptedException {
+    public static int testSimulacioLoginCorrecte( int id_conn,String usuari, String contrasenya) throws InterruptedException {
 
         Socket sc;
+        int resultat=0;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
        
-           //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            //Cálcul clau pública client
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
            
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
             //Recullim el id_sessio vàlit
-            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
               
             SystemUtils.escriuNouLog("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
             SystemUtils.escriuNouLog("resposta servidor  es un id  valit    : " + resposta_svr_id);
             
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
-              
-                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
-                                
+                
+                resultat =1;
+                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
             }
         } catch (IOException ex) {
             Logger.getLogger(TestCridesUsuaris.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return resultat;
     }
     
+  
     /**
      * Mètode que simula un login errori
      * @param usuari
@@ -441,22 +466,24 @@ public class TestCridesUsuaris {
     public static void testSimulacioLoginFallit(int id_conn,String usuari, String contrasenya) throws InterruptedException {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
            
            //Enviem resposta al servidor  de la crida, amb el usuari i la contrasenya
-             out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
+             out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
 
             //Recullim el id_sessio no vàlit 
-            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText( in.readUTF(),shared_secret.toByteArray()));
+            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText( in.readUTF(),edc.getShare_key_client().toByteArray()));
               
              SystemUtils.escriuNouLog("Fem el login amb l'usuari " + usuari + "i contrasenya  erronea :" + contrasenya + " - El resulta és FALLIT  ");
 
@@ -479,22 +506,23 @@ public class TestCridesUsuaris {
     public static void llistatCount(int id_conn) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
        
-            //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+           //Cálcul clau pública client
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
           
             //Exemples
             SystemUtils.escriuNouLog("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_COUNT,0",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_COUNT,0",edc.getShare_key_client().toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
@@ -503,7 +531,7 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
             
             //Llegir el numero total de registres de la consulta
-            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             
              SystemUtils.escriuNouLog("El total de registres és :" +total);
 
@@ -522,6 +550,8 @@ public class TestCridesUsuaris {
     public static void llistatGrid(int id_conn) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             
             sc = new Socket("127.0.0.1", 5000);
@@ -529,17 +559,18 @@ public class TestCridesUsuaris {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
          
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
+          
            
             //Aquí pots fer la consulta que vulguis et tornara el seu result i el podràs tractar
             //Exemples
             SystemUtils.escriuNouLog("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_GRID,0",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_GRID,0",edc.getShare_key_client().toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
@@ -548,7 +579,7 @@ public class TestCridesUsuaris {
             //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
               
             //El sservidor en torna el número de registres trobat en la consulta
-            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             
              SystemUtils.escriuNouLog("El total de registres és :" + total);
             
@@ -558,7 +589,7 @@ public class TestCridesUsuaris {
             for (int i = 0; i < total; i++) {
               //registres.add(in.readUTF());
               
-              registres.add(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()) );
+              registres.add(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()) );
             
             }
             //Mostrem els registres guardats en el arrayList
