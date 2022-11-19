@@ -9,6 +9,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.ArrayList;
 import org.junit.Test;
 import static org.junit.Assert.*;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
@@ -32,13 +33,11 @@ public class JUnitTestCridesUsuaris {
     public JUnitTestCridesUsuaris() {
     }
     
- 
-
     @Test
     @Order(1)
      public void t1_testSimulacioLoginCorrecteIncorrecte() throws InterruptedException{  //comoprova un login incorrecte
 
-        assertNotEquals( testSimulacioLoginErroni(0, "carles","pwdcarless"),1);
+        assertNotEquals( testSimulacioLoginErroni(0, "carles","errorpassword"),1);
     } 
     
     @Test
@@ -47,39 +46,36 @@ public class JUnitTestCridesUsuaris {
 
         assertEquals( testSimulacioLoginCorrecte(0, "carles","pwdcarles"),1);
     }
-     
+ 
     @Test
     @Order(3)
-     public void t3_alta() throws InterruptedException, IOException{  //comoprova un login incorrecte
+     public void t3_llistat() throws InterruptedException, IOException{  //comoprova un login incorrecte
+
+         assertNotEquals( llistat(id_conn_correcte),1);
+         
+         
+    }  
+     
+    @Test
+    @Order(4)
+     public void t3_alta_baixa_modificacio() throws InterruptedException, IOException{  //comoprova un login incorrecte
 
          assertEquals( alta(id_conn_correcte,"silvia,pwdsilvia,silvia,olivar,1,1,1"),1);
+         id_user =  buscarIdUsuari(id_conn_correcte,"silvia");
+         assertEquals( modificacio(id_conn_correcte,id_user,",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1"),1);
+         assertEquals( baixa(id_conn_correcte, id_user),1);
+         
     }  
     
     @Test
-    @Order(4)
+    @Order(5)
      public void t4_buscarIdUsuari() throws InterruptedException, IOException{  //comoprova un login incorrecte
 
-        id_user =  buscarIdUsuari(id_conn_correcte,"silvia");
-        assertNotEquals(id_user,0);
+        assertNotEquals(buscarIdUsuari(id_conn_correcte,"carles"),0);
     }  
-  
-    @Test
-    @Order(5)
-     public void t5_testModificacio() throws InterruptedException, IOException{  //comoprova un login incorrecte
-
-        assertEquals( modificacio(id_conn_correcte,id_user,",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1"),1);
-    }
-     
+ 
     @Test
     @Order(6)
-     public void t6_baixa() throws InterruptedException, IOException{  //comoprova un login incorrecte
-
-        assertEquals( baixa(id_conn_correcte, id_user),1);
-    }
-     
-     
-    @Test
-    @Order(7)
      public void t7_testSimulacioLogOut() throws InterruptedException, IOException{  //comoprova un login incorrecte
 
         assertEquals(testSimulacioLogOut(id_conn_correcte),1);
@@ -251,6 +247,7 @@ public class JUnitTestCridesUsuaris {
      * @param id_conn passem les credencials i el id d'un usuari logat al program
      * amb el rol admin
      * @param params passem els registres del camps dels usuari separat per "," en format text
+     * @return 
     */
     public int alta(int id_conn, String params) {
 
@@ -367,5 +364,64 @@ public class JUnitTestCridesUsuaris {
         return resultat;
     }
     
+  /**
+    * Aquest mètode fa una crida  a la crida USER_QUERY per simular una consulta
+    * feta pels clients en la Bd's
+    * Retorna un llistat per consola de la consulta feta.
+    * @param id_conn passem les credencials i el id d'un usuari logat al program
+    * amb el rol admin
+     * @return 
+    */ 
+    public int llistat(int id_conn) {
+
+        Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        int total =0;
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+           //Cálcul clau pública client
+            edc.clauPublicaClient();
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
+           
+            System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris ");
+            //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
+            //out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",shared_secret.toByteArray()));
+            //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
+            //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");
+            //out.writeUTF(id_conn + ",USER_QUERY,2,cognom");
+           //  out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,2,nom",shared_secret.toByteArray()));
+            //out.writeUTF(id_conn + ",USER_QUERY,2,departament");
+            //out.writeUTF(id_conn + ",USER_QUERY,3,rol = 1,cognom");
+             out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY,0",edc.getShare_key_client().toByteArray()));
+           
+            //El sservidor en torna el número de registres trobat en la consulta
+             total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+
+            SystemUtils.escriuNouLog("El total de registres és :" + total);
+
+            ArrayList registres = new ArrayList();
+            //Posem el registres rebut dins d'un arrayList
+            for (int i = 0; i < total; i++) {
+             // registres.add(in.readUTF());
+                registres.add(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()) );
+            }
+            //Mostrem els registres guardats en el arrayList
+            for (int i = 0; i < registres.size(); i++) {
+                System.out.println(registres.get(i).toString());
+            }
+        } catch (IOException ex) {
+           
+        }
+        
+        return total;
+    }
+          
      
 }

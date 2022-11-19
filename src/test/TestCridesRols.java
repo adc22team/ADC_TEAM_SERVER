@@ -5,6 +5,7 @@
  */
 package test;
 
+import classes.EncrypDecrypCli;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -116,23 +117,25 @@ public class TestCridesRols {
     public static int buscarIdRol(int id_conn, String rol) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
    
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
     
             //Executo la consulta de la crida per sortir
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_FIND," + rol,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_FIND," + rol,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta
-            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
 
             //Si troba l'usuari torna el seu id
             return id_trobat;
@@ -155,25 +158,27 @@ public class TestCridesRols {
     public static void altaRol(int id_conn, String params) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
             
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
         
             //Executo la consulta de la crida per fer l'alta del nou usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_NEW," + params,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_NEW," + params,edc.getShare_key_client().toByteArray()));
      
             SystemUtils.escriuNouLog("Crida d'una alta   : " + id_conn + ",ROLE_NEW," + params);
             
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-            System.out.println("Resultat de la consulta : " + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+            System.out.println("Resultat de la consulta : " + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
@@ -192,24 +197,26 @@ public class TestCridesRols {
     */ 
    public static void modificacioRol(int id_conn,int id_key){
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-    
+            
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
             
             //El primer parametre es el id a modificar
-            out.writeUTF(SystemUtils.encryptedText(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat,Descripcio modificat",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn+",ROLE_MODIFI," + id_key + ",Rol de prova modificat,Descripcio modificat",edc.getShare_key_client().toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             System.out.println("Resultat de la modificació : "
-                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
@@ -225,26 +232,28 @@ public class TestCridesRols {
      * @param id_key id que té el usuari en la Bd's
     */ 
     public static void baixaRol(int id_conn, int id_key) {
+       
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
         try {
             
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
-                  
+          
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
    
             //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn +",ROLE_DELETE," + id_key,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn +",ROLE_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
             System.out.println("Resultat de la baixa       : "
-                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray())));
+                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesRols.class.getName()).log(Level.SEVERE, null, ex);
@@ -261,34 +270,36 @@ public class TestCridesRols {
     public static void llistatRols(int id_conn) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
          
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
   
             System.out.println("Executem la crida a fer un llistat de tots els rols de la Bd's de rols ");
-             out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_QUERY,0",shared_secret.toByteArray()));
+             out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_QUERY,0",edc.getShare_key_client().toByteArray()));
             //out.writeUTF(id_conn + ",ROLE_QUERY,1,rol = 'Administrador'");
             //out.writeUTF(id_conn + ",ROLE_QUERY,1,id = 1");
             //out.writeUTF(id_conn + ",ROLE_QUERY,2,rol");
             //out.writeUTF(id_conn + ",ROLE_QUERY,3,rol = 'Administrador',id");
            
             //El sservidor en torna el número de registres trobat en la consultA
-            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
 
             System.out.println("El total de registres és :" + total);
 
             ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
-                registres.add(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()) );
+                registres.add(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()) );
             }
             //Mostrem els registres guardats en el arrayList
             for (int i = 0; i < registres.size(); i++) {
@@ -310,24 +321,26 @@ public class TestCridesRols {
     public static void llistatCountRols(int id_conn) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
    
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");            
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
             
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_QUERY_COUNT,0",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",ROLE_QUERY_COUNT,0",edc.getShare_key_client().toByteArray()));
          
            //Llegir el numero total de registres de la consulta
-            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             
             System.out.println("El total de registres és :" +total);
 
@@ -343,6 +356,7 @@ public class TestCridesRols {
      public static void testSimulacioLogOut(int id_conn) {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
         System.out.println("Ara femt el logOut ....... ");
 
         try {
@@ -351,15 +365,15 @@ public class TestCridesRols {
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
 
             //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
             
             
            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",edc.getShare_key_client().toByteArray()));
             
             System.out.println("LogOut realitzat correctament ");
 
@@ -377,31 +391,32 @@ public class TestCridesRols {
     public static void testSimulacioLoginCorrecte( int id_conn,String usuari, String contrasenya) throws InterruptedException {
 
         Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
         try {
             sc = new Socket("127.0.0.1", 5000);
             DataInputStream in = new DataInputStream(sc.getInputStream());
             DataOutputStream out = new DataOutputStream(sc.getOutputStream());
      
-            //Cálcul clau pública client
-            String[] claus_ps = SystemUtils.clauPublicaClient().split(",");       
+           //Cálcul clau pública client
+            edc.clauPublicaClient();
             //Enviem la clau pública del client al servidor
-            out.writeUTF(String.valueOf(claus_ps[0]));
-            System.out.println("Valor public_key part client enviada al servidor: " + claus_ps[0]);
-            //llegim la clau pública del servidor
-            BigInteger shared_secret =SystemUtils.calculClauCompartida(in.readUTF(),claus_ps[1]);
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
                    
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,shared_secret.toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
             
             //Recullim el id_sessio vàlit
-            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+            resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
               
             System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
             System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
             
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {       
-                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),shared_secret.toByteArray()));
+                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
             }
         } catch (IOException ex) {
