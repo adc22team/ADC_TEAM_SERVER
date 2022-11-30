@@ -84,6 +84,23 @@ public final class SystemUtils {
         return campsData;
     }
     
+    
+    
+     /**
+     * Aquest mètode  static agafaa la data i la hor del sistema i
+     * el torna la data i la hora en un String
+     * @return una cadena amb la data i la hora del sistema
+     */
+    public static String agafarDataHoraSistemaTiq() {
+        
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy,HH:mm:ss");
+        java.util.Date date = new java.util.Date();
+        String data = dateFormat.format(date);
+   //     String[] campsData = data.split(",");
+        
+        return data;
+    }
+    
     /**
      * Aquest mètode l static que genera un número aleatori entre un interval definit
      * en els paràmetres d'entrada s'utilitza per genera el id_sessio al fer el login
@@ -159,6 +176,40 @@ public final class SystemUtils {
 	    
 	return sb.toString();
 }
+    
+ /**
+     * 
+     * @param selectBasic sql bàsica de la consulta afegir els paràmetres
+     * @param missatge paràmetres introduits del client en la crida
+     * @return la setencia sql formatejada correctament amb els paràmetres rebuts
+     * @throws IOException 
+     */
+    public static String formatLlistatTiq(String selectBasic, String[] missatge) throws IOException {
+
+        SystemUtils.escriuNouLog("Util format QUERY's");
+        //Select amb la base de la consulta
+        String sql = selectBasic;
+    
+        //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
+        switch (missatge[2]) {
+            case "0":
+                sql = sql + "order by id_tiq";         
+                break;
+            case "1":              
+                sql = sql + "where " + missatge[3]; 
+                break;
+            case "2":
+                sql = sql + "order by " + missatge[3];
+                break;
+            case "3":
+                sql = sql + " where " + missatge[3] + " order by " + missatge[4];          
+                break;
+            default:
+        }
+        SystemUtils.escriuNouLog("Resultat de la setencia final SQL : " + sql);
+
+        return sql;
+    }       
     
 /**
      * 
@@ -269,6 +320,7 @@ public final class SystemUtils {
   * @return
   * @throws IOException 
   */
+    /*
   public static String clausServer(String clientPublicKeyUTF) throws IOException{
         
         BigInteger base       = new BigInteger("2");
@@ -303,8 +355,8 @@ public final class SystemUtils {
         return claus_publica_share_server;
         
     }
-  
-  
+  */
+ /* 
     public static String clauPublicaClient() throws IOException {
 
         //Enviaem la clau publica del client
@@ -327,7 +379,8 @@ public final class SystemUtils {
         return clau_publica_client_secret;
     }
  
- 
+ */
+    /*
       public static BigInteger calculClauCompartida(String publicKeyServer,String secretString) throws IOException {
     
           BigInteger prime = new BigInteger("195180477495478597250447434252857037807");
@@ -344,6 +397,6 @@ public final class SystemUtils {
           return shared_secret;
       }
       
-            
+           */ 
     
 }

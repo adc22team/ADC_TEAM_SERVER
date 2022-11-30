@@ -101,7 +101,7 @@ public class Server {
                 //Llegir la crida del client
                 //format id_conn,CRIDA,....,...
               //  String resposta = SystemUtils.decryptedText(in.readUTF(),share_key.toByteArray());
-                String resposta = SystemUtils.decryptedText(in.readUTF(),ed.getShare_key_server().toByteArray());
+                String resposta = ed.decryptedText(in.readUTF(),ed.getShare_key_server().toByteArray());
                 SystemUtils.escriuNouLog("USER_RESPONSE # " + resposta);
 
                 //Descompondre la resposta del client, en un array
@@ -209,8 +209,8 @@ public class Server {
                 
             case "TIQU_":
                 
-                //TIQU_ crista a la classe que gestiona els tiquets i la seva persistència,
-                //No està implementada    
+                ServerFilTiquets filtiquet = new ServerFilTiquets(sc, in, out, missatge, id_conn, this,share_key);
+                filtiquet.start();   
                 break;
                 
             case "ROLE_":
