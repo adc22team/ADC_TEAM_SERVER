@@ -102,10 +102,11 @@ public class TestCridesTiquets {
         //Simulem la baixa d'un usuari pel seu usuari
         System.out.println("############################ Simulació de la baixa de l'usuari Silvia ################### ");   
         baixa(resposta_svr_id,buscarIdTiquet(resposta_svr_id,"incidencia33"));
-   /*     System.out.println();                    
+        System.out.println();                    
+        System.out.println("####################### Simulació llistat número total de registres de tiquets ########## ");   
         llistatCount(resposta_svr_id);
        
-        System.out.println();                    
+  /*      System.out.println();                    
         llistatGrid(resposta_svr_id);*/
        
         System.out.println();                    
@@ -430,7 +431,7 @@ public class TestCridesTiquets {
             //Exemples
             SystemUtils.escriuNouLog("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
             //0 - sense parametres | 1 -  where | 2 - order by | 3 - where i order by
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_QUERY_COUNT,0",edc.getShare_key_client().toByteArray()));
+            out.writeUTF(SystemUtils.encryptedText(id_conn + ",TIQU_QUERY_COUNT,0",edc.getShare_key_client().toByteArray()));
             //out.writeUTF(id_conn + ",USER_QUERY,1,nom = 'carles'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,cognom = 'fugarolas'");
             //out.writeUTF(id_conn + ",USER_QUERY,1,id = 1");

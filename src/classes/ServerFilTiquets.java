@@ -115,26 +115,26 @@ public class ServerFilTiquets extends Thread {
                         // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
                         SystemUtils.escriuNouLog("EXECUTE_TIQU_QUERY #");
                         //Creem un arrayList per gestionar el resultats de las consultas
-                        ArrayList<String> usuariArrayList = new ArrayList<>();
+                        ArrayList<String> tiquetArrayList = new ArrayList<>();
                        
                         sql =SystemUtils.formatLlistatTiq("select * from tiquets ",missatge);
                         SystemUtils.escriuNouLog("VALOR SQL TIQU_QUERY # "+ sql);
                         
                         //Guardem en un ArrayList els registres trobats
-                        usuariArrayList  = conn.consultaSqlTiquets(sql);
+                        tiquetArrayList  = conn.consultaSqlTiquets(sql);
                         //Enviem el nombre total de elements de la llista al client
-                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(usuariArrayList.size()),share_key.toByteArray()));
+                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(tiquetArrayList.size()),share_key.toByteArray()));
                         
                         //Enviar les dades reculllides de la consulta al client
-                        for(int i = 0; i < usuariArrayList.size(); i++){
+                        for(int i = 0; i < tiquetArrayList.size(); i++){
                             //Enviem el registres separats per "," al client
-                            out.writeUTF(SystemUtils.encryptedText(usuariArrayList.get(i),share_key.toByteArray()));
+                            out.writeUTF(SystemUtils.encryptedText(tiquetArrayList.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
-                            SystemUtils.escriuNouLog(usuariArrayList.get(i));
+                            SystemUtils.escriuNouLog(tiquetArrayList.get(i));
                         }
                         break;
                     case "TIQU_QUERY_GRID":
-                        
+                        /*
                         // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
                         SystemUtils.escriuNouLog("EXECUTE_TIQU_QUERY_GRID #");
                         //Creem un arrayList per gestionar el resultats de las consultas
@@ -154,7 +154,7 @@ public class ServerFilTiquets extends Thread {
                             out.writeUTF(SystemUtils.encryptedText(usuariArrayListGrid.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(usuariArrayListGrid.get(i));
-                        }
+                        }*/
                         break;   
                         
                     case "TIQU_QUERY_COUNT":
@@ -162,15 +162,15 @@ public class ServerFilTiquets extends Thread {
                         // Registrar en el log que s'està fent una consulta a la Bd's usuaris  
                         SystemUtils.escriuNouLog("EXECUTE_TIQU_QUERY_COUNT #");
                         //Creem un arrayList per gestionar el resultats de las consultas
-                        ArrayList<String> usuariArrayListCount = new ArrayList<>();
+                        ArrayList<String> tiquetArrayListCount = new ArrayList<>();
                         //Guardem en un ArrayList els registres trobats
                         
-                        sql =SystemUtils.formatLlistat("select * from tiquets ",missatge);
+                        sql =SystemUtils.formatLlistatTiq("select * from tiquets ",missatge);
                         SystemUtils.escriuNouLog("VALOR SQL TIQU_QUERY_COUNT # "+ sql);
                         
-                 //       usuariArrayListCount  = conn.consultaSqlUsuaris(sql);
+                        tiquetArrayListCount  = conn.consultaSqlTiquets(sql);
                         //Enviem el nombre total de elements de la llista al client
-                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(usuariArrayListCount.size()),share_key.toByteArray()));
+                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(tiquetArrayListCount.size()),share_key.toByteArray()));
 
                         break;    
                         

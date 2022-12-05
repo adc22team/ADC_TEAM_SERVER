@@ -231,6 +231,8 @@ public class MetodesSQLgestioTiquets {
          //Retornem el resultat de l'operació 0 - Error i 1 - Correcte       
         return result;
     }
+    
+    
   
     /**
      * Mètode que elimina un usuari de la Bd's de usuari
