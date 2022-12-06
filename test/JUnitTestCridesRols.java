@@ -149,7 +149,7 @@ public class JUnitTestCridesRols {
     }
     
      /**
-    * Mètode que busca el id d'un departament
+    * Mètode que busca el id d'un rol
      * @param id_conn
     * @param departament
     * @return el id que té l'usuari a la Bd's
@@ -190,8 +190,8 @@ public class JUnitTestCridesRols {
      
     
       /**
-     * Aquest mètode fa una crida  a la crida DEPA_NEW per simular l'alta d'un nou
-     * usuari en la Bd's
+     * Aquest mètode fa una crida  a la crida ROL_NEW per simular l'alta d'un nou
+     * rol en la Bd's
      * Genera un nou usuari i recull el resultat de l'operació
      * 
      * @param id_conn passem les credencials i el id d'un usuari logat al program
@@ -234,7 +234,7 @@ public class JUnitTestCridesRols {
     
        /**
      * Aquest mètode fa una crida  a la crida ROL_MODIFI per simular la modificacio d'un
-     * usuari en la Bd's
+     * rol en la Bd's
      * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
      * l'operació
      * 
@@ -276,7 +276,7 @@ public class JUnitTestCridesRols {
      
      /**
      * Aquest mètode fa una crida  a la crida ROL_DELETE per simular la baixa d'un
-     * usuari en la Bd's
+     * rol en la Bd's
      * Elinima un usuari  i mostre per consola el resultat de  l'operació
      * 
      * @param id_conn passem el id_connexió obtingut al fer login.
@@ -315,7 +315,7 @@ public class JUnitTestCridesRols {
     }
     
   /**
-    * Aquest mètode fa una crida  a la crida DEPA_QUERY per simular una consulta
+    * Aquest mètode fa una crida  a la crida ROL_QUERY per simular una consulta
     * feta pels clients en la Bd's
     * Retorna un llistat per consola de la consulta feta.
     * @param id_conn passem les credencials i el id d'un usuari logat al program

@@ -191,7 +191,7 @@ public class JUnitTestCridesDepartaments {
     
       /**
      * Aquest mètode fa una crida  a la crida DEPA_NEW per simular l'alta d'un nou
-     * usuari en la Bd's
+     * departament en la Bd's
      * Genera un nou usuari i recull el resultat de l'operació
      * 
      * @param id_conn passem les credencials i el id d'un usuari logat al program
@@ -234,7 +234,7 @@ public class JUnitTestCridesDepartaments {
     
        /**
      * Aquest mètode fa una crida  a la crida DEPA_MODIFI per simular la modificacio d'un
-     * usuari en la Bd's
+     * departament en la Bd's
      * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
      * l'operació
      * 
@@ -276,7 +276,7 @@ public class JUnitTestCridesDepartaments {
      
      /**
      * Aquest mètode fa una crida  a la crida DEPA_DELETE per simular la baixa d'un
-     * usuari en la Bd's
+     * departament en la Bd's
      * Elinima un usuari  i mostre per consola el resultat de  l'operació
      * 
      * @param id_conn passem el id_connexió obtingut al fer login.

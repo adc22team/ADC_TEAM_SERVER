@@ -131,10 +131,10 @@ public class TestCridesDepartaments {
             edc.calculClauCompartida(in.readUTF());
     
             //Executo la consulta de la crida per sortir
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",DEPA_FIND," + departament,edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",DEPA_FIND," + departament,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta
-             int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+             int id_trobat =Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
 
              //Si troba l'usuari torna el seu id
             return id_trobat;
@@ -172,13 +172,13 @@ public class TestCridesDepartaments {
             edc.calculClauCompartida(in.readUTF());
             
             //Executo la consulta de la crida per fer l'alta del nou usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",DEPA_NEW," + params, edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",DEPA_NEW," + params, edc.getShare_key_client().toByteArray()));
             
             SystemUtils.escriuNouLog("Crida d'una alta : " + id_conn + ",DEPA_NEW," + params);
             
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             System.out.println("Resultat de l'alta : "
-                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
+                    + Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
@@ -213,12 +213,12 @@ public class TestCridesDepartaments {
             
      
             //El terce parametre es el id a modificar
-            out.writeUTF(SystemUtils.encryptedText(id_conn+",DEPA_MODIFI," + id_key 
+            out.writeUTF(edc.encryptedText(id_conn+",DEPA_MODIFI," + id_key 
                     + ",Departament de prova modificat, Descripcio modificada, 666 66 66",edc.getShare_key_client().toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             System.out.println("Resultat de la modificacio    : "
-                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
+                    + Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
@@ -251,11 +251,11 @@ public class TestCridesDepartaments {
             edc.calculClauCompartida(in.readUTF());
      
             //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",DEPA_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",DEPA_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
            
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
             SystemUtils.escriuNouLog("Resultat de la baixa       : "
-                    + Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
+                    + Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray())));
 
         } catch (IOException ex) {
             Logger.getLogger(TestCridesDepartaments.class.getName()).log(Level.SEVERE, null, ex);
@@ -295,14 +295,14 @@ public class TestCridesDepartaments {
             //out.writeUTF(id_conn + ",DEPA_QUERY,3,departament = 'Compres',id");
 
             //El sservidor en torna el número de registres trobat en la consulta
-            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            int total = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
 
             System.out.println("El total de registres és :" + total);
 
             ArrayList registres = new ArrayList();
             //Posem el registres rebut dins d'un arrayList
             for (int i = 0; i < total; i++) {
-                registres.add(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()) );
+                registres.add(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()) );
             }
             //Mostrem els registres guardats en el arrayList
             for (int i = 0; i < registres.size(); i++) {
@@ -340,10 +340,10 @@ public class TestCridesDepartaments {
         
             //Exemples
             System.out.println("Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris " );
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",DEPA_QUERY_COUNT,0",edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",DEPA_QUERY_COUNT,0",edc.getShare_key_client().toByteArray()));
          
             //Llegir el numero total de registres de la consulta
-            int total = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            int total = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             
             System.out.println("El total de registres és :" + total);
 
@@ -376,7 +376,7 @@ public class TestCridesDepartaments {
             edc.calculClauCompartida(in.readUTF());
             
            //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",USER_EXIT",edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",USER_EXIT",edc.getShare_key_client().toByteArray()));
             
             System.out.println("LogOut realitzat correctament ");
 
@@ -410,18 +410,18 @@ public class TestCridesDepartaments {
             edc.calculClauCompartida(in.readUTF());
                    
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
             
             //Recullim el id_sessio vàlit
-              resposta_svr_id = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            resposta_svr_id = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
           
-              System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
+            System.out.println("Fem el login amb l'usuari " + usuari + "i contrasenya  correcte :" + contrasenya + " - El resulta és CORRECTE  ");
             System.out.println("resposta servidor  es un id  valit    : " + resposta_svr_id);
             
             //Si la validació és correcte, recullim el rol de l'usuari
             if (resposta_svr_id != 0) {
             
-                rol = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+                rol = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
                 System.out.println("resposta servidor del rol que l'usuari : " + rol);
                 
             }
