@@ -91,7 +91,7 @@ public final class SystemUtils {
      */
     public static String agafarDataHoraSistemaTiq() {
         
-        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy,HH:mm:ss");
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy;HH:mm:ss");
         java.util.Date date = new java.util.Date();
         String data = dateFormat.format(date);
    //     String[] campsData = data.split(",");

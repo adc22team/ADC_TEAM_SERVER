@@ -75,8 +75,10 @@ public class MetodesSQLgestioTiquets {
         int id_tiq;
         String incidencia;
         String comentaris;
-        String data;
+        String data_inici;
+        String data_final;
         int estat;
+        int prioritat;
         int id_usuari;
         int id_tecnic;
         //Definició del ArrayList que guardarà el resultat de la consulta
@@ -91,14 +93,16 @@ public class MetodesSQLgestioTiquets {
             id_tiq = result.getInt("id_tiq");
             incidencia = result.getString("incidencia");
             comentaris = result.getString("comentaris");
-            data = result.getString("data");
+            data_inici = result.getString("data_inici");
+            data_final = result.getString("data_final");
             estat = result.getInt("estat");
+            prioritat = result.getInt("prioritat");
             id_usuari = result.getInt("id_usuari");
             id_tecnic = result.getInt("id_tecnic");
 
             //Afegir cada registre dins el ArrayList 
-            tiquetsArrayList.add(id_tiq + "," + data + "," + incidencia + "," + comentaris + "," + estat + ","
-                    + id_usuari + "," + id_tecnic);
+            tiquetsArrayList.add(id_tiq + "," + data_inici + "," + incidencia + "," + comentaris + "," + estat + "," + prioritat + ","
+                    + id_usuari + "," + id_tecnic + "," + data_final);
 
         }
         //Retornem la llista confecciona
@@ -121,8 +125,10 @@ public class MetodesSQLgestioTiquets {
         int id_tiq;
         String incidencia;
         String comentaris;
-        String data;
+        String data_inici;
+        String data_final;
         int estat;
+        int prioritat;
         int id_usuari;
         int id_tecnic;
         //Definició del ArrayList que guardarà el resultat de la consulta
@@ -137,14 +143,16 @@ public class MetodesSQLgestioTiquets {
             id_tiq = result.getInt("id_tiq");
             incidencia = result.getString("incidencia");
             comentaris = result.getString("comentaris");
-            data = result.getString("data");
+            data_inici = result.getString("data_inici");
+            data_final = result.getString("data_final");
             estat = result.getInt("estat");
+            prioritat = result.getInt("prioritat");
             id_usuari = result.getInt("id_usuari");
             id_tecnic = result.getInt("id_tecnic");
 
             //Afegir cada registre dins el ArrayList 
-            tiquetsArrayList.add(id_tiq + "," + data + "," + incidencia + "," + comentaris + "," + estat + ","
-                    + id_usuari + "," + id_tecnic);
+            tiquetsArrayList.add(id_tiq + "," + data_inici + "," + incidencia + "," + comentaris + "," + estat + "," + prioritat + ","
+                    + id_usuari + "," + id_tecnic + "," + data_final);
 
         }
         //Retornem la llista confecciona
@@ -165,7 +173,7 @@ public class MetodesSQLgestioTiquets {
         //Afegim en el log l'operació d'alta demanada pel client
         SystemUtils.escriuNouLog("INSERT_NEW_TIQ_IN_DB #");
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("INSERT INTO tiquets (id_tiq, incidencia,comentaris,data,estat,id_usuari,id_tecnic) VALUES (default,?,?,?,?,?,?)");
+        String sentenciaCrear = ("INSERT INTO tiquets (id_tiq, incidencia,comentaris,data_inici,estat,id_usuari,id_tecnic,prioritat) VALUES (default,?,?,?,?,?,?,?)");
         //preparem la consulta
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer l'alta 
@@ -178,6 +186,7 @@ public class MetodesSQLgestioTiquets {
             sentence_ready.setInt(4, Integer.parseInt(altaDades[4])); //estat
             sentence_ready.setInt(5, Integer.parseInt(altaDades[5])); //id_usuari  
             sentence_ready.setInt(6, Integer.parseInt(altaDades[6])); //id_tecnic
+            sentence_ready.setInt(7, Integer.parseInt(altaDades[7])); //prioritat
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();
@@ -206,7 +215,7 @@ public class MetodesSQLgestioTiquets {
         //Afegim en el log l'operació de modificació demanada pel client
         SystemUtils.escriuNouLog("UPDATE_TIQ_ID # "+modificacioDades[0]);       
         //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
-        String sentenciaCrear = ("UPDATE tiquets SET incidencia = ?, comentaris = ?,estat = ?, id_usuari = ?, id_tecnic = ? WHERE id_tiq = ?");
+        String sentenciaCrear = ("UPDATE tiquets SET incidencia = ?, comentaris = ?,estat = ?, id_usuari = ?, id_tecnic = ?, prioritat = ?, data_final = ? WHERE id_tiq = ?");
         //Definim el PreparedStatement   
         PreparedStatement sentence_ready;
         //preparem i executem la SQL per fer la modificació        
@@ -219,8 +228,9 @@ public class MetodesSQLgestioTiquets {
             sentence_ready.setInt(3, Integer.parseInt(modificacioDades[5])); //estat
             sentence_ready.setInt(4, Integer.parseInt(modificacioDades[6])); //id_usuari  
             sentence_ready.setInt(5, Integer.parseInt(modificacioDades[7])); //id_tecnic
-          
-            sentence_ready.setInt(6,Integer.parseInt(modificacioDades[2])); //id
+            sentence_ready.setInt(6, Integer.parseInt(modificacioDades[8])); //prioritat
+            sentence_ready.setString(7, modificacioDades[9]); //data_final
+            sentence_ready.setInt(8,Integer.parseInt(modificacioDades[2])); //id
             //Recollim el resultat de l'alta
             result = sentence_ready.executeUpdate();
             sentence_ready.close();

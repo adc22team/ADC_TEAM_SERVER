@@ -74,7 +74,7 @@ public class TestCridesTiquets {
       
         //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
         System.out.println("####################   Simulació d'una alta d'un tiquet  ###############################");
-        alta(resposta_svr_id,"incidencia3,comentari3,1,3,1"); 
+        alta(resposta_svr_id,"incidencia3,comentari3,1,3,1,1"); 
      
         System.out.println();                    
         llistat(resposta_svr_id);
@@ -223,7 +223,7 @@ public class TestCridesTiquets {
                        
             //El primer parametre es el id a modificar
             out.writeUTF(edc.encryptedText(id_conn+",TIQU_MODIFI," + id_key 
-                        + ",incidencia33,comentari33,1,3,1",edc.getShare_key_client().toByteArray()));
+                        + ",incidencia33,comentari33,1,3,1,1,31/12/2022;23:59:59",edc.getShare_key_client().toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
             SystemUtils.escriuNouLog("Resultat de la modificacio : " 
@@ -363,6 +363,7 @@ public class TestCridesTiquets {
       * @param usuari 
       * @param contrasenya
       * @param id_conn
+     * @return 
       * @throws InterruptedException 
       */
     public static int testSimulacioLoginCorrecte( int id_conn,String usuari, String contrasenya) throws InterruptedException {

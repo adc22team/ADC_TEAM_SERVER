@@ -50,9 +50,9 @@ public class JUnitTestCridesTiquets {
     @Order(3)
      public void t3_alta_baixa_modificacioTiquet() throws InterruptedException, IOException{  //comoprova un login incorrecte
 
-        assertEquals( alta(id_conn_correcte,"incidencia3,comentari3,1,3,1"),1);
+        assertEquals( alta(id_conn_correcte,"incidencia3,comentari3,1,3,1,1"),1);
         id_tiq =  buscarIdTiquet(id_conn_correcte,"incidencia3");
-        assertEquals( modificacio(id_conn_correcte,id_tiq,",incidencia33,comentari33,1,3,1"),1);
+        assertEquals( modificacio(id_conn_correcte,id_tiq,",incidencia33,comentari33,1,3,1,1,31/12/2022;23:59:59"),1);
         assertEquals( baixa(id_conn_correcte, id_tiq),1);
          
     }  

@@ -1,701 +1,330 @@
-06/12/2022;18:04:22 - Valor share_key en el  server      : 152343816404191822403722738455149738113
-06/12/2022;18:04:22 - USER_RESPONSE # 0,LOGIN,martina,pwderronea
-06/12/2022;18:04:22 - VALUE_id_conn # 0
-06/12/2022;18:04:22 - ENCRYTED_PASSWORD_ALG             # f4648828bd6ae7dfb1916a03a7ede782badb7e8ee6cc3e59350e455e88e9fe05
-06/12/2022;18:04:22 - SQL_RESPONSE_VALIDATE_USER        # 0
-06/12/2022;18:04:22 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:04:22 - SERVER_SEND_ID_CONN_USER_WRONG          # 0
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - Fem el login amb l'usuari martinai contrasenya  erronea :pwderronea - El resulta 茅s FALLIT  
-06/12/2022;18:04:22 - resposta servidor del : 0 ERROR VALIDACIO!!
-06/12/2022;18:04:22 - Valor share_key en el  server      : 84042129562773772530283192580646624222
-06/12/2022;18:04:22 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
-06/12/2022;18:04:22 - VALUE_id_conn # 0
-06/12/2022;18:04:22 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
-06/12/2022;18:04:22 - SQL_RESPONSE_VALIDATE_USER        # 1
-06/12/2022;18:04:22 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:04:22 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 270 - carles
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {270=carles}
-06/12/2022;18:04:22 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 270
-06/12/2022;18:04:22 - Fem el login amb l'usuari carlesi contrasenya  correcte :pwdcarles - El resulta 茅s CORRECTE  
-06/12/2022;18:04:22 - resposta servidor  es un id  valit    : 270
-06/12/2022;18:04:22 - SERVER_SEND_ROLE_USER                   # 1
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - Valor share_key en el  server      : 132023560899311528550106458647982240623
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_NEW,silvia,pwdsilvia,silvia,olivar,1,1,1
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_NEW
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - Crida d'una alta : 270,USER_NEW,silvia,pwdsilvia,silvia,olivar,1,1,1
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:22 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:22 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:22 - CRIDA_A_EXECUTAR# USER_NEW
-06/12/2022;18:04:22 - ADD_NEW_USER_IN_BD #
-06/12/2022;18:04:22 - INSERT_NEW_USER_IN_DB #
-06/12/2022;18:04:22 - Valor de resultat # 1
-06/12/2022;18:04:22 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:22 - Valor share_key en el  server      : 105048153946821655139734443121717737518
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_QUERY,0
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_QUERY
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:22 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:22 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:22 - CRIDA_A_EXECUTAR# USER_QUERY
-06/12/2022;18:04:22 - EXECUTE_USER_QUERY #
-06/12/2022;18:04:22 - Util format QUERY's
-06/12/2022;18:04:22 - Resultat de la setencia final SQL : select * from usuaris order by id
-06/12/2022;18:04:22 - VALOR SQL USER_QUERY # select * from usuaris order by id
-06/12/2022;18:04:22 - El total de registres 茅s :7
-06/12/2022;18:04:22 - 1,aitor                                             ,fc8f10388f1139a1da1c800e3900caf4e9f57839184f87bc096081257c605290                                    ,Aitor                                             ,Garcia                                            ,1,1,1
-06/12/2022;18:04:22 - 2,daniela                                           ,1293b2bbf925d6515e86e5357a8e9fe318c22c41d1efee64cc83b6911f88c5ac                                    ,Daniela                                           ,Guitierrez                                        ,2,1,1
-06/12/2022;18:04:22 - 3,carles                                            ,367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64                                    ,Carles                                            ,Fugarolas                                         ,1,1,1
-06/12/2022;18:04:22 - 6,manel                                             ,4962b140ea0e612d11365e5a4c5221dc8e0e94989a69f9aede215fc1c1101873                                    ,Manel                                             ,Lopez                                             ,3,2,1
-06/12/2022;18:04:22 - 7,martina                                           ,33785b881a1d679d2e7ad7bdac2f73a0a18fad83a41ae2ae7ed513366832ad48                                    ,Martina                                           ,Perez                                             ,1,3,1
-06/12/2022;18:04:22 - 199,emi                                               ,71ec09d85a74f2cde8e3647bca3649f70bb4386805a399e30645ee14275d43a8                                    ,emi                                               ,lopez                                             ,1,1,1
-06/12/2022;18:04:22 - Valor share_key en el  server      : 4798335184673276600976145330439411892
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_FIND,silvia
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_FIND
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - 202,silvia                                            ,2adb1d59023be74d4f15d23232ab5734811c57fc98068450637c6f231cb468bd                                    ,silvia                                            ,olivar                                            ,1,1,1
-06/12/2022;18:04:22 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:22 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:22 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:22 - CRIDA_A_EXECUTAR# USER_FIND
-06/12/2022;18:04:22 - FIND_ID_IN_DB #
-06/12/2022;18:04:22 - RESULT_FIND_USER_ID # 202
-06/12/2022;18:04:22 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:22 - Valor share_key en el  server      : 156840222952343337939785049364705704167
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_FIND,silvia
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_FIND
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:22 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:22 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:22 - CRIDA_A_EXECUTAR# USER_FIND
-06/12/2022;18:04:22 - FIND_ID_IN_DB #
-06/12/2022;18:04:22 - RESULT_FIND_USER_ID # 202
-06/12/2022;18:04:22 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:22 - Valor share_key en el  server      : 94289713181968353416958802342781959453
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_MODIFI,202,silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_MODIFI
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:22 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:22 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:22 - CRIDA_A_EXECUTAR# USER_MODIFI
-06/12/2022;18:04:22 - MODIFI_NEW_USER_IN_BD #
-06/12/2022;18:04:22 - UPDATE_USER_ID # 270
-06/12/2022;18:04:22 - MODIFI_UPDATE_USER_RESULT # 1
-06/12/2022;18:04:22 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:22 - Resultat de la modificacio : 1
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:22 - Valor share_key en el  server      : 13848536682402156763927424324009429820
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_QUERY,0
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_QUERY
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:22 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:22 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:22 - CRIDA_A_EXECUTAR# USER_QUERY
-06/12/2022;18:04:22 - EXECUTE_USER_QUERY #
-06/12/2022;18:04:22 - Util format QUERY's
-06/12/2022;18:04:22 - Resultat de la setencia final SQL : select * from usuaris order by id
-06/12/2022;18:04:22 - VALOR SQL USER_QUERY # select * from usuaris order by id
-06/12/2022;18:04:22 - 1,aitor                                             ,fc8f10388f1139a1da1c800e3900caf4e9f57839184f87bc096081257c605290                                    ,Aitor                                             ,Garcia                                            ,1,1,1
-06/12/2022;18:04:22 - 2,daniela                                           ,1293b2bbf925d6515e86e5357a8e9fe318c22c41d1efee64cc83b6911f88c5ac                                    ,Daniela                                           ,Guitierrez                                        ,2,1,1
-06/12/2022;18:04:22 - 3,carles                                            ,367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64                                    ,Carles                                            ,Fugarolas                                         ,1,1,1
-06/12/2022;18:04:22 - 6,manel                                             ,4962b140ea0e612d11365e5a4c5221dc8e0e94989a69f9aede215fc1c1101873                                    ,Manel                                             ,Lopez                                             ,3,2,1
-06/12/2022;18:04:22 - El total de registres 茅s :7
-06/12/2022;18:04:22 - 7,martina                                           ,33785b881a1d679d2e7ad7bdac2f73a0a18fad83a41ae2ae7ed513366832ad48                                    ,Martina                                           ,Perez                                             ,1,3,1
-06/12/2022;18:04:22 - 199,emi                                               ,71ec09d85a74f2cde8e3647bca3649f70bb4386805a399e30645ee14275d43a8                                    ,emi                                               ,lopez                                             ,1,1,1
-06/12/2022;18:04:22 - 202,silvia                                            ,2adb1d59023be74d4f15d23232ab5734811c57fc98068450637c6f231cb468bd                                    ,SILVIA                                            ,OLIVAR                                            ,2,3,1
-06/12/2022;18:04:22 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:22 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:22 - Valor share_key en el  server      : 121019403088600275093487143185632184095
-06/12/2022;18:04:22 - USER_RESPONSE # 270,USER_FIND,silvia
-06/12/2022;18:04:22 - VALUE_id_conn # 270
-06/12/2022;18:04:22 - crida a la gesti贸 de fils USER_FIND
-06/12/2022;18:04:22 - SERVER_online_waiting_for_request
-06/12/2022;18:04:22 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:22 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:23 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:23 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:23 - CRIDA_A_EXECUTAR# USER_FIND
-06/12/2022;18:04:23 - FIND_ID_IN_DB #
-06/12/2022;18:04:23 - RESULT_FIND_USER_ID # 202
-06/12/2022;18:04:23 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:23 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:23 - Valor share_key en el  server      : 109897231680199555106682979112125185428
-06/12/2022;18:04:23 - USER_RESPONSE # 270,USER_DELETE,202
-06/12/2022;18:04:23 - VALUE_id_conn # 270
-06/12/2022;18:04:23 - crida a la gesti贸 de fils USER_DELETE
-06/12/2022;18:04:23 - SERVER_online_waiting_for_request
-06/12/2022;18:04:23 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:23 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:23 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:23 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:23 - CRIDA_A_EXECUTAR# USER_DELETE
-06/12/2022;18:04:23 - DELETE_USER_IN_DB #
-06/12/2022;18:04:23 - DELETE_USER_ID           # 202
-06/12/2022;18:04:23 - RESULT_DELETE_USER_ID # 1
-06/12/2022;18:04:23 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:23 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:23 - Resultat de la baixa : 1
-06/12/2022;18:04:23 - Valor share_key en el  server      : 143116949606834540491585031681717770100
-06/12/2022;18:04:23 - Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris 
-06/12/2022;18:04:23 - USER_RESPONSE # 270,USER_QUERY_COUNT,0
-06/12/2022;18:04:23 - VALUE_id_conn # 270
-06/12/2022;18:04:23 - crida a la gesti贸 de fils USER_QUERY_COUNT
-06/12/2022;18:04:23 - SERVER_online_waiting_for_request
-06/12/2022;18:04:23 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:23 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:23 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:23 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:23 - CRIDA_A_EXECUTAR# USER_QUERY_COUNT
-06/12/2022;18:04:23 - EXECUTE_USER_QUERY_COUNT #
-06/12/2022;18:04:23 - Util format QUERY's
-06/12/2022;18:04:23 - Resultat de la setencia final SQL : select * from usuaris order by id
-06/12/2022;18:04:23 - VALOR SQL USER_QUERY_COUNT # select * from usuaris order by id
-06/12/2022;18:04:23 - El total de registres 茅s :6
-06/12/2022;18:04:23 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:23 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:23 - Valor share_key en el  server      : 99026173737652220578238971450678595443
-06/12/2022;18:04:23 - Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris 
-06/12/2022;18:04:23 - USER_RESPONSE # 270,USER_QUERY_GRID,0
-06/12/2022;18:04:23 - VALUE_id_conn # 270
-06/12/2022;18:04:23 - crida a la gesti贸 de fils USER_QUERY_GRID
-06/12/2022;18:04:23 - SERVER_online_waiting_for_request
-06/12/2022;18:04:23 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:23 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:23 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:23 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:23 - CRIDA_A_EXECUTAR# USER_QUERY_GRID
-06/12/2022;18:04:23 - EXECUTE_USER_QUERY_GRID #
-06/12/2022;18:04:23 - Util format QUERY's
-06/12/2022;18:04:23 - Resultat de la setencia final SQL : select * from public.usuaris_grid order by id
-06/12/2022;18:04:23 - VALOR SQL USER_QUERY_GRID # select * from public.usuaris_grid order by id
-06/12/2022;18:04:23 - El total de registres 茅s :6
-06/12/2022;18:04:23 - 1,aitor                                             ,Aitor                                             ,Garcia                                            ,Administraci贸                                     ,Administrador                                     
-06/12/2022;18:04:23 - 2,daniela                                           ,Daniela                                           ,Guitierrez                                        ,Comercial                                         ,Administrador                                     
-06/12/2022;18:04:23 - 3,carles                                            ,Carles                                            ,Fugarolas                                         ,Administraci贸                                     ,Administrador                                     
-06/12/2022;18:04:23 - 6,manel                                             ,Manel                                             ,Lopez                                             ,Marketing                                         ,T猫cnic                                            
-06/12/2022;18:04:23 - 7,martina                                           ,Martina                                           ,Perez                                             ,Administraci贸                                     ,Usuari                                            
-06/12/2022;18:04:23 - Ara femt el logOut ....... 
-06/12/2022;18:04:23 - 199,emi                                               ,emi                                               ,lopez                                             ,Administraci贸                                     ,Administrador                                     
-06/12/2022;18:04:23 - Valor share_key en el  server      : 160266067213596515937811971725198329591
-06/12/2022;18:04:23 - USER_RESPONSE # 270,USER_EXIT
-06/12/2022;18:04:23 - VALUE_id_conn # 270
-06/12/2022;18:04:23 - crida a la gesti贸 de fils USER_EXIT
-06/12/2022;18:04:23 - SERVER_online_waiting_for_request
-06/12/2022;18:04:23 - LogOut realitzat correctament proves usuaris 
-06/12/2022;18:04:23 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:23 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {270=carles}
-06/12/2022;18:04:23 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:23 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:23 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:23 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:23 - CRIDA_A_EXECUTAR# USER_EXIT
-06/12/2022;18:04:23 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#270
-06/12/2022;18:04:23 - CLOSE_DB_CONECTION_TIQ #270
-06/12/2022;18:04:23 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
-06/12/2022;18:04:38 - Valor share_key en el  server      : 26883885879698051366345864110643526843
-06/12/2022;18:04:38 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
-06/12/2022;18:04:38 - VALUE_id_conn # 0
-06/12/2022;18:04:38 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
-06/12/2022;18:04:38 - SQL_RESPONSE_VALIDATE_USER        # 1
-06/12/2022;18:04:38 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:04:38 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 663 - carles
-06/12/2022;18:04:38 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {663=carles}
-06/12/2022;18:04:38 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 663
-06/12/2022;18:04:38 - SERVER_SEND_ROLE_USER                   # 1
-06/12/2022;18:04:38 - SERVER_online_waiting_for_request
-06/12/2022;18:04:38 - Fem el login amb l'usuari carles i contrasenya  correcte :pwdcarles - El resulta 閟 correcte  
-06/12/2022;18:04:38 - resposta servidor  es un id  valit    : 663
-06/12/2022;18:04:38 - Valor share_key en el  server      : 108527552954182851239864048671848351818
-06/12/2022;18:04:38 - USER_RESPONSE # 663,DEPA_FIND,Comercial
-06/12/2022;18:04:38 - VALUE_id_conn # 663
-06/12/2022;18:04:38 - crida a la gesti贸 de fils DEPA_FIND
-06/12/2022;18:04:38 - SERVER_online_waiting_for_request
-06/12/2022;18:04:38 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:38 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:38 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:38 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:38 - FIND_ID_IN_DB_ROLS #
-06/12/2022;18:04:38 - RESULT_FIND_DEPART_ID # 2
-06/12/2022;18:04:38 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:38 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {663=carles}
-06/12/2022;18:04:38 - Valor share_key en el  server      : 138504143109505561139826114673146004614
-06/12/2022;18:04:38 - USER_RESPONSE # 663,DEPA_NEW,Departament prova,Descripcio Prova,66666666
-06/12/2022;18:04:38 - VALUE_id_conn # 663
-06/12/2022;18:04:38 - crida a la gesti贸 de fils DEPA_NEW
-06/12/2022;18:04:38 - SERVER_online_waiting_for_request
-06/12/2022;18:04:38 - Crida d'una alta : 663,DEPA_NEW,Departament prova,Descripcio Prova,66666666
-06/12/2022;18:04:38 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:38 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:38 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:38 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:38 - ADD_NEW_DEPART_IN_BD #
-06/12/2022;18:04:38 - INSERT_NEW_DEPARTAMENT_IN_DB #
-06/12/2022;18:04:38 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:38 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {663=carles}
-06/12/2022;18:04:38 - Valor share_key en el  server      : 32543921280896786155854551269048430371
-06/12/2022;18:04:38 - USER_RESPONSE # 663,DEPA_FIND,Departament prova
-06/12/2022;18:04:38 - VALUE_id_conn # 663
-06/12/2022;18:04:38 - crida a la gesti贸 de fils DEPA_FIND
-06/12/2022;18:04:38 - SERVER_online_waiting_for_request
-06/12/2022;18:04:38 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:38 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:39 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:39 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:39 - FIND_ID_IN_DB_ROLS #
-06/12/2022;18:04:39 - RESULT_FIND_DEPART_ID # 33
-06/12/2022;18:04:39 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {663=carles}
-06/12/2022;18:04:39 - Valor share_key en el  server      : 136950963957800231441928245634203547470
-06/12/2022;18:04:39 - USER_RESPONSE # 663,DEPA_MODIFI,33,Departament de prova modificat, Descripcio modificada, 666 66 66
-06/12/2022;18:04:39 - VALUE_id_conn # 663
-06/12/2022;18:04:39 - crida a la gesti贸 de fils DEPA_MODIFI
-06/12/2022;18:04:39 - SERVER_online_waiting_for_request
-06/12/2022;18:04:39 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:39 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:39 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:39 - MODIFI_NEW_DEPA_IN_BD #
-06/12/2022;18:04:39 - UPDATE_DEPARTAMENT_IN_DB #
-06/12/2022;18:04:39 - MODIFI_UPDATE_DEPART_RESULT # 1
-06/12/2022;18:04:39 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {663=carles}
-06/12/2022;18:04:39 - Resultat de la modificacio : 1
-06/12/2022;18:04:39 - Valor share_key en el  server      : 27929754328087593545859360022802831527
-06/12/2022;18:04:39 - USER_RESPONSE # 663,DEPA_DELETE,33
-06/12/2022;18:04:39 - VALUE_id_conn # 663
-06/12/2022;18:04:39 - crida a la gesti贸 de fils DEPA_DELETE
-06/12/2022;18:04:39 - SERVER_online_waiting_for_request
-06/12/2022;18:04:39 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:39 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:39 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:39 - DELETE_DEPART_IN_DB #
-06/12/2022;18:04:39 - DELETE_DEPARTAMENT_ID           # 33
-06/12/2022;18:04:39 - RESULT_DELETE_DEPART_ID # 1
-06/12/2022;18:04:39 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {663=carles}
-06/12/2022;18:04:39 - Valor share_key en el  server      : 81297114977848672974210068863579575642
-06/12/2022;18:04:39 - USER_RESPONSE # 663,DEPA_QUERY,0
-06/12/2022;18:04:39 - VALUE_id_conn # 663
-06/12/2022;18:04:39 - crida a la gesti贸 de fils DEPA_QUERY
-06/12/2022;18:04:39 - SERVER_online_waiting_for_request
-06/12/2022;18:04:39 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:39 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:39 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:39 - EXECUTE_DEPART_QUERY #
-06/12/2022;18:04:39 - Util format QUERY's
-06/12/2022;18:04:39 - Resultat de la setencia final SQL : select * from departaments order by id
-06/12/2022;18:04:39 - VALOR SQL ROLE_QUERY # select * from departaments order by id
-06/12/2022;18:04:39 - 1,Administraci贸                                     ,null,null
-06/12/2022;18:04:39 - 2,Comercial                                         ,null,null
-06/12/2022;18:04:39 - El total de registres 閟 :4
-06/12/2022;18:04:39 - 3,Marketing                                         ,null,null
-06/12/2022;18:04:39 - 12,Ventas                                            ,null,null
-06/12/2022;18:04:39 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {663=carles}
-06/12/2022;18:04:39 - Valor share_key en el  server      : 30643566160918775955608422119052731114
-06/12/2022;18:04:39 - USER_RESPONSE # 663,USER_EXIT
-06/12/2022;18:04:39 - VALUE_id_conn # 663
-06/12/2022;18:04:39 - crida a la gesti贸 de fils USER_EXIT
-06/12/2022;18:04:39 - SERVER_online_waiting_for_request
-06/12/2022;18:04:39 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:39 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:39 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:39 - CRIDA_A_EXECUTAR# USER_EXIT
-06/12/2022;18:04:39 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#663
-06/12/2022;18:04:39 - CLOSE_DB_CONECTION_TIQ #663
-06/12/2022;18:04:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
-06/12/2022;18:04:53 - Valor share_key en el  server      : 114257684551702236971360544709238791661
-06/12/2022;18:04:53 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
-06/12/2022;18:04:53 - VALUE_id_conn # 0
-06/12/2022;18:04:53 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
-06/12/2022;18:04:53 - SQL_RESPONSE_VALIDATE_USER        # 1
-06/12/2022;18:04:53 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:04:53 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 626 - carles
-06/12/2022;18:04:53 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {626=carles}
-06/12/2022;18:04:53 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 626
-06/12/2022;18:04:53 - SERVER_SEND_ROLE_USER                   # 1
-06/12/2022;18:04:53 - SERVER_online_waiting_for_request
-06/12/2022;18:04:53 - Fem el login amb l'usuari carles i contrasenya  correcte :pwdcarles - El resulta 閟 correcte  
-06/12/2022;18:04:53 - resposta servidor  es un id  valit    : 626
-06/12/2022;18:04:53 - Valor share_key en el  server      : 25555123007482961638063415225822586741
-06/12/2022;18:04:53 - USER_RESPONSE # 626,ROLE_NEW,Rol prova,Descripcio Prova
-06/12/2022;18:04:53 - VALUE_id_conn # 626
-06/12/2022;18:04:53 - crida a la gesti贸 de fils ROLE_NEW
-06/12/2022;18:04:53 - SERVER_online_waiting_for_request
-06/12/2022;18:04:53 - Crida d'una alta : 626,ROLE_NEW,Rol prova,Descripcio Prova
-06/12/2022;18:04:53 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:53 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:53 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:53 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:53 - ADD_NEW_ROLE_IN_BD #
-06/12/2022;18:04:53 - INSERT_NEW_ROLE_IN_DB #
-06/12/2022;18:04:53 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:53 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {626=carles}
-06/12/2022;18:04:53 - Valor share_key en el  server      : 88352892865485808576315412621735806135
-06/12/2022;18:04:53 - USER_RESPONSE # 626,ROLE_FIND,Rol prova
-06/12/2022;18:04:53 - VALUE_id_conn # 626
-06/12/2022;18:04:53 - crida a la gesti贸 de fils ROLE_FIND
-06/12/2022;18:04:53 - SERVER_online_waiting_for_request
-06/12/2022;18:04:53 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:53 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:53 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:53 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:53 - FIND_ID_IN_DB_ROLS #
-06/12/2022;18:04:53 - RESULT_FIND_ROLE_ID # 51
-06/12/2022;18:04:53 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:53 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {626=carles}
-06/12/2022;18:04:53 - Valor share_key en el  server      : 5750015203062432832450035357053168854
-06/12/2022;18:04:53 - USER_RESPONSE # 626,ROLE_MODIFI,51,Rol de prova modificat, Descripcio modificada
-06/12/2022;18:04:53 - VALUE_id_conn # 626
-06/12/2022;18:04:53 - crida a la gesti贸 de fils ROLE_MODIFI
-06/12/2022;18:04:53 - SERVER_online_waiting_for_request
-06/12/2022;18:04:53 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:53 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:54 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:54 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:54 - MODIFI_NEW_USER_IN_BD #
-06/12/2022;18:04:54 - UPDATE_USER_ID_0 # 626
-06/12/2022;18:04:54 - UPDATE_USER_ID_1 # ROLE_MODIFI
-06/12/2022;18:04:54 - UPDATE_USER_ID_2 # 51
-06/12/2022;18:04:54 - MODIFI_UPDATE_ROLE_RESULT # 1
-06/12/2022;18:04:54 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {626=carles}
-06/12/2022;18:04:54 - Resultat de la modificacio : 1
-06/12/2022;18:04:54 - Valor share_key en el  server      : 103383839101289237236810927620467014803
-06/12/2022;18:04:54 - USER_RESPONSE # 626,ROLE_DELETE,51
-06/12/2022;18:04:54 - VALUE_id_conn # 626
-06/12/2022;18:04:54 - crida a la gesti贸 de fils ROLE_DELETE
-06/12/2022;18:04:54 - SERVER_online_waiting_for_request
-06/12/2022;18:04:54 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:54 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:54 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:54 - DELETE_ROLE_IN_DB #
-06/12/2022;18:04:54 - DELETE_ROLE_ID           # 51
-06/12/2022;18:04:54 - RESULT_DELETE_ROLE_ID # 1
-06/12/2022;18:04:54 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {626=carles}
-06/12/2022;18:04:54 - Valor share_key en el  server      : 14362199184882753855962850203293526039
-06/12/2022;18:04:54 - USER_RESPONSE # 626,ROLE_QUERY,0
-06/12/2022;18:04:54 - VALUE_id_conn # 626
-06/12/2022;18:04:54 - crida a la gesti贸 de fils ROLE_QUERY
-06/12/2022;18:04:54 - SERVER_online_waiting_for_request
-06/12/2022;18:04:54 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:54 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:54 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:54 - EXECUTE_ROLE_QUERY #
-06/12/2022;18:04:54 - Util format QUERY's
-06/12/2022;18:04:54 - Resultat de la setencia final SQL : select * from rols order by id
-06/12/2022;18:04:54 - VALOR SQL ROLE_QUERY # select * from rols order by id
-06/12/2022;18:04:54 - 1,Administrador                                     ,null
-06/12/2022;18:04:54 - 2,T猫cnic                                            ,null
-06/12/2022;18:04:54 - El total de registres 閟 :6
-06/12/2022;18:04:54 - 3,Usuari                                            ,null
-06/12/2022;18:04:54 - 4,Convidat                                          ,null
-06/12/2022;18:04:54 - 5,Auxiliar                                          ,null
-06/12/2022;18:04:54 - 29,Auditor                                           ,null
-06/12/2022;18:04:54 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {626=carles}
-06/12/2022;18:04:54 - Valor share_key en el  server      : 99397232133224000230187378913931489660
-06/12/2022;18:04:54 - USER_RESPONSE # 626,ROLE_FIND,Administrador
-06/12/2022;18:04:54 - VALUE_id_conn # 626
-06/12/2022;18:04:54 - crida a la gesti贸 de fils ROLE_FIND
-06/12/2022;18:04:54 - SERVER_online_waiting_for_request
-06/12/2022;18:04:54 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:54 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:54 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:54 - FIND_ID_IN_DB_ROLS #
-06/12/2022;18:04:54 - RESULT_FIND_ROLE_ID # 1
-06/12/2022;18:04:54 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {626=carles}
-06/12/2022;18:04:54 - Valor share_key en el  server      : 169099364679097289484544416288791738983
-06/12/2022;18:04:54 - USER_RESPONSE # 626,USER_EXIT
-06/12/2022;18:04:54 - VALUE_id_conn # 626
-06/12/2022;18:04:54 - crida a la gesti贸 de fils USER_EXIT
-06/12/2022;18:04:54 - SERVER_online_waiting_for_request
-06/12/2022;18:04:54 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:04:54 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:04:54 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:04:54 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:04:54 - CRIDA_A_EXECUTAR# USER_EXIT
-06/12/2022;18:04:54 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#626
-06/12/2022;18:04:54 - CLOSE_DB_CONECTION_TIQ #626
-06/12/2022;18:04:54 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
-06/12/2022;18:05:06 - Valor share_key en el  server      : 13994117998597770425286650499998435621
-06/12/2022;18:05:06 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
-06/12/2022;18:05:06 - VALUE_id_conn # 0
-06/12/2022;18:05:06 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
-06/12/2022;18:05:06 - SQL_RESPONSE_VALIDATE_USER        # 1
-06/12/2022;18:05:06 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:05:06 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 227 - carles
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {227=carles}
-06/12/2022;18:05:06 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 227
-06/12/2022;18:05:06 - SERVER_SEND_ROLE_USER                   # 1
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - Fem el login amb l'usuari carles i contrasenya  correcte :pwdcarles - El resulta 閟 correcte  
-06/12/2022;18:05:06 - resposta servidor  es un id  valit    : 227
-06/12/2022;18:05:06 - Valor share_key en el  server      : 115935496564292803845668765246433120735
-06/12/2022;18:05:06 - USER_RESPONSE # 227,DEPA_FIND,Comercial
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils DEPA_FIND
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:06 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:06 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:06 - FIND_ID_IN_DB_ROLS #
-06/12/2022;18:05:06 - RESULT_FIND_DEPART_ID # 2
-06/12/2022;18:05:06 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {227=carles}
-06/12/2022;18:05:06 - Valor share_key en el  server      : 15749312271949972913788612590816458231
-06/12/2022;18:05:06 - USER_RESPONSE # 227,DEPA_NEW,Departament prova,Descripcio Prova,66666666
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils DEPA_NEW
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - Crida d'una alta : 227,DEPA_NEW,Departament prova,Descripcio Prova,66666666
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:06 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:06 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:06 - ADD_NEW_DEPART_IN_BD #
-06/12/2022;18:05:06 - INSERT_NEW_DEPARTAMENT_IN_DB #
-06/12/2022;18:05:06 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {227=carles}
-06/12/2022;18:05:06 - Valor share_key en el  server      : 159510581690830405470976065277025209286
-06/12/2022;18:05:06 - USER_RESPONSE # 227,DEPA_FIND,Departament prova
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils DEPA_FIND
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:06 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:06 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:06 - FIND_ID_IN_DB_ROLS #
-06/12/2022;18:05:06 - RESULT_FIND_DEPART_ID # 34
-06/12/2022;18:05:06 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {227=carles}
-06/12/2022;18:05:06 - Valor share_key en el  server      : 157247482909624382164501253575416643180
-06/12/2022;18:05:06 - USER_RESPONSE # 227,DEPA_MODIFI,34,Departament de prova modificat, Descripcio modificada, 666 66 66
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils DEPA_MODIFI
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:06 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:06 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:06 - MODIFI_NEW_DEPA_IN_BD #
-06/12/2022;18:05:06 - UPDATE_DEPARTAMENT_IN_DB #
-06/12/2022;18:05:06 - MODIFI_UPDATE_DEPART_RESULT # 1
-06/12/2022;18:05:06 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {227=carles}
-06/12/2022;18:05:06 - Resultat de la modificacio : 1
-06/12/2022;18:05:06 - Valor share_key en el  server      : 51938161158540548436686117626077104893
-06/12/2022;18:05:06 - USER_RESPONSE # 227,DEPA_DELETE,34
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils DEPA_DELETE
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:06 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:06 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:06 - DELETE_DEPART_IN_DB #
-06/12/2022;18:05:06 - DELETE_DEPARTAMENT_ID           # 34
-06/12/2022;18:05:06 - RESULT_DELETE_DEPART_ID # 1
-06/12/2022;18:05:06 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {227=carles}
-06/12/2022;18:05:06 - Valor share_key en el  server      : 69994777600623544515024604600631181788
-06/12/2022;18:05:06 - USER_RESPONSE # 227,DEPA_QUERY,0
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils DEPA_QUERY
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:06 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:06 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:06 - EXECUTE_DEPART_QUERY #
-06/12/2022;18:05:06 - Util format QUERY's
-06/12/2022;18:05:06 - Resultat de la setencia final SQL : select * from departaments order by id
-06/12/2022;18:05:06 - VALOR SQL ROLE_QUERY # select * from departaments order by id
-06/12/2022;18:05:06 - 1,Administraci贸                                     ,null,null
-06/12/2022;18:05:06 - 2,Comercial                                         ,null,null
-06/12/2022;18:05:06 - 3,Marketing                                         ,null,null
-06/12/2022;18:05:06 - 12,Ventas                                            ,null,null
-06/12/2022;18:05:06 - El total de registres 閟 :4
-06/12/2022;18:05:06 - CLOSE_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {227=carles}
-06/12/2022;18:05:06 - Valor share_key en el  server      : 109642522366165907149858281193832709990
-06/12/2022;18:05:06 - USER_RESPONSE # 227,USER_EXIT
-06/12/2022;18:05:06 - VALUE_id_conn # 227
-06/12/2022;18:05:06 - crida a la gesti贸 de fils USER_EXIT
-06/12/2022;18:05:06 - SERVER_online_waiting_for_request
-06/12/2022;18:05:06 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:06 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:07 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:07 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:07 - CRIDA_A_EXECUTAR# USER_EXIT
-06/12/2022;18:05:07 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#227
-06/12/2022;18:05:07 - CLOSE_DB_CONECTION_TIQ #227
-06/12/2022;18:05:07 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
-06/12/2022;18:05:39 - Valor share_key en el  server      : 101995194185146555186642937133959272309
-06/12/2022;18:05:39 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
-06/12/2022;18:05:39 - VALUE_id_conn # 0
-06/12/2022;18:05:39 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
-06/12/2022;18:05:39 - SQL_RESPONSE_VALIDATE_USER        # 1
-06/12/2022;18:05:39 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:05:39 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 824 - carles
-06/12/2022;18:05:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {824=carles}
-06/12/2022;18:05:39 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 824
-06/12/2022;18:05:39 - SERVER_SEND_ROLE_USER                   # 1
-06/12/2022;18:05:39 - SERVER_online_waiting_for_request
-06/12/2022;18:05:39 - Fem el login amb l'usuari carles i contrasenya  correcte :pwdcarles - El resulta 閟 correcte  
-06/12/2022;18:05:39 - resposta servidor  es un id  valit    : 824
-06/12/2022;18:05:39 - Valor share_key en el  server      : 106687974958670125902095811270406751968
-06/12/2022;18:05:39 - USER_RESPONSE # 0,LOGIN,carles,errorpassword
-06/12/2022;18:05:39 - VALUE_id_conn # 0
-06/12/2022;18:05:39 - ENCRYTED_PASSWORD_ALG             # ea9b5e1e80d7fffec027742b810a5aefd2703b128e91c7e380e25835d6cfe6d0
-06/12/2022;18:05:39 - SQL_RESPONSE_VALIDATE_USER        # 0
-06/12/2022;18:05:39 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
-06/12/2022;18:05:39 - SERVER_SEND_ID_CONN_USER_WRONG          # 0
-06/12/2022;18:05:39 - SERVER_online_waiting_for_request
-06/12/2022;18:05:39 - Fem el login amb l'usuari carles i contrasenya  incorrecte :errorpassword - El resulta 閟 erroni 
-06/12/2022;18:05:39 - resposta servidor  es un id  valit    : 0
-06/12/2022;18:05:39 - Valor share_key en el  server      : 156433451642269196269900380145824749859
-06/12/2022;18:05:39 - USER_RESPONSE # 824,USER_FIND,carles
-06/12/2022;18:05:39 - VALUE_id_conn # 824
-06/12/2022;18:05:39 - crida a la gesti贸 de fils USER_FIND
-06/12/2022;18:05:39 - SERVER_online_waiting_for_request
-06/12/2022;18:05:39 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:39 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:39 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:39 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:39 - CRIDA_A_EXECUTAR# USER_FIND
-06/12/2022;18:05:39 - FIND_ID_IN_DB #
-06/12/2022;18:05:39 - RESULT_FIND_USER_ID # 3
-06/12/2022;18:05:39 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:39 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {824=carles}
-06/12/2022;18:05:39 - Valor share_key en el  server      : 21922456023972939321701223569817701641
-06/12/2022;18:05:39 - USER_RESPONSE # 824,USER_NEW,silvia,pwdsilvia,silvia,olivar,1,1,1
-06/12/2022;18:05:39 - VALUE_id_conn # 824
-06/12/2022;18:05:39 - crida a la gesti贸 de fils USER_NEW
-06/12/2022;18:05:39 - SERVER_online_waiting_for_request
-06/12/2022;18:05:39 - Crida d'una alta : 824,USER_NEW,silvia,pwdsilvia,silvia,olivar,1,1,1
-06/12/2022;18:05:40 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:40 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:40 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:40 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:40 - CRIDA_A_EXECUTAR# USER_NEW
-06/12/2022;18:05:40 - ADD_NEW_USER_IN_BD #
-06/12/2022;18:05:40 - INSERT_NEW_USER_IN_DB #
-06/12/2022;18:05:40 - Valor de resultat # 1
-06/12/2022;18:05:40 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:40 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {824=carles}
-06/12/2022;18:05:40 - Valor share_key en el  server      : 52870947547907012635712374669575028602
-06/12/2022;18:05:40 - USER_RESPONSE # 824,USER_FIND,silvia
-06/12/2022;18:05:40 - VALUE_id_conn # 824
-06/12/2022;18:05:40 - crida a la gesti贸 de fils USER_FIND
-06/12/2022;18:05:40 - SERVER_online_waiting_for_request
-06/12/2022;18:05:40 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:40 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:40 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:40 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:40 - CRIDA_A_EXECUTAR# USER_FIND
-06/12/2022;18:05:40 - FIND_ID_IN_DB #
-06/12/2022;18:05:40 - RESULT_FIND_USER_ID # 203
-06/12/2022;18:05:40 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:40 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {824=carles}
-06/12/2022;18:05:40 - Valor share_key en el  server      : 118915735329938657739499662501460093299
-06/12/2022;18:05:40 - USER_RESPONSE # 824,USER_MODIFI,203,silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1
-06/12/2022;18:05:40 - VALUE_id_conn # 824
-06/12/2022;18:05:40 - crida a la gesti贸 de fils USER_MODIFI
-06/12/2022;18:05:40 - SERVER_online_waiting_for_request
-06/12/2022;18:05:40 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:40 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:40 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:40 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:40 - CRIDA_A_EXECUTAR# USER_MODIFI
-06/12/2022;18:05:40 - MODIFI_NEW_USER_IN_BD #
-06/12/2022;18:05:40 - UPDATE_USER_ID # 824
-06/12/2022;18:05:40 - MODIFI_UPDATE_USER_RESULT # 1
-06/12/2022;18:05:40 - Resultat de la modificacio : 1
-06/12/2022;18:05:40 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:40 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {824=carles}
-06/12/2022;18:05:40 - Valor share_key en el  server      : 148328095646527895333504537380151851896
-06/12/2022;18:05:40 - USER_RESPONSE # 824,USER_DELETE,203
-06/12/2022;18:05:40 - VALUE_id_conn # 824
-06/12/2022;18:05:40 - crida a la gesti贸 de fils USER_DELETE
-06/12/2022;18:05:40 - SERVER_online_waiting_for_request
-06/12/2022;18:05:40 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:40 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:40 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:40 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:40 - CRIDA_A_EXECUTAR# USER_DELETE
-06/12/2022;18:05:40 - DELETE_USER_IN_DB #
-06/12/2022;18:05:40 - DELETE_USER_ID           # 203
-06/12/2022;18:05:40 - RESULT_DELETE_USER_ID # 1
-06/12/2022;18:05:40 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:40 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {824=carles}
-06/12/2022;18:05:40 - Valor share_key en el  server      : 132105248315261606443712565906309296488
-06/12/2022;18:05:40 - USER_RESPONSE # 824,USER_QUERY,0
-06/12/2022;18:05:40 - VALUE_id_conn # 824
-06/12/2022;18:05:40 - crida a la gesti贸 de fils USER_QUERY
-06/12/2022;18:05:40 - SERVER_online_waiting_for_request
-06/12/2022;18:05:40 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:40 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:40 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:40 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:40 - CRIDA_A_EXECUTAR# USER_QUERY
-06/12/2022;18:05:40 - EXECUTE_USER_QUERY #
-06/12/2022;18:05:40 - Util format QUERY's
-06/12/2022;18:05:40 - Resultat de la setencia final SQL : select * from usuaris order by id
-06/12/2022;18:05:40 - VALOR SQL USER_QUERY # select * from usuaris order by id
-06/12/2022;18:05:40 - 1,aitor                                             ,fc8f10388f1139a1da1c800e3900caf4e9f57839184f87bc096081257c605290                                    ,Aitor                                             ,Garcia                                            ,1,1,1
-06/12/2022;18:05:40 - 2,daniela                                           ,1293b2bbf925d6515e86e5357a8e9fe318c22c41d1efee64cc83b6911f88c5ac                                    ,Daniela                                           ,Guitierrez                                        ,2,1,1
-06/12/2022;18:05:40 - 3,carles                                            ,367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64                                    ,Carles                                            ,Fugarolas                                         ,1,1,1
-06/12/2022;18:05:40 - 6,manel                                             ,4962b140ea0e612d11365e5a4c5221dc8e0e94989a69f9aede215fc1c1101873                                    ,Manel                                             ,Lopez                                             ,3,2,1
-06/12/2022;18:05:40 - 7,martina                                           ,33785b881a1d679d2e7ad7bdac2f73a0a18fad83a41ae2ae7ed513366832ad48                                    ,Martina                                           ,Perez                                             ,1,3,1
-06/12/2022;18:05:40 - 199,emi                                               ,71ec09d85a74f2cde8e3647bca3649f70bb4386805a399e30645ee14275d43a8                                    ,emi                                               ,lopez                                             ,1,1,1
-06/12/2022;18:05:40 - El total de registres 閟 :6
-06/12/2022;18:05:40 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:40 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {824=carles}
-06/12/2022;18:05:40 - Valor share_key en el  server      : 119961926599659130130542689717469444483
-06/12/2022;18:05:40 - USER_RESPONSE # 824,USER_EXIT
-06/12/2022;18:05:40 - VALUE_id_conn # 824
-06/12/2022;18:05:40 - crida a la gesti贸 de fils USER_EXIT
-06/12/2022;18:05:40 - SERVER_online_waiting_for_request
-06/12/2022;18:05:40 - OPEN_DB_CONECTION_TIQ #
-06/12/2022;18:05:40 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
-06/12/2022;18:05:40 - SQL_RESPONSE_successful_connection_user tiqinssues
-06/12/2022;18:05:40 - CONECTION_SUCCEFULLY_DB_TIQ #
-06/12/2022;18:05:40 - CRIDA_A_EXECUTAR# USER_EXIT
-06/12/2022;18:05:40 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#824
-06/12/2022;18:05:40 - CLOSE_DB_CONECTION_TIQ #824
-06/12/2022;18:05:40 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+06/12/2022;18:32:01 - Valor share_key en el  server      : 27340772685210209066508233192289922327
+06/12/2022;18:32:02 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
+06/12/2022;18:32:02 - VALUE_id_conn # 0
+06/12/2022;18:32:02 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
+06/12/2022;18:32:02 - SQL_RESPONSE_VALIDATE_USER        # 1
+06/12/2022;18:32:02 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+06/12/2022;18:32:02 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 860 - carles
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {860=carles}
+06/12/2022;18:32:02 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 860
+06/12/2022;18:32:02 - Fem el login amb l'usuari carlesi contrasenya  correcte :pwdcarles - El resulta 茅s CORRECTE  
+06/12/2022;18:32:02 - resposta servidor  es un id  valit    : 860
+06/12/2022;18:32:02 - SERVER_SEND_ROLE_USER                   # 1
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - Valor share_key en el  server      : 66079832251839630483122287575720291642
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_NEW,incidencia3,comentari3,1,3,1,1
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_NEW
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - Crida d'una alta : 860,TIQU_NEW,incidencia3,comentari3,1,3,1,1
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:02 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:02 - CRIDA_A_EXECUTAR# TIQU_NEW
+06/12/2022;18:32:02 - ADD_NEW_TIQUET_IN_BD #
+06/12/2022;18:32:02 - INSERT_NEW_TIQ_IN_DB #
+06/12/2022;18:32:02 - Valor de resultat # 1
+06/12/2022;18:32:02 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:02 - Valor share_key en el  server      : 15140688873076560252243827037336208203
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_QUERY,0
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_QUERY
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:02 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:02 - CRIDA_A_EXECUTAR# TIQU_QUERY
+06/12/2022;18:32:02 - EXECUTE_TIQU_QUERY #
+06/12/2022;18:32:02 - Util format QUERY's
+06/12/2022;18:32:02 - Resultat de la setencia final SQL : select * from tiquets order by id_tiq
+06/12/2022;18:32:02 - VALOR SQL TIQU_QUERY # select * from tiquets order by id_tiq
+06/12/2022;18:32:02 - 1,null,incidencia1                                                                                         ,comentari1                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:32:02 - El total de registres 茅s :3
+06/12/2022;18:32:02 - 2,null,incidencia2                                                                                         ,comentari2                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:32:02 - 10,06/12/2022;18:32:02 ,incidencia3                                                                                         ,comentari3                                                                                                                                                                                                                                                                                                  ,1,1,3,1,null
+06/12/2022;18:32:02 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:02 - Valor share_key en el  server      : 119271778469981518294601821037320542045
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_FIND,incidencia2
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_FIND
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:02 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:02 - CRIDA_A_EXECUTAR# TIQU_FIND
+06/12/2022;18:32:02 - FIND_ID_IN_DB #
+06/12/2022;18:32:02 - RESULT_FIND_TIQU_ID # 2
+06/12/2022;18:32:02 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:02 - Valor share_key en el  server      : 158635136940646747253552284177429877609
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_FIND,incidencia3
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_FIND
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:02 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:02 - CRIDA_A_EXECUTAR# TIQU_FIND
+06/12/2022;18:32:02 - FIND_ID_IN_DB #
+06/12/2022;18:32:02 - RESULT_FIND_TIQU_ID # 10
+06/12/2022;18:32:02 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:02 - Valor share_key en el  server      : 71080052413259837205070482792786088004
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_QUERY,0
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_QUERY
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:02 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:02 - CRIDA_A_EXECUTAR# TIQU_QUERY
+06/12/2022;18:32:02 - EXECUTE_TIQU_QUERY #
+06/12/2022;18:32:02 - Util format QUERY's
+06/12/2022;18:32:02 - Resultat de la setencia final SQL : select * from tiquets order by id_tiq
+06/12/2022;18:32:02 - VALOR SQL TIQU_QUERY # select * from tiquets order by id_tiq
+06/12/2022;18:32:02 - El total de registres 茅s :3
+06/12/2022;18:32:02 - 1,null,incidencia1                                                                                         ,comentari1                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:32:02 - 2,null,incidencia2                                                                                         ,comentari2                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:32:02 - Valor share_key en el  server      : 38561363058187836027619468935482318264
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_FIND,incidencia3
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_FIND
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - 10,06/12/2022;18:32:02 ,incidencia3                                                                                         ,comentari3                                                                                                                                                                                                                                                                                                  ,1,1,3,1,null
+06/12/2022;18:32:02 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:02 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:02 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:02 - CRIDA_A_EXECUTAR# TIQU_FIND
+06/12/2022;18:32:02 - FIND_ID_IN_DB #
+06/12/2022;18:32:02 - RESULT_FIND_TIQU_ID # 10
+06/12/2022;18:32:02 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:02 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:02 - Valor share_key en el  server      : 134129971682115359813321680518443481912
+06/12/2022;18:32:02 - USER_RESPONSE # 860,TIQU_MODIFI,10,incidencia33,comentari33,1,3,1,1,31/12/2022;23:59:59
+06/12/2022;18:32:02 - VALUE_id_conn # 860
+06/12/2022;18:32:02 - crida a la gesti贸 de fils TIQU_MODIFI
+06/12/2022;18:32:02 - SERVER_online_waiting_for_request
+06/12/2022;18:32:02 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:02 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:03 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:03 - CRIDA_A_EXECUTAR# TIQU_MODIFI
+06/12/2022;18:32:03 - MODIFI_UPDATE_TIQU_IN_BD #
+06/12/2022;18:32:03 - UPDATE_TIQ_ID # 860
+06/12/2022;18:32:03 - MODIFI_UPDATE_TIQU_RESULT # 1
+06/12/2022;18:32:03 - Resultat de la modificacio : 1
+06/12/2022;18:32:03 - Valor share_key en el  server      : 53287282311238240103662873696359138248
+06/12/2022;18:32:03 - USER_RESPONSE # 860,TIQU_QUERY,0
+06/12/2022;18:32:03 - VALUE_id_conn # 860
+06/12/2022;18:32:03 - crida a la gesti贸 de fils TIQU_QUERY
+06/12/2022;18:32:03 - SERVER_online_waiting_for_request
+06/12/2022;18:32:03 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:03 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:03 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:03 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:03 - CRIDA_A_EXECUTAR# TIQU_QUERY
+06/12/2022;18:32:03 - EXECUTE_TIQU_QUERY #
+06/12/2022;18:32:03 - Util format QUERY's
+06/12/2022;18:32:03 - Resultat de la setencia final SQL : select * from tiquets order by id_tiq
+06/12/2022;18:32:03 - VALOR SQL TIQU_QUERY # select * from tiquets order by id_tiq
+06/12/2022;18:32:03 - 1,null,incidencia1                                                                                         ,comentari1                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:32:03 - El total de registres 茅s :3
+06/12/2022;18:32:03 - 2,null,incidencia2                                                                                         ,comentari2                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:32:03 - 10,06/12/2022;18:32:02 ,incidencia33                                                                                        ,comentari33                                                                                                                                                                                                                                                                                                 ,1,1,3,1,31/12/2022;23:59:59 
+06/12/2022;18:32:03 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:03 - Valor share_key en el  server      : 84584501659037853347914044264184305869
+06/12/2022;18:32:03 - USER_RESPONSE # 860,TIQU_FIND,incidencia33
+06/12/2022;18:32:03 - VALUE_id_conn # 860
+06/12/2022;18:32:03 - crida a la gesti贸 de fils TIQU_FIND
+06/12/2022;18:32:03 - SERVER_online_waiting_for_request
+06/12/2022;18:32:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:03 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:03 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:03 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:03 - CRIDA_A_EXECUTAR# TIQU_FIND
+06/12/2022;18:32:03 - FIND_ID_IN_DB #
+06/12/2022;18:32:03 - RESULT_FIND_TIQU_ID # 10
+06/12/2022;18:32:03 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:03 - Valor share_key en el  server      : 63540522221911136161373926908573845782
+06/12/2022;18:32:03 - USER_RESPONSE # 860,TIQU_DELETE,10
+06/12/2022;18:32:03 - VALUE_id_conn # 860
+06/12/2022;18:32:03 - crida a la gesti贸 de fils TIQU_DELETE
+06/12/2022;18:32:03 - SERVER_online_waiting_for_request
+06/12/2022;18:32:03 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:03 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:03 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:03 - CRIDA_A_EXECUTAR# TIQU_DELETE
+06/12/2022;18:32:03 - DELETE_TIQU_IN_DB #
+06/12/2022;18:32:03 - DELETE_TIQ_ID           # 10
+06/12/2022;18:32:03 - RESULT_DELETE_TIQU_ID # 1
+06/12/2022;18:32:03 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:03 - Resultat de la baixa : 1
+06/12/2022;18:32:03 - Valor share_key en el  server      : 89734054101749202850581243448458214053
+06/12/2022;18:32:03 - Executem la crida a fer un llistat de tots els usuaris de la Bd's d'usuaris 
+06/12/2022;18:32:03 - USER_RESPONSE # 860,TIQU_QUERY_COUNT,0
+06/12/2022;18:32:03 - VALUE_id_conn # 860
+06/12/2022;18:32:03 - crida a la gesti贸 de fils TIQU_QUERY_COUNT
+06/12/2022;18:32:03 - SERVER_online_waiting_for_request
+06/12/2022;18:32:03 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:03 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:03 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:03 - CRIDA_A_EXECUTAR# TIQU_QUERY_COUNT
+06/12/2022;18:32:03 - EXECUTE_TIQU_QUERY_COUNT #
+06/12/2022;18:32:03 - Util format QUERY's
+06/12/2022;18:32:03 - Resultat de la setencia final SQL : select * from tiquets order by id_tiq
+06/12/2022;18:32:03 - VALOR SQL TIQU_QUERY_COUNT # select * from tiquets order by id_tiq
+06/12/2022;18:32:03 - El total de registres 茅s :2
+06/12/2022;18:32:03 - Ara femt el logOut ....... 
+06/12/2022;18:32:03 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {860=carles}
+06/12/2022;18:32:03 - Valor share_key en el  server      : 56155444113952571486076354476577873798
+06/12/2022;18:32:03 - USER_RESPONSE # 860,USER_EXIT
+06/12/2022;18:32:03 - LogOut realitzat correctament proves tiquets 
+06/12/2022;18:32:03 - VALUE_id_conn # 860
+06/12/2022;18:32:03 - crida a la gesti贸 de fils USER_EXIT
+06/12/2022;18:32:03 - SERVER_online_waiting_for_request
+06/12/2022;18:32:03 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:32:03 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:32:03 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:32:03 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:32:03 - CRIDA_A_EXECUTAR# USER_EXIT
+06/12/2022;18:32:03 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#860
+06/12/2022;18:32:03 - CLOSE_DB_CONECTION_TIQ #860
+06/12/2022;18:32:03 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+06/12/2022;18:34:24 - Valor share_key en el  server      : 19847611826692188822592344182547893666
+06/12/2022;18:34:24 - USER_RESPONSE # 0,LOGIN,carles,pwdcarles
+06/12/2022;18:34:24 - VALUE_id_conn # 0
+06/12/2022;18:34:24 - ENCRYTED_PASSWORD_ALG             # 367e122cd321d1884404da9d731265bff103a922322330c926fd939f72ffcb64
+06/12/2022;18:34:24 - SQL_RESPONSE_VALIDATE_USER        # 1
+06/12/2022;18:34:24 - SERVER_SHOW_ID_CONN_USER_RECEIVED # 0
+06/12/2022;18:34:24 - SERVER_ADD_USER_AND_ID_CONN-IN_HashMap  # 733 - carles
+06/12/2022;18:34:24 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap # {733=carles}
+06/12/2022;18:34:24 - SERVER_SEND_NEW_ID_CONN_USER_OK         # 733
+06/12/2022;18:34:24 - SERVER_SEND_ROLE_USER                   # 1
+06/12/2022;18:34:24 - SERVER_online_waiting_for_request
+06/12/2022;18:34:24 - Fem el login amb l'usuari carles i contrasenya  correcte :pwdcarles - El resulta 閟 correcte  
+06/12/2022;18:34:24 - resposta servidor  es un id  valit    : 733
+06/12/2022;18:34:24 - Valor share_key en el  server      : 89167833636756600265364104961065248918
+06/12/2022;18:34:24 - USER_RESPONSE # 733,TIQU_FIND,incidencia2
+06/12/2022;18:34:24 - VALUE_id_conn # 733
+06/12/2022;18:34:24 - crida a la gesti贸 de fils TIQU_FIND
+06/12/2022;18:34:24 - SERVER_online_waiting_for_request
+06/12/2022;18:34:24 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:24 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:24 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:24 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:24 - CRIDA_A_EXECUTAR# TIQU_FIND
+06/12/2022;18:34:24 - FIND_ID_IN_DB #
+06/12/2022;18:34:24 - RESULT_FIND_TIQU_ID # 2
+06/12/2022;18:34:24 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:24 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {733=carles}
+06/12/2022;18:34:24 - Valor share_key en el  server      : 66791455847913805722112212335811287847
+06/12/2022;18:34:24 - USER_RESPONSE # 733,TIQU_QUERY,0
+06/12/2022;18:34:24 - VALUE_id_conn # 733
+06/12/2022;18:34:24 - crida a la gesti贸 de fils TIQU_QUERY
+06/12/2022;18:34:24 - SERVER_online_waiting_for_request
+06/12/2022;18:34:24 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:24 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:24 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:24 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:24 - CRIDA_A_EXECUTAR# TIQU_QUERY
+06/12/2022;18:34:24 - EXECUTE_TIQU_QUERY #
+06/12/2022;18:34:24 - Util format QUERY's
+06/12/2022;18:34:24 - Resultat de la setencia final SQL : select * from tiquets order by id_tiq
+06/12/2022;18:34:24 - VALOR SQL TIQU_QUERY # select * from tiquets order by id_tiq
+06/12/2022;18:34:24 - 1,null,incidencia1                                                                                         ,comentari1                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:34:24 - 2,null,incidencia2                                                                                         ,comentari2                                                                                                                                                                                                                                                                                                  ,1,0,3,1,null
+06/12/2022;18:34:24 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:24 - El total de registres 閟 :2
+06/12/2022;18:34:24 - Valor share_key en el  server      : 49528532465590939080386141310722858679
+06/12/2022;18:34:24 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {733=carles}
+06/12/2022;18:34:24 - USER_RESPONSE # 733,USER_EXIT
+06/12/2022;18:34:24 - VALUE_id_conn # 733
+06/12/2022;18:34:24 - crida a la gesti贸 de fils USER_EXIT
+06/12/2022;18:34:24 - SERVER_online_waiting_for_request
+06/12/2022;18:34:24 - Valor share_key en el  server      : 97760364478405892516154085321283418693
+06/12/2022;18:34:24 - USER_RESPONSE # 733,TIQU_NEW,incidencia3,comentari3,1,3,1,1
+06/12/2022;18:34:24 - VALUE_id_conn # 733
+06/12/2022;18:34:24 - crida a la gesti贸 de fils TIQU_NEW
+06/12/2022;18:34:24 - SERVER_online_waiting_for_request
+06/12/2022;18:34:24 - Crida d'una alta d'un tiquet : 733,TIQU_NEW,incidencia3,comentari3,1,3,1,1
+06/12/2022;18:34:24 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:24 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:24 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:24 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:25 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:25 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:25 - CRIDA_A_EXECUTAR# USER_EXIT
+06/12/2022;18:34:25 - EXECUTE_USER_EXIT_ServerfilsUsuaris_#733
+06/12/2022;18:34:25 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:25 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+06/12/2022;18:34:25 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:25 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:25 - CRIDA_A_EXECUTAR# TIQU_NEW
+06/12/2022;18:34:25 - ADD_NEW_TIQUET_IN_BD #
+06/12/2022;18:34:25 - INSERT_NEW_TIQ_IN_DB #
+06/12/2022;18:34:25 - Valor de resultat # 1
+06/12/2022;18:34:25 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:25 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+06/12/2022;18:34:25 - Valor share_key en el  server      : 29993378215489678408030330884658941570
+06/12/2022;18:34:25 - USER_RESPONSE # 733,TIQU_FIND,incidencia3
+06/12/2022;18:34:25 - VALUE_id_conn # 733
+06/12/2022;18:34:25 - crida a la gesti贸 de fils TIQU_FIND
+06/12/2022;18:34:25 - SERVER_online_waiting_for_request
+06/12/2022;18:34:25 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:25 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:25 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:25 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:25 - CRIDA_A_EXECUTAR# TIQU_FIND
+06/12/2022;18:34:25 - FIND_ID_IN_DB #
+06/12/2022;18:34:25 - RESULT_FIND_TIQU_ID # 11
+06/12/2022;18:34:25 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:25 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+06/12/2022;18:34:25 - Valor share_key en el  server      : 139848029466443223668815025264053124951
+06/12/2022;18:34:25 - USER_RESPONSE # 733,TIQU_MODIFI,11,incidencia33,comentari33,1,3,1,1,31/12/2022;23:59:59
+06/12/2022;18:34:25 - VALUE_id_conn # 733
+06/12/2022;18:34:25 - crida a la gesti贸 de fils TIQU_MODIFI
+06/12/2022;18:34:25 - SERVER_online_waiting_for_request
+06/12/2022;18:34:25 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:25 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:25 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:25 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:25 - CRIDA_A_EXECUTAR# TIQU_MODIFI
+06/12/2022;18:34:25 - MODIFI_UPDATE_TIQU_IN_BD #
+06/12/2022;18:34:25 - UPDATE_TIQ_ID # 733
+06/12/2022;18:34:25 - MODIFI_UPDATE_TIQU_RESULT # 1
+06/12/2022;18:34:25 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:25 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
+06/12/2022;18:34:25 - Resultat de la modificacio del tiquet: 1
+06/12/2022;18:34:25 - Valor share_key en el  server      : 91361798080509508328494265341793539143
+06/12/2022;18:34:25 - USER_RESPONSE # 733,TIQU_DELETE,11
+06/12/2022;18:34:25 - VALUE_id_conn # 733
+06/12/2022;18:34:25 - crida a la gesti贸 de fils TIQU_DELETE
+06/12/2022;18:34:25 - SERVER_online_waiting_for_request
+06/12/2022;18:34:25 - OPEN_DB_CONECTION_TIQ #
+06/12/2022;18:34:25 - INFO_SQL_CONNECTION # jdbc:postgresql://192.168.1.141/tiq
+06/12/2022;18:34:25 - SQL_RESPONSE_successful_connection_user tiqinssues
+06/12/2022;18:34:25 - CONECTION_SUCCEFULLY_DB_TIQ #
+06/12/2022;18:34:25 - CRIDA_A_EXECUTAR# TIQU_DELETE
+06/12/2022;18:34:25 - DELETE_TIQU_IN_DB #
+06/12/2022;18:34:25 - DELETE_TIQ_ID           # 11
+06/12/2022;18:34:25 - RESULT_DELETE_TIQU_ID # 1
+06/12/2022;18:34:25 - CLOSE_DB_CONECTION_TIQ #733
+06/12/2022;18:34:25 - SERVER_SHOW_ACTIVES_USERS_IN_ID_HashMap          # {}
