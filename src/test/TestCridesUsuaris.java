@@ -432,7 +432,7 @@ public class TestCridesUsuaris {
             edc.calculClauCompartida(in.readUTF());
            
             //Enviem resposta al servidor amb el usuari i la contrasenya
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",LOGIN," + usuari + "," + contrasenya ,edc.getShare_key_client().toByteArray()));
             //Recullim el id_sessio vàlit
             resposta_svr_id = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
               

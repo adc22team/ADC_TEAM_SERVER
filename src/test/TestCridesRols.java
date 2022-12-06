@@ -248,7 +248,7 @@ public class TestCridesRols {
             edc.calculClauCompartida(in.readUTF());
    
             //Enviem al servidor la crida per fer la baixa d'un usuari
-            out.writeUTF(SystemUtils.encryptedText(id_conn +",ROLE_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn +",ROLE_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
             System.out.println("Resultat de la baixa       : "

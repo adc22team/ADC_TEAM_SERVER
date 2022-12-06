@@ -173,7 +173,7 @@ public class JUnitTestCridesTiquets {
             out.writeUTF(edc.encryptedText(id_conn+",TIQU_FIND," + incidencia,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta
-            int id_trobat =Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            int id_trobat =Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             
             //Si troba l'usuari torna el seu id
             System.out.println("Buscar el id_tiq del tiquet : " + incidencia + "a la Bd's de tiquets, id_tiq trobat : "+ id_trobat);
@@ -263,7 +263,7 @@ public class JUnitTestCridesTiquets {
                         + sql,edc.getShare_key_client().toByteArray()));
 
             //Lleguim el resultat de l'operació al servidor  0 - Malament i 1 - Bé
-            resultat = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            resultat = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             SystemUtils.escriuNouLog("Resultat de la modificacio del tiquet: " + resultat); 
 
         } catch (IOException ex) {
@@ -303,7 +303,7 @@ public class JUnitTestCridesTiquets {
             out.writeUTF(edc.encryptedText(id_conn +",TIQU_DELETE," + id_key,edc.getShare_key_client().toByteArray()));
             
             //Llegir el numero total de registres de la consulta, si resultat és 1 es correcte
-            resultat = Integer.parseInt(SystemUtils.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            resultat = Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
             System.out.println("Resultat de la baixa del tiquet: " +resultat);
        
         } catch (IOException ex) {

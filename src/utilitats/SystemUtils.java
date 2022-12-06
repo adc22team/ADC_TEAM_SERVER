@@ -250,7 +250,7 @@ public final class SystemUtils {
       * @return 
      * @throws java.io.IOException 
       */     
-      public static String encryptedText(String pText, byte[] key) throws IOException {
+   /*   public static String encryptedText(String pText, byte[] key) throws IOException {
           
         if (ACTIVAR_ENCRIPTACIO){  
        
@@ -281,14 +281,14 @@ public final class SystemUtils {
             return pText;
         }    
     }
-    
+    */
     /**
      * 
      * @param pTextEncrypted
      * @param key
      * @return 
      */
-    public static String decryptedText(String pTextEncrypted, byte[] key) {
+ /*   public static String decryptedText(String pTextEncrypted, byte[] key) {
       
         if (ACTIVAR_ENCRIPTACIO) {
             try {
@@ -311,7 +311,7 @@ public final class SystemUtils {
         } else {
             return pTextEncrypted;
         }
-    }
+    }*/
  /**
   * 
   * @param clientPublicKeyUTF

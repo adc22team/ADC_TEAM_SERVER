@@ -288,7 +288,7 @@ public class TestCridesDepartaments {
             edc.calculClauCompartida(in.readUTF());
             
             System.out.println("Executem la crida a fer un llistat de tots els departaments de la Bd's de departaments ");
-            out.writeUTF(SystemUtils.encryptedText(id_conn + ",DEPA_QUERY,0",edc.getShare_key_client().toByteArray()));
+            out.writeUTF(edc.encryptedText(id_conn + ",DEPA_QUERY,0",edc.getShare_key_client().toByteArray()));
             //out.writeUTF(id_conn + ",DEPA_QUERY,1,departament = 'Compres'");
             //out.writeUTF(id_conn + ",DEPA_QUERY,1,id = 1");
             //out.writeUTF(id_conn + ",DEPA_QUERY,2,departament");
