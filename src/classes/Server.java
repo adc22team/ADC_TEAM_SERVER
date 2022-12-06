@@ -145,20 +145,20 @@ public class Server {
                                 + mapUsuaris);
 
                         //Enviem el ID# assignat a l'usuari, al servidor
-                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(new_id_conn),ed.getShare_key_server().toByteArray()));
+                        out.writeUTF(ed.encryptedText(String.valueOf(new_id_conn),ed.getShare_key_server().toByteArray()));
                         
                         SystemUtils.escriuNouLog("SERVER_SEND_NEW_ID_CONN_USER_OK         # "
                                                         + new_id_conn);
                         //Enviar el rol que té l'usuari.
                         int rol = conn.rolUsuari(missatge[2], missatge[3]);
-                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(rol),ed.getShare_key_server().toByteArray()));
+                        out.writeUTF(   ed.encryptedText(String.valueOf(rol),ed.getShare_key_server().toByteArray()));
                         
                         SystemUtils.escriuNouLog("SERVER_SEND_ROLE_USER                   # "
                                                         + rol);
                     } else {
                         //No te ID i el usuari / contrasenya no es correcte
                         //Enviem el ID# assignat a l'usuari si el ID# = 0 ERROR
-                        out.writeUTF(SystemUtils.encryptedText("0",ed.getShare_key_server().toByteArray()));
+                        out.writeUTF(ed.encryptedText("0",ed.getShare_key_server().toByteArray()));
                         SystemUtils.escriuNouLog("SERVER_SEND_ID_CONN_USER_WRONG          # " + id_conn);
                     }
                 } else {
@@ -186,6 +186,7 @@ public class Server {
      * @param missatge crida que el client cap el servidor
      * @param id_conn el id de connexió obtingut al fer el login 
      * @param server servidor que ha creat el nou fil
+     * @param share_key
      * @throws IOException 
      */
     public  void GestioFils(Socket socket, DataInputStream in, DataOutputStream out, String[] missatge, 

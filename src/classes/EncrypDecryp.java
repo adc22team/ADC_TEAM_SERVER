@@ -71,7 +71,7 @@ public class EncrypDecryp {
      * @return
      * @throws java.io.IOException
      */
-    public static String encryptedText(String pText, byte[] key) throws IOException {
+    public String encryptedText(String pText, byte[] key) throws IOException {
 
         if (ACTIVAR_ENCRIPTACIO) {
 
@@ -109,7 +109,7 @@ public class EncrypDecryp {
      * @param key
      * @return
      */
-    public static String decryptedText(String pTextEncrypted, byte[] key) {
+    public  String decryptedText(String pTextEncrypted, byte[] key) {
 
         if (ACTIVAR_ENCRIPTACIO) {
             try {

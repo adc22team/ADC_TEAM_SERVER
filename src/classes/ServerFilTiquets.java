@@ -59,11 +59,13 @@ public class ServerFilTiquets extends Thread {
         try {
             // - - - S E R V E R    T I Q  I S S U E S    G E S T I O    T I Q U E T S  - - -
             try { 
-                // Registrar que s'està demanant l'alta d'un nou usuari
-                SystemUtils.escriuNouLog("OPEN_DB_CONECTION_TIQ #");
-                //Establir la connexió a la BD's  
-                MetodesSQLgestioTiquets conn = new MetodesSQLgestioTiquets();
-                conn.establirConnexio();
+               // Registrar que s'està demanant l'alta d'un nou usuari
+               SystemUtils.escriuNouLog("OPEN_DB_CONECTION_TIQ #");
+               //Establir la connexió a la BD's  
+               MetodesSQLgestioTiquets conn = new MetodesSQLgestioTiquets();
+               conn.establirConnexio();
+                
+               EncrypDecryp ed = new  EncrypDecryp();
                 
                SystemUtils.escriuNouLog("CONECTION_SUCCEFULLY_DB_TIQ #");
                
@@ -82,7 +84,7 @@ public class ServerFilTiquets extends Thread {
                         //dades = missatge[2].split(",");
                         result =conn.altaTiquet(missatge);
                         //Enviem el resultat de l'operació 0 - error i 1  - ok al client
-                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
+                         out.writeUTF(ed.encryptedText(String.valueOf(result),share_key.toByteArray()));
                          break;
 
                     case "TIQU_DELETE":
@@ -94,11 +96,12 @@ public class ServerFilTiquets extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_DELETE_TIQU_ID # " +result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
+                        out.writeUTF(ed.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
 
                     case "TIQU_MODIFI":
+                        
                         // Registrar en el log que s'està fent una modificació usuari                      
                         SystemUtils.escriuNouLog("MODIFI_UPDATE_TIQU_IN_BD #");
                         //Executa la modificació en la base de dades, pasant com a paràmete els camps
@@ -106,7 +109,7 @@ public class ServerFilTiquets extends Thread {
                         //Registrar el resultat de l'operació  0 malament | 1 correcte en l'arxiu log
                          SystemUtils.escriuNouLog("MODIFI_UPDATE_TIQU_RESULT # " + result);
                         //Enviem el resultat de l'operació  0 malament | 1 correcte al client
-                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
+                         out.writeUTF(ed.encryptedText(String.valueOf(result),share_key.toByteArray()));
                                                
                          break;
                         
@@ -123,12 +126,12 @@ public class ServerFilTiquets extends Thread {
                         //Guardem en un ArrayList els registres trobats
                         tiquetArrayList  = conn.consultaSqlTiquets(sql);
                         //Enviem el nombre total de elements de la llista al client
-                          out.writeUTF(SystemUtils.encryptedText(String.valueOf(tiquetArrayList.size()),share_key.toByteArray()));
+                          out.writeUTF(ed.encryptedText(String.valueOf(tiquetArrayList.size()),share_key.toByteArray()));
                         
                         //Enviar les dades reculllides de la consulta al client
                         for(int i = 0; i < tiquetArrayList.size(); i++){
                             //Enviem el registres separats per "," al client
-                            out.writeUTF(SystemUtils.encryptedText(tiquetArrayList.get(i),share_key.toByteArray()));
+                            out.writeUTF(ed.encryptedText(tiquetArrayList.get(i),share_key.toByteArray()));
                             //Registrem els enviaments al l'arxiu lg's
                             SystemUtils.escriuNouLog(tiquetArrayList.get(i));
                         }
@@ -170,7 +173,7 @@ public class ServerFilTiquets extends Thread {
                         
                         tiquetArrayListCount  = conn.consultaSqlTiquets(sql);
                         //Enviem el nombre total de elements de la llista al client
-                        out.writeUTF(SystemUtils.encryptedText(String.valueOf(tiquetArrayListCount.size()),share_key.toByteArray()));
+                        out.writeUTF(ed.encryptedText(String.valueOf(tiquetArrayListCount.size()),share_key.toByteArray()));
 
                         break;    
                         
@@ -183,7 +186,7 @@ public class ServerFilTiquets extends Thread {
                         //Mostra el resultat de l'operació 0 malament | 1 correcte
                         SystemUtils.escriuNouLog("RESULT_FIND_TIQU_ID # " + result);
                         //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
-                         out.writeUTF(SystemUtils.encryptedText(String.valueOf(result),share_key.toByteArray()));
+                         out.writeUTF(ed.encryptedText(String.valueOf(result),share_key.toByteArray()));
                         
                         break;
                         
