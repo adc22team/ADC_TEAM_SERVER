@@ -190,6 +190,17 @@ public class ServerFilTiquets extends Thread {
                         
                         break;
                         
+                    case "TIQU_STATUS":
+                        
+                        // Registrar en el log que s'està fent un canvi de l'estat del ticket  
+                        SystemUtils.escriuNouLog("EXECUTE_TIQU_STATUS_ServerfilsTiquets_#" +id_conn);
+                        result =conn.canviStatus(missatge[2],missatge[3]);
+                        //Mostra el resultat de l'operació 0 malament | 1 correcte
+                        SystemUtils.escriuNouLog("RESULT_TIQU_STATUS_ID # " + result);
+                        //Enviem el  resultat de l'operació 0  = INCORRECTE 1 = OK al client                     
+                         out.writeUTF(ed.encryptedText(String.valueOf(result),share_key.toByteArray()));
+                        break;    
+                        
                     case "TIQU_EXIT":
                         
                         // Registrar en el log que s'està fent una sortidade l'aplicatiu  
@@ -198,7 +209,7 @@ public class ServerFilTiquets extends Thread {
                         this.server.esborrar(id_conn);
                         
                         break;
-
+                        
                     default:
                         
                         SystemUtils.escriuNouLog("BAD_COMMAND_SEND_FORCE_TIQU_EXIT # " + missatge[0]);

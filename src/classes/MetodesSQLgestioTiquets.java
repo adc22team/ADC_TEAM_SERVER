@@ -207,8 +207,6 @@ public class MetodesSQLgestioTiquets {
      * @throws SQLException
      * @throws IOException 
      */
-    
-        //out.writeUTF(id_conn+",USER_MODIFI," + id_key + ",silvia,pwdsilvia,SILVIA,OLIVAR,2,3,1");
     public int modificarTiquet(String[] modificacioDades) throws SQLException, IOException{
         //Contador que recullirar el resultat de l'operació 0 - error i 1 - satisfactori              
         int result =0;
@@ -241,9 +239,6 @@ public class MetodesSQLgestioTiquets {
          //Retornem el resultat de l'operació 0 - Error i 1 - Correcte       
         return result;
     }
-    
-    
-  
     /**
      * Mètode que elimina un usuari de la Bd's de usuari
      * @param id_key pasem per paràmetre el identificador del registre
@@ -299,4 +294,43 @@ public class MetodesSQLgestioTiquets {
         //Retormen el seu valor
         return id;
     } 
+    
+     /**
+     * Mètode que ens permet fer l'alta d'un usuari dins la taula usuraris
+     * @param estat
+     * @param id_tiq
+     * @return retornem un 0 si l'alta no s'ha pogut fer i 1 si s'ha fet satisfactoriament
+     * @throws SQLException
+     * @throws IOException 
+     */
+    public int canviStatus(String estat, String id_tiq) throws SQLException, IOException{
+        //Contador que recullirar el resultat de l'operació 0 - error i 1 - satisfactori              
+        int result =0;
+        //Afegim en el log l'operació de modificació demanada pel client
+        SystemUtils.escriuNouLog("UPDATE_TIQ_STATUS_ID # "+ id_tiq);       
+        //Definició del sentecia SQL per poder introduir el seus valors al camp corresponent
+        String sentenciaCrear = ("UPDATE tiquets SET estat = ? WHERE id_tiq = ?");
+        //Definim el PreparedStatement   
+        PreparedStatement sentence_ready;
+        //preparem i executem la SQL per fer la modificació        
+        try {
+            sentence_ready = conectar.prepareStatement(sentenciaCrear);   
+            
+            sentence_ready.setInt(1, Integer.parseInt(estat)); //estat
+            sentence_ready.setInt(2,Integer.parseInt(id_tiq)); //id_tiq
+            
+            //Recollim el resultat de l'alta
+            result = sentence_ready.executeUpdate();
+            sentence_ready.close();
+        } catch (Exception e) {
+             //Afegim en el log l'operació modificació ha donar error
+             SystemUtils.escriuNouLog("UPDATE_TIQ_IN_DB_ERROR # " + e);
+        }
+         //Retornem el resultat de l'operació 0 - Error i 1 - Correcte       
+        return result;
+    }
+    
+    
+    
+    
 }

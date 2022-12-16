@@ -64,9 +64,18 @@ public class JUnitTestCridesTiquets {
         assertNotEquals(buscarIdTiquet(id_conn_correcte,"incidencia2"),0);
     }  
  
-    @Test
+     @Test
     @Order(5)
-     public void t7_testSimulacioLogOut() throws InterruptedException, IOException{  //comoprova un login incorrecte
+     public void t5_testCanviEstat() throws InterruptedException, IOException{  //comoprova un canvi d'estat d'un tiquet
+
+        assertEquals(canviEstat(id_conn_correcte,"5",String.valueOf(buscarIdTiquet(id_conn_correcte,"incidencia2"))),1);
+        assertEquals(canviEstat(id_conn_correcte,"0",String.valueOf(buscarIdTiquet(id_conn_correcte,"incidencia2"))),1);
+                
+    }  
+
+    @Test
+    @Order(6)
+     public void t6_testSimulacioLogOut() throws InterruptedException, IOException{  //comoprova un login incorrecte
 
         assertEquals(testSimulacioLogOut(id_conn_correcte),1);
     } 
@@ -187,9 +196,49 @@ public class JUnitTestCridesTiquets {
     } 
      
     
+     /**
+    * Mètode per fer el canvi d'un estat d'un tiquet
+     * @param id_conn
+     * @param nouEstat
+     * @param id_tiq
+     * @return el id que té l'usuari a la Bd's
+    */
+    public static int canviEstat(int id_conn, String nouEstat, String id_tiq) {
+
+        Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            //Cálcul clau pública client
+            edc.clauPublicaClient();
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
+            
+            //Executo la consulta de la crida per canviar l'estat d'un tiquet
+            out.writeUTF(edc.encryptedText(id_conn+",TIQU_STATUS," + nouEstat +","+ id_tiq,edc.getShare_key_client().toByteArray()));
+            
+            //Llegir el resultat de l'operació
+            int resultat =Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            
+            //Si troba l'usuari torna el seu id
+            return resultat;
+
+        } catch (IOException ex) {
+        }
+        //Sinó pot fer el canvi d'estat retorna 0 
+        return 0;
+    }
+  
+    
       /**
-     * Aquest mètode fa una crida  a la crida USER_NEW per simular l'alta d'un nou
-     * usuari en la Bd's
+     * Aquest mètode fa una crida  a la crida TIQU_NEW per simular l'alta d'un nou
+     * tiquet en la Bd's
      * Genera un nou usuari i recull el resultat de l'operació
      * 
      * @param id_conn passem les credencials i el id d'un usuari logat al program
@@ -231,14 +280,14 @@ public class JUnitTestCridesTiquets {
    
     
        /**
-     * Aquest mètode fa una crida  a la crida USER_MODIFI per simular la modificacio d'un
-     * usuari en la Bd's
+     * Aquest mètode fa una crida  a la crida TIQU_MODIFI per simular la modificacio d'un
+     *tiquet en la Bd's
      * Fa la modificació dels camps d'un registre i mostre per consola el resultat de 
      * l'operació
      * 
      * @param id_conn passem les credencials i el id d'un usuari logat al program
      * amb el rol admin
-     * @param id_key id que té el usuari en la Bd's
+     * @param id_key id que té el tiquet en la Bd's
      * @param sql
     */ 
    public int modificacio(int id_conn,int id_key,String sql){
@@ -273,9 +322,9 @@ public class JUnitTestCridesTiquets {
     }
      
      /**
-     * Aquest mètode fa una crida  a la crida USER_DELETE per simular la baixa d'un
-     * usuari en la Bd's
-     * Elinima un usuari  i mostre per consola el resultat de  l'operació
+     * Aquest mètode fa una crida  a la crida TIQU_DELETE per simular la baixa d'un
+     * tiquet en la Bd's
+     * Elinima un tiquet  i mostre per consola el resultat de  l'operació
      * 
      * @param id_conn passem el id_connexió obtingut al fer login.
      * @param id_key id que té el usuari en la Bd's
@@ -313,7 +362,7 @@ public class JUnitTestCridesTiquets {
     }
     
   /**
-    * Aquest mètode fa una crida  a la crida USER_QUERY per simular una consulta
+    * Aquest mètode fa una crida  a la crida TIQU_QUERY per simular una consulta
     * feta pels clients en la Bd's
     * Retorna un llistat per consola de la consulta feta.
     * @param id_conn passem les credencials i el id d'un usuari logat al program

@@ -62,8 +62,8 @@ public class TestCridesTiquets {
         //NOTA:  per fer les proves ha d'existir l'usuari carles // pwd carles i 
         //l'usuari martina // pwdmartina
         System.out.println();
-        System.out.println("#################### S I M U L A C I O   D E  P R O V E S ################################");
-        System.out.println("#################### #################################### ################################");
+        System.out.println("############### S I M U L A C I O   D E  P R O V E S   T I Q U E T S #####################");
+        System.out.println("#########################################################################################");
     
         System.out.println();                    
         System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
@@ -72,16 +72,23 @@ public class TestCridesTiquets {
         testSimulacioLoginCorrecte(0,"carles","pwdcarles");
         System.out.println();                    
       
-        //Simulem una alta d'un nou usuari dins la Bd's d'usuaris
+        //Simulem una alta d'un nou tiquet dins la Bd's de tiquets
         System.out.println("####################   Simulació d'una alta d'un tiquet  ###############################");
         alta(resposta_svr_id,"incidencia3,comentari3,1,3,1,1"); 
      
         System.out.println();                    
         llistat(resposta_svr_id);
         
+        //Simulem el canvi de l'estat d'un tiquet
+        System.out.println("####################   Simulació el canvi de l'estat d'un tiquet ##########################");
+        canviEstat(resposta_svr_id,"9",String.valueOf(buscarIdTiquet(resposta_svr_id,"incidencia2"))); 
+     
+        System.out.println();                    
+        llistat(resposta_svr_id);
+        
         System.out.println();                       
-       //Simulem la cerca d'un usuari pel seu usuari
-        System.out.println("######### Simulació de buscar el ID del tiquet incidencia1  : " + buscarIdTiquet(resposta_svr_id,"incidencia2"));
+       //Simulem la cerca d'un tiquet pel camp incidència
+        System.out.println("######### Simulació de buscar el ID del tiquet incidencia2  : " + buscarIdTiquet(resposta_svr_id,"incidencia2"));
         
         System.out.println();                       
        //Simulem la cerca d'un usuari pel seu usuari
@@ -91,8 +98,8 @@ public class TestCridesTiquets {
         llistat(resposta_svr_id);
        
         System.out.println();                    
-        //Simulem una modificació d'un usuari
-        System.out.println("#################### Simulació de la modificació de l'usuari Silvia  #####################");
+        //Simulem una modificació d'un tiquet
+        System.out.println("#################### Simulació de la modificació del tiquet incidencia3  #####################");
         modificacio(resposta_svr_id,buscarIdTiquet(resposta_svr_id,"incidencia3"));
        
         System.out.println();                    
@@ -100,13 +107,13 @@ public class TestCridesTiquets {
         
         System.out.println();        
         //Simulem la baixa d'un usuari pel seu usuari
-        System.out.println("############################ Simulació de la baixa de l'usuari Silvia ################### ");   
+        System.out.println("############################ Simulació de la baixa del tiquet incidencia3 ################### ");   
         baixa(resposta_svr_id,buscarIdTiquet(resposta_svr_id,"incidencia33"));
         System.out.println();                    
         System.out.println("####################### Simulació llistat número total de registres de tiquets ########## ");   
         llistatCount(resposta_svr_id);
        
-  /*      System.out.println();                    
+     /*   System.out.println();                    
         llistatGrid(resposta_svr_id);*/
        
         System.out.println();                    
@@ -121,8 +128,8 @@ public class TestCridesTiquets {
    /**
     * Mètode que busca el id d'un usuari
      * @param id_conn
-    * @param usuari
-    * @return el id que té l'usuari a la Bd's
+     * @param incidencia
+     * @return el id que té l'usuari a la Bd's
     */
     public static int buscarIdTiquet(int id_conn, String incidencia) {
 
@@ -534,6 +541,47 @@ public class TestCridesTiquets {
         } catch (IOException ex) {
             Logger.getLogger(TestCridesTiquets.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    
+     /**
+    * Mètode per fer el canvi d'un estat d'un tiquet
+     * @param id_conn
+     * @param nouEstat
+     * @param id_tiq
+     * @return el id que té l'usuari a la Bd's
+    */
+    public static int canviEstat(int id_conn, String nouEstat, String id_tiq) {
+
+        Socket sc;
+        EncrypDecrypCli edc = new  EncrypDecrypCli();
+        
+        try {
+            sc = new Socket("127.0.0.1", 5000);
+            DataInputStream in = new DataInputStream(sc.getInputStream());
+            DataOutputStream out = new DataOutputStream(sc.getOutputStream());
+            
+            //Cálcul clau pública client
+            edc.clauPublicaClient();
+            //Enviem la clau pública del client al servidor
+            out.writeUTF(edc.getClauPublicaClient());
+            //llegim la clau pública del servidor i generem la clau compartida
+            edc.calculClauCompartida(in.readUTF());
+            
+            //Executo la consulta de la crida per canviar l'estat d'un tiquet
+            out.writeUTF(edc.encryptedText(id_conn+",TIQU_STATUS," + nouEstat +","+ id_tiq,edc.getShare_key_client().toByteArray()));
+            
+            //Llegir el resultat de l'operació
+            int resultat =Integer.parseInt(edc.decryptedText(in.readUTF(),edc.getShare_key_client().toByteArray()));
+            
+            //Si troba l'usuari torna el seu id
+            return resultat;
+
+        } catch (IOException ex) {
+            Logger.getLogger(TestCridesTiquets.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        //Sinó troba l'usuari retorna 0 
+        return 0;
     }
   
 }
