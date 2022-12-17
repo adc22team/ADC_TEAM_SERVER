@@ -56,7 +56,7 @@ public class EncrypDecrypCli {
     }
 
     /**
-     *
+     * Mètode per desecriptar strings
      * @param pText
      * @param key
      * @return
@@ -95,7 +95,7 @@ public class EncrypDecrypCli {
     }
 
     /**
-     *
+     * Mètode per encriptar strings
      * @param pTextEncrypted
      * @param key
      * @return
@@ -149,7 +149,13 @@ public class EncrypDecrypCli {
         secretClient      = String.valueOf(secret);     
     }
  
- 
+    
+    /**
+     * Mètode que calcula la clau compartida del client
+     * @param publicKeyServer
+     * @throws IOException
+     */
+
       public void calculClauCompartida(String publicKeyServer) throws IOException {
     
           BigInteger prime = new BigInteger("195180477495478597250447434252857037807");

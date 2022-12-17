@@ -81,7 +81,8 @@ public class TestCridesTiquets {
         
         //Simulem el canvi de l'estat d'un tiquet
         System.out.println("####################   Simulació el canvi de l'estat d'un tiquet ##########################");
-        canviEstat(resposta_svr_id,"9",String.valueOf(buscarIdTiquet(resposta_svr_id,"incidencia2"))); 
+        System.out.println("El número de tiquet trobat és: "+ buscarIdTiquet(resposta_svr_id,"incidencia2"));
+        canviEstat(resposta_svr_id,"4",String.valueOf(buscarIdTiquet(resposta_svr_id,"incidencia2"))); //Fet canvi a arxivat
      
         System.out.println();                    
         llistat(resposta_svr_id);
@@ -91,10 +92,10 @@ public class TestCridesTiquets {
         System.out.println("######### Simulació de buscar el ID del tiquet incidencia2  : " + buscarIdTiquet(resposta_svr_id,"incidencia2"));
         
         System.out.println();                       
-       //Simulem la cerca d'un usuari pel seu usuari
+       //Simulem la cerca d'un tiquet pel seu comentari
         System.out.println("######### Simulació de buscar el ID del tiquet incidencia1  : " + buscarIdTiquet(resposta_svr_id,"incidencia3"));
         
-         System.out.println();                    
+        System.out.println();                    
         llistat(resposta_svr_id);
        
         System.out.println();                    

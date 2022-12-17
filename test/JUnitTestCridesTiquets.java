@@ -68,7 +68,7 @@ public class JUnitTestCridesTiquets {
     @Order(5)
      public void t5_testCanviEstat() throws InterruptedException, IOException{  //comoprova un canvi d'estat d'un tiquet
 
-        assertEquals(canviEstat(id_conn_correcte,"5",String.valueOf(buscarIdTiquet(id_conn_correcte,"incidencia2"))),1);
+        assertEquals(canviEstat(id_conn_correcte,"4",String.valueOf(buscarIdTiquet(id_conn_correcte,"incidencia2"))),1);
         assertEquals(canviEstat(id_conn_correcte,"0",String.valueOf(buscarIdTiquet(id_conn_correcte,"incidencia2"))),1);
                 
     }  
