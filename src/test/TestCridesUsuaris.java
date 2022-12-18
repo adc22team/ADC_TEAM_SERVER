@@ -74,7 +74,7 @@ public class TestCridesUsuaris {
         System.out.println();
         System.out.println("#####################    Simulació d'un login fallit   ###################################");
         //Simulem el login d'un usuari FALLIT en Bd's
-        testSimulacioLoginFallit  (0,"martina","pwderronea");
+  //      testSimulacioLoginFallit  (0,"martina","pwderronea");
     
         System.out.println();                    
         System.out.println("############# Simulació d'un login correcte per fer la resta de proves ###################");
