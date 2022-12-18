@@ -104,7 +104,7 @@ public class MetodesSQLgestioTiquets {
          /*   tiquetsArrayList.add(id_tiq + "," + data_inici + "," + incidencia + "," + comentaris + "," + estat + "," + prioritat + ","
                     + id_usuari + "," + id_tecnic + "," + data_final);*/
             
-            tiquetsArrayList.add(id_tiq + incidencia + "," + comentaris + ","  + estat + ","
+            tiquetsArrayList.add(id_tiq+ "," + incidencia + "," + comentaris + ","  + estat + ","
                       + id_usuari + "," + id_tecnic + "," + data_inici + "," + data_final + "," + prioritat );
                     
 
@@ -155,8 +155,12 @@ public class MetodesSQLgestioTiquets {
             id_tecnic = result.getInt("id_tecnic");
 
             //Afegir cada registre dins el ArrayList 
-            tiquetsArrayList.add(id_tiq + "," + data_inici + "," + incidencia + "," + comentaris + "," + estat + "," + prioritat + ","
+            /*tiquetsArrayList.add(id_tiq + "," + data_inici + "," + incidencia + "," + comentaris + "," + estat + "," + prioritat + ","
                     + id_usuari + "," + id_tecnic + "," + data_final);
+            */
+               
+            tiquetsArrayList.add(id_tiq + "," + incidencia + "," + comentaris + ","  + estat + ","
+                      + id_usuari + "," + id_tecnic + "," + data_inici + "," + data_final + "," + prioritat );
 
         }
         //Retornem la llista confecciona
