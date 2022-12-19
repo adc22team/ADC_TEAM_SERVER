@@ -190,7 +190,7 @@ public class MetodesSQLgestioTiquets {
             
             sentence_ready.setString(1, altaDades[2]); // incidencia
             sentence_ready.setString(2, altaDades[3]); // comentari
-            sentence_ready.setString(3, SystemUtils.agafarDataHoraSistemaTiq()); //data
+            sentence_ready.setString(3, SystemUtils.agafarDataHoraSistema()); //data
             sentence_ready.setInt(4, Integer.parseInt(altaDades[4])); //estat
             sentence_ready.setInt(5, Integer.parseInt(altaDades[5])); //id_usuari  
             sentence_ready.setInt(6, Integer.parseInt(altaDades[6])); //id_tecnic

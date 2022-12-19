@@ -162,7 +162,7 @@ public class TiqServerMain extends javax.swing.JFrame {
             hb.start();
             status = true;
             btn_start.setText("RUNNING");
-            TextAreaLogs.setText(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] + " - SERVER_online_waiting_for_request");
+            TextAreaLogs.setText(agafarDataHoraSistema() + " - SERVER_online_waiting_for_request");
         } else {
             JOptionPane.showMessageDialog(this, "SERVER STATUS - RUNNING");
         }
@@ -183,7 +183,7 @@ public class TiqServerMain extends javax.swing.JFrame {
         //Si no existeix el creem
         if (!f.exists()) {
             try {
-                TextAreaLogs.append(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] +"- Creat arxiu d'incidències no EXISTEIX\n");
+                TextAreaLogs.append(agafarDataHoraSistema() + "- Creat arxiu d'incidències no EXISTEIX\n");
                 f.createNewFile();
             } catch (IOException ex) {
                 Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
@@ -205,7 +205,7 @@ public class TiqServerMain extends javax.swing.JFrame {
         } catch (IOException ex) {
             Logger.getLogger(TiqServerMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-        TextAreaLogs.append(agafarDataHoraSistema()[0] + ";" + agafarDataHoraSistema()[1] +" - Log's carregats correctament\n");
+        TextAreaLogs.append(agafarDataHoraSistema() + " - Log's carregats correctament\n");
     }//GEN-LAST:event_btn_logsActionPerformed
 
      /**
